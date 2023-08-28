@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:mi_app_imgsound/src/pages/game1_page.dart'; // Descomenta esto cuando tengas la página game1_page.dart
+import 'package:mi_app_imgsound/src/pages/game1_page.dart';
 
 class InstructionsPage extends StatelessWidget {
   @override
@@ -77,15 +77,12 @@ class InstructionPage extends StatelessWidget {
           ),
           const SizedBox(height: 32.0),
           ElevatedButton(
-            onPressed: index == total - 1
-                ? () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => Game1Page()), // Descomenta esto cuando tengas la página game1_page.dart
-                    // );
-                  }
-                : null,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Game1Page()),
+              );
+            },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.resolveWith<Color>(
                 (states) => Color(0xFF00D8BB),

@@ -8,12 +8,20 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  audioplayers: ^0.20.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
 flutter:
   uses-material-design: true
+  assets:
+    - assets/sounds/acento.mp3
+    - assets/sounds/silencio.mp3
+    - assets/sounds/conteo1.mp3
+    - assets/sounds/conteo2.mp3
+    - assets/sounds/conteo3.mp3
+    - assets/sounds/conteo4.mp3
   fonts:
     - family: WorkSans
       fonts:
