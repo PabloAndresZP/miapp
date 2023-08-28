@@ -24,8 +24,9 @@ class _Game1PageState extends State<Game1Page> {
     final String path = 'assets/sounds/$sound.mp3';
     final int result = await audioPlayer.play(path, isLocal: true);
 
-    if (result == 1) {
-      // success
+    if (result != 1) {
+      // handle error
+      print('Error playing sound: $result');
     }
   }
 
@@ -59,7 +60,8 @@ class _Game1PageState extends State<Game1Page> {
       appBar: AppBar(
         title: Text('Ritmo Pictórico'),
       ),
-      body: Column(
+      body: ListView(
+        padding: EdgeInsets.all(20),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,41 +72,41 @@ class _Game1PageState extends State<Game1Page> {
             ],
           ),
           SizedBox(height: 20),
-          Expanded(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('¿Identificas los acentos y los silencios?'),
-                  SizedBox(height: 20),
-                  ExerciseGrid(exerciseGrid: exerciseGrid),
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      DraggableButton('Acento', updateExerciseGrid),
-                      DraggableButton('Silencio', updateExerciseGrid),
-                    ],
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      playSound('conteo1');
-                    },
-                    child: Text('Play'),
-                  ),
-                  SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () {
-                      checkAnswers();
-                    },
-                    child: Text('COMPROBAR'),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF00D8BB),
-                    ),
-                  ),
-                ],
+          Center(child: Text('¿Identificas los acentos y los silencios?')),
+          SizedBox(height: 20),
+          Center(
+            child: ElevatedButton(
+              onPressed: () {
+                playSound('conteo1');
+              },
+              child: Text('Play'),
+              style: ElevatedButton.styleFrom(
+                shape: CircleBorder(),
+                padding: EdgeInsets.all(20),
               ),
+            ),
+          ),
+          SizedBox(height: 20),
+          Container(
+            height: 200,  // Define una altura específica
+            child: ExerciseGrid(exerciseGrid: exerciseGrid),
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              DraggableButton('Acento', updateExerciseGrid),
+              DraggableButton('Silencio', updateExerciseGrid),
+            ],
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              checkAnswers();
+            },
+            child: Text('COMPROBAR'),
+            style: ElevatedButton.styleFrom(
+              primary: Color(0xFF00D8BB),
             ),
           ),
         ],
