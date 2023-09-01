@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'src/pages/instructions_page.dart';
-import 'package:mi_app_imgsound/src/pages/instructions2_page.dart';
+//import 'package:mi_app_imgsound/src/pages/instructions2_page.dart';
+import 'src/pages/level2_screen.dart';
 import 'src/widgets/coin_counter.dart';
 
 void main() {
@@ -128,7 +129,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Instructions2Page()),
+                  MaterialPageRoute(builder: (context) => Level2Screen()),
                 );
               },
               style: ElevatedButton.styleFrom(
