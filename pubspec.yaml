@@ -22,6 +22,10 @@ flutter:
     - assets/sounds/conteo2.mp3
     - assets/sounds/conteo3.mp3
     - assets/sounds/conteo4.mp3
+    - assets/images/bosquef.png
+    - assets/images/bosquet.png
+    - assets/sounds/escmayor.mp3
+    - assets/sounds/escmenor.mp3
   fonts:
     - family: WorkSans
       fonts:
