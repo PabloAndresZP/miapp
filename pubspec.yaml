@@ -31,11 +31,16 @@ flutter:
     - assets/images/ritmo.png
     - assets/images/icon_lienzo.png
     - assets/images/icon_atras.png
+    - assets/images/coin_yellow.png
     - assets/images/icon_home.png
+    - assets/images/personam.png
     - assets/images/icon_menu.png
     - assets/images/icon_teoria.png
     - assets/sounds/escmayor.mp3
     - assets/sounds/escmenor.mp3
+    - assets/sounds/esccromatica.mp3
+    - assets/sounds/modofrigio.mp3
+    - assets/sounds/eschexatonica.mp3
   fonts:
     - family: WorkSans
       fonts:
