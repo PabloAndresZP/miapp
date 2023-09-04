@@ -24,6 +24,16 @@ flutter:
     - assets/sounds/conteo4.mp3
     - assets/images/bosquef.png
     - assets/images/bosquet.png
+    - assets/images/textura.png
+    - assets/images/textura_2.png
+    - assets/images/textura_3.png
+    - assets/images/pintando.png
+    - assets/images/ritmo.png
+    - assets/images/icon_lienzo.png
+    - assets/images/icon_atras.png
+    - assets/images/icon_home.png
+    - assets/images/icon_menu.png
+    - assets/images/icon_teoria.png
     - assets/sounds/escmayor.mp3
     - assets/sounds/escmenor.mp3
   fonts:

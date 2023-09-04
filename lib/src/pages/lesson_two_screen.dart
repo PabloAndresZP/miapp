@@ -6,93 +6,69 @@ class LessonTwoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Lecciones'),
-        backgroundColor: Color(0xFF00D8BB),
+        backgroundColor: Color(0xFF030328),
+        leading: IconButton(
+          icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        title: Text(
+          'Lecciones',
+          style: TextStyle(
+            color: Color(0xFF044A1D6),
+            fontFamily: 'WorkSans',
+            fontWeight: FontWeight.bold,
+            fontSize: 21.5,
+          ),
+        ),
+        centerTitle: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Instructions2Page()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF00D8BB),
-                minimumSize: Size(313, 48),
+      body: Stack(
+        children: [
+          Container(  // Textura de fondo
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/textura_3.png'),
+                fit: BoxFit.cover,
               ),
-              child: Text('Lección 1',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Color(0xFFFDFDFD),
-                  )),
             ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: null,
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF00D8BB),
-                minimumSize: Size(313, 48),
-              ),
-              child: Text('Lección 2',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Color(0xFFFDFDFD),
-                  )),
+          ),
+          Center( // <-- Para centrar los botones
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                buildTextButton('Lección 1', context, Instructions2Page()),
+                SizedBox(height: 16),
+                buildTextButton('Lección 2', context, null, active: false),
+                SizedBox(height: 16),
+                buildTextButton('Lección 3', context, null, active: false),
+                SizedBox(height: 16),
+                buildTextButton('Lección 4', context, null, active: false),
+                SizedBox(height: 16),
+                buildTextButton('Lección 5', context, null, active: false),
+              ],
             ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: null,
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF00D8BB),
-                minimumSize: Size(313, 48),
-              ),
-              child: Text('Lección 3',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Color(0xFFFDFDFD),
-                  )),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: null,
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF00D8BB),
-                minimumSize: Size(313, 48),
-              ),
-              child: Text('Lección 4',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Color(0xFFFDFDFD),
-                  )),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: null,
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF00D8BB),
-                minimumSize: Size(313, 48),
-              ),
-              child: Text('Lección 5',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Color(0xFFFDFDFD),
-                  )),
-            ),
-          ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildTextButton(String label, BuildContext context, Widget? page, {bool active = true}) {
+    return TextButton(
+      onPressed: page == null ? null : () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => page),
+        );
+      },
+      child: Text(label,
+        style: TextStyle(
+          color: active ? Color(0xFF044A1D6) : Colors.grey,
+          fontFamily: 'WorkSans',
+          fontWeight: FontWeight.bold,
+          fontSize: 21.5,
         ),
       ),
     );
