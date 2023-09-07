@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'src/pages/instructions_page.dart';
 import 'src/pages/level2_screen.dart';
 import 'src/pages/theory_page.dart';
-import 'src/pages/game3_page.dart'; // <-- Importa la nueva página aquí
+import 'src/pages/game3_page.dart';
+import 'src/pages/register_page.dart';
+import 'src/widgets/custom_footer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -32,6 +34,106 @@ class HomePage extends StatelessWidget {
 
   final String title;
 
+  void _showMenu(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Color(0xFF030328),
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                title: Text(
+                  'Teoría',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TheoryPage()),
+                  );
+                },
+              ),
+
+              ListTile(
+                title: Text(
+                  'Ritmo Pictórico',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => InstructionsPage()),
+                  );
+                },
+              ),
+              
+              ListTile(
+                title: Text(
+                  'Pintando Sonido',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Level2Screen()),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text(
+                  'Lienzo Sonoro',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Game3Page()),
+                  );
+                },
+              ),
+
+                ListTile(
+                title: Text(
+                  'Regístrate',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterPage()),
+                  );
+                },
+              )
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final button = (String imagePath, String label, VoidCallback onPressed) => GestureDetector(
@@ -43,10 +145,10 @@ class HomePage extends StatelessWidget {
           SizedBox(height: 8),
           Text(label,
               style: TextStyle(
-                color: Color(0xFF044A1D6),
+                color: Color(0xFF7CF8FF),
                 fontFamily: 'WorkSans',
                 fontWeight: FontWeight.bold,
-                fontSize: 17,
+                fontSize: 15,
               )),
         ],
       ),
@@ -62,7 +164,7 @@ class HomePage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/textura_2.png'),
+            image: AssetImage('assets/images/textura_5.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -73,10 +175,10 @@ class HomePage extends StatelessWidget {
             Text(
               '¿Qué quieres jugar?',
               style: TextStyle(
-                color: Color(0xFF044A1D6),
+                color: Color(0xFF7CF8FF),
                 fontFamily: 'WorkSans',
                 fontWeight: FontWeight.bold,
-                fontSize: 21.5,
+                fontSize: 29.3,
               ),
               textAlign: TextAlign.center,
             ),
@@ -101,7 +203,7 @@ class HomePage extends StatelessWidget {
               child: button('assets/images/icon_lienzo.png', 'Lienzo Sonoro', () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Game3Page()), // <-- Actualiza aquí
+                  MaterialPageRoute(builder: (context) => Game3Page()),
                 );
               }),
             ),
@@ -109,76 +211,74 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 4.0),
-        child: BottomAppBar(
-          color: Color(0xFF030328),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: Image.asset('assets/images/icon_teoria.png', height: 24, width: 24),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => TheoryPage()),
-                      );
-                    },
-                  ),
-                  Text(
-                    'Teoría',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'WorkSans',
-                      fontSize: 10,
+      bottomNavigationBar: BottomAppBar(
+        color: Color(0xFF030328),
+        child: Container(
+          height: 80.0,
+          child: SingleChildScrollView(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Image.asset('assets/images/icon_teoria.png', height: 24, width: 24),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TheoryPage()),
+                        );
+                      },
                     ),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: Image.asset('assets/images/icon_home.png', height: 24, width: 24),
-                    onPressed: () {
-                      Navigator.of(context).popUntil((route) => route.isFirst);
-                    },
-                  ),
-                  Text(
-                    'Home',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'WorkSans',
-                      fontSize: 10,
+                    Text(
+                      'Teoría',
+                      style: TextStyle(
+                        color: Color(0xFFFDFDFD),
+                        fontFamily: 'WorkSans',
+                        fontSize: 12,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: Image.asset('assets/images/icon_menu.png', height: 24, width: 24),
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Funcionalidad del Menú no implementada'))
-                      );
-                    },
-                  ),
-                  Text(
-                    'Menú',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'WorkSans',
-                      fontSize: 10,
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Image.asset('assets/images/icon_home.png', height: 24, width: 24),
+                      onPressed: () {
+                        Navigator.of(context).popUntil((route) => route.isFirst);
+                      },
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    Text(
+                      'Home',
+                      style: TextStyle(
+                        color: Color(0xFFFDFDFD),
+                        fontFamily: 'WorkSans',
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Image.asset('assets/images/icon_menu.png', height: 24, width: 24),
+                      onPressed: () => _showMenu(context),
+                    ),
+                    Text(
+                      'Menú',
+                      style: TextStyle(
+                        color: Color(0xFFFDFDFD),
+                        fontFamily: 'WorkSans',
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -27,6 +27,8 @@ flutter:
     - assets/images/textura.png
     - assets/images/textura_2.png
     - assets/images/textura_3.png
+    - assets/images/textura_4.png
+    - assets/images/textura_5.png
     - assets/images/pintando.png
     - assets/images/ritmo.png
     - assets/images/icon_lienzo.png
