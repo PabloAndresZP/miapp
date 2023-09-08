@@ -30,6 +30,7 @@ flutter:
     - assets/images/textura_4.png
     - assets/images/textura_5.png
     - assets/images/pintando.png
+    - assets/images/lienzo_sonoro.png
     - assets/images/ritmo.png
     - assets/images/icon_lienzo.png
     - assets/images/icon_atras.png

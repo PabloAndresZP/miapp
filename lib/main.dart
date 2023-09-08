@@ -4,7 +4,7 @@ import 'src/pages/level2_screen.dart';
 import 'src/pages/theory_page.dart';
 import 'src/pages/game3_page.dart';
 import 'src/pages/register_page.dart';
-import 'src/widgets/custom_footer.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -136,23 +136,23 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final button = (String imagePath, String label, VoidCallback onPressed) => GestureDetector(
-      onTap: onPressed,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(imagePath, height: 48),
-          SizedBox(height: 8),
-          Text(label,
-              style: TextStyle(
-                color: Color(0xFF7CF8FF),
-                fontFamily: 'WorkSans',
-                fontWeight: FontWeight.bold,
-                fontSize: 15,
-              )),
-        ],
-      ),
-    );
+    final button = (String imagePath, String label, VoidCallback onPressed, {double imgHeight = 48}) => GestureDetector(
+  onTap: onPressed,
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Image.asset(imagePath, height: imgHeight), // imgHeight se usa aquí
+      SizedBox(height: 8),
+      Text(label,
+          style: TextStyle(
+            color: Color(0xFF7CF8FF),
+            fontFamily: 'WorkSans',
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          )),
+    ],
+  ),
+);
 
     return Scaffold(
       appBar: AppBar(
@@ -200,14 +200,14 @@ class HomePage extends StatelessWidget {
               ],
             ),
             Center(
-              child: button('assets/images/icon_lienzo.png', 'Lienzo Sonoro', () {
+              child: button('assets/images/lienzo_sonoro.png', 'Lienzo Sonoro', () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Game3Page()),
                 );
-              }),
+              }, imgHeight: 72), // Ajustado el tamaño de imagen para el botón "Lienzo Sonoro"
             ),
-            const SizedBox(height: 36),
+            const SizedBox(height: 48),
           ],
         ),
       ),
