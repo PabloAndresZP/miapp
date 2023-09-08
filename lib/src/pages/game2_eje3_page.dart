@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:mi_app_imgsound/src/widgets/coin_counter.dart';
 import 'package:mi_app_imgsound/src/widgets/hearts_indicator.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 class Game2Eje3Page extends StatefulWidget {
   final int initialHearts;
@@ -118,7 +119,7 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/textura_2.png'),
+              image: AssetImage('assets/images/textura_6.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -188,6 +189,7 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
           ),
         ),
       ),
+      bottomNavigationBar: CustomFooter(),  // Aquí se añade el footer.
     );
   }
 }

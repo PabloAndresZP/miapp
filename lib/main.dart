@@ -4,7 +4,7 @@ import 'src/pages/level2_screen.dart';
 import 'src/pages/theory_page.dart';
 import 'src/pages/game3_page.dart';
 import 'src/pages/register_page.dart';
-import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
+
 
 void main() {
   runApp(const MyApp());

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/pages/instructions2_page.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart'; // Asegúrate de que esta importación esté correcta.
 
 class LessonTwoScreen extends StatelessWidget {
   @override
@@ -14,7 +15,7 @@ class LessonTwoScreen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Lecciones',
+          'Pintando Sonido',
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
@@ -29,7 +30,7 @@ class LessonTwoScreen extends StatelessWidget {
           Container(  // Textura de fondo
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/textura_3.png'),
+                image: AssetImage('assets/images/textura_5.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -52,6 +53,7 @@ class LessonTwoScreen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: CustomFooter(), // Aquí está el CustomFooter añadido
     );
   }
 

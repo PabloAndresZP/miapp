@@ -20,6 +20,17 @@ class _RegisterPageState extends State<RegisterPage> {
     super.dispose();
   }
 
+  InputDecoration _inputDecoration(String label) {
+    return InputDecoration(
+      labelText: label,
+      labelStyle: TextStyle(
+        fontFamily: 'WorkSans',
+        fontSize: 15,
+        color: Color(0xFF044A1D6),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Container(  // Textura de fondo
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/textura_3.png'),
+                image: AssetImage('assets/images/textura_6.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -60,7 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 children: <Widget>[
                   TextFormField(
                     controller: _nameController,
-                    decoration: InputDecoration(labelText: 'Nombre completo'),
+                    decoration: _inputDecoration('Nombre completo'),
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, introduce tu nombre';
@@ -71,7 +82,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(height: 16),
                   TextFormField(
                     controller: _emailController,
-                    decoration: InputDecoration(labelText: 'Correo electrónico'),
+                    decoration: _inputDecoration('Correo electrónico'),
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
                         return 'Por favor, introduce tu correo electrónico';
@@ -85,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(height: 16),
                   TextFormField(
                     controller: _passwordController,
-                    decoration: InputDecoration(labelText: 'Contraseña'),
+                    decoration: _inputDecoration('Contraseña'),
                     obscureText: true,
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
@@ -104,7 +115,19 @@ class _RegisterPageState extends State<RegisterPage> {
                         // Implementar la lógica de registro aquí
                       }
                     },
-                    child: Text('Registrarse'),
+                    child: Text('REGISTRARSE', style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                      color: Color(0xFFFDFDFD),
+                    )),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF00D8BB),
+                      fixedSize: Size(MediaQuery.of(context).size.width, 60),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
                   )
                 ],
               ),

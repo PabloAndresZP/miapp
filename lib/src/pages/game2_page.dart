@@ -3,6 +3,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:mi_app_imgsound/src/widgets/coin_counter.dart';
 import 'package:mi_app_imgsound/src/widgets/hearts_indicator.dart';
 import 'package:mi_app_imgsound/src/pages/game2_eje3_page.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 class Game2Page extends StatefulWidget {
   @override
@@ -174,7 +175,7 @@ void _checkAnswer() {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/textura_3.png'),
+              image: AssetImage('assets/images/textura_5.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -260,6 +261,8 @@ void _checkAnswer() {
                     ),
                   ],
                 ),
+
+                
                 ElevatedButton(
                   onPressed: _checkAnswer,
                   child: Text('Verificar'),
@@ -269,6 +272,7 @@ void _checkAnswer() {
           ),
         ),
       ),
+      bottomNavigationBar: CustomFooter(),  // Footer añadido aquí
     );
   }
 }

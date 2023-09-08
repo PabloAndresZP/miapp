@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/pages/lesson_two_screen.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 class Level2Screen extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class Level2Screen extends StatelessWidget {
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
             fontWeight: FontWeight.bold,
-            fontSize: 21.5,
+            fontSize: 23.4,
           ),
         ),
         centerTitle: true,
@@ -29,7 +30,7 @@ class Level2Screen extends StatelessWidget {
           Container(  // Textura de fondo
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/textura_3.png'),
+                image: AssetImage('assets/images/textura_5.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -50,6 +51,7 @@ class Level2Screen extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: CustomFooter(),
     );
   }
 
@@ -61,12 +63,13 @@ class Level2Screen extends StatelessWidget {
           MaterialPageRoute(builder: (context) => page),
         );
       },
-      child: Text(label,
+      child: Text(
+        label,
         style: TextStyle(
           color: active ? Color(0xFF044A1D6) : Colors.grey,
           fontFamily: 'WorkSans',
           fontWeight: FontWeight.bold,
-          fontSize: 21.5,
+          fontSize: 18.7,
         ),
       ),
     );
