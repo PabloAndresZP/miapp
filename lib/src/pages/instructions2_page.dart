@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/pages/game2_page.dart';
-import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';  // Asegúrate de que esta importación sea correcta.
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 const List<String> instructions = [
   'Asocia imágenes con escalas musicales.',
-   'Descubre la relación entre las escalas musicales y las imágenes. Una escala musical es una secuencia organizada de notas que se desplazan en intervalos determinados. Es fundamental en la música y nos ayuda tanto a componer como a analizar melodías.',
+  'Descubre la relación entre las escalas musicales y las imágenes. Una escala musical es una secuencia organizada de notas que se desplazan en intervalos determinados. Es fundamental en la música y nos ayuda tanto a componer como a analizar melodías.',
   'Ejercicios de asociación. En estos ejercicios, se te presentará una imagen acompañada de dos audios, uno por cada escala. Tu misión es vincular la imagen con la escala que mejor la represente.',
   '¡Un giro inesperado! A veces, las dinámicas cambian. Se te ofrecerá una escala y dos imágenes. Tu tarea será seleccionar la imagen que mejor se relacione con esa escala. Considera las emociones o estados de ánimo que evocan las escalas al tomar tu decisión.',
   // ... (resto de tus instrucciones)
@@ -42,7 +42,7 @@ class _Instructions2PageState extends State<Instructions2Page> {
       ),
       body: Stack(
         children: [
-          Container(  
+          Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/textura_5.png'),
@@ -88,7 +88,7 @@ class _Instructions2PageState extends State<Instructions2Page> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 30.0),
-              child: TextButton(
+              child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -103,22 +103,24 @@ class _Instructions2PageState extends State<Instructions2Page> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                ),
-                child: Text(
-                  'Jugar',
-                  style: TextStyle(
-                    color: Color(0xFFFDFDFD),
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 21.5,
+                  shadowColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.3)),
+                  elevation: MaterialStateProperty.all<double>(5.0),
+                  textStyle: MaterialStateProperty.all<TextStyle>(
+                    TextStyle(
+                      color: Color(0xFFFDFDFD),
+                      fontFamily: 'WorkSans',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
                   ),
                 ),
+                child: Text('Jugar'),
               ),
             ),
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),  // Aquí está el CustomFooter añadido
+      bottomNavigationBar: CustomFooter(),
     );
   }
 }

@@ -29,6 +29,12 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
     'assets/sounds/escmayor.mp3',
   ];
 
+  // Lista para manejar las etiquetas debajo de los círculos
+  List<List<String>> labels = [
+  ['Escala Mayor'],
+  
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -57,7 +63,7 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
       ));
 
       setState(() {
-        coins += 10; 
+        coins += 1; 
       });
 
     } else {
@@ -99,6 +105,7 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFFDFDFD),
       appBar: AppBar(
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png'),
@@ -107,22 +114,17 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
         title: Text(
           'Pintando sonido',
           style: TextStyle(
-            color: Color(0xFFFDFDFD),
+            color: Color(0xFF44A1D6),
             fontFamily: 'WorkSans',
             fontWeight: FontWeight.bold,
-            fontSize: 21.5,
+            fontSize: 23.4,
           ),
         ),
         backgroundColor: Color(0xFF030328),
       ),
       body: SingleChildScrollView(
         child: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/textura_6.png'),
-              fit: BoxFit.cover,
-            ),
-          ),
+          //
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
