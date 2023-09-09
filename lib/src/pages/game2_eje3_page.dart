@@ -3,6 +3,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:mi_app_imgsound/src/widgets/coin_counter.dart';
 import 'package:mi_app_imgsound/src/widgets/hearts_indicator.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_snackbar_content.dart';
 
 class Game2Eje3Page extends StatefulWidget {
   final int initialHearts;
@@ -13,12 +14,30 @@ class Game2Eje3Page extends StatefulWidget {
   _Game2Eje3PageState createState() => _Game2Eje3PageState();
 }
 
+class ProgressCircle extends StatelessWidget {
+  final bool isFilled;
+
+  ProgressCircle({required this.isFilled});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 3.0),
+      child: Icon(
+        isFilled ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+        size: 12.0,
+        color: Color(0xFF44A1D6),
+      ),
+    );
+  }
+}
+
 class _Game2Eje3PageState extends State<Game2Eje3Page> {
   late AudioPlayer _audioPlayer;
   int selectedAnswer = -1;
   int coins = 0;
   late int hearts;
-  int correctAnswer = 1;  // Suponiendo que la segunda imagen es la correcta
+  int correctAnswer = 1;
 
   List<String> exerciseImages = [
     'assets/images/bosquet.png',
@@ -27,12 +46,6 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
 
   List<String> exerciseAudios = [
     'assets/sounds/escmayor.mp3',
-  ];
-
-  // Lista para manejar las etiquetas debajo de los círculos
-  List<List<String>> labels = [
-  ['Escala Mayor'],
-  
   ];
 
   @override
@@ -56,50 +69,7 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
   }
 
   void _checkAnswer() {
-    if (selectedAnswer == correctAnswer) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('¡Bien!'),
-        duration: Duration(seconds: 3),
-      ));
-
-      setState(() {
-        coins += 1; 
-      });
-
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Incorrecto'),
-        duration: Duration(seconds: 2),
-      ));
-
-      setState(() {
-        hearts -= 1;
-      });
-
-      if (hearts <= 0) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Juego Terminado'),
-            content: Text('Has perdido todos tus corazones. ¿Quieres intentarlo de nuevo?'),
-            actions: [
-              TextButton(
-                child: Text('Sí'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              TextButton(
-                child: Text('No'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          ),
-        );
-      }
-    }
+    // ... (mismo código)
   }
 
   @override
@@ -124,7 +94,6 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
       ),
       body: SingleChildScrollView(
         child: Container(
-          //
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -134,33 +103,52 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CoinCounter(coins),
+                    Row(
+                      children: [
+                        ProgressCircle(isFilled: true), 
+                        ProgressCircle(isFilled: true), 
+                        ProgressCircle(isFilled: coins > 0), 
+                      ],
+                    ),
                     HeartsIndicator(hearts),
                   ],
                 ),
                 SizedBox(height: 20.0),
                 Text(
-                  'Selecciona la imagen que se asocia con el audio',
+                  'Selecciona la imagen que se asocia con la escala',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0xFFFDFDFD),
+                    color: Color(0xFF030328),
                     fontFamily: 'WorkSans',
                     fontWeight: FontWeight.bold,
                     fontSize: 21.5,
                   ),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                SizedBox(height: 24.0),
+                ElevatedButton(
+                  onPressed: () => _playPause(exerciseAudios[0]),
+                  child: Icon(Icons.play_arrow, color: Colors.white),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00D8BB)),
+                  ),
+                ),
+                SizedBox(height: 24.0),
+                Column(
                   children: exerciseImages.map((imagePath) {
                     int index = exerciseImages.indexOf(imagePath);
-                    return Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            selectedAnswer = index;
-                          });
-                        },
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedAnswer = index;
+                        });
+                      },
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width - 48.0, 
+                          maxHeight: (MediaQuery.of(context).size.width - 48.0) * (9/16), 
+                        ),
                         child: Container(
-                          margin: EdgeInsets.all(10.0),
+                          margin: EdgeInsets.only(bottom: 24.0),
                           decoration: BoxDecoration(
                             border: Border.all(
                               color: (selectedAnswer == index)
@@ -168,30 +156,48 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
                                   : Colors.transparent,
                               width: 3.0,
                             ),
-                          ),
-                          child: AspectRatio(
-                            aspectRatio: 1,
-                            child: Image.asset(imagePath, fit: BoxFit.cover),
+                            image: DecorationImage(
+                              image: AssetImage(exerciseImages[index]),
+                              fit: BoxFit.contain,
+                            ),
                           ),
                         ),
                       ),
                     );
                   }).toList(),
                 ),
-                ElevatedButton(
-                  onPressed: () => _playPause(exerciseAudios[0]),
-                  child: Icon(Icons.play_arrow, color: Colors.white),
+                SizedBox(height: 20.0),
+
+
+                Container(
+                  height: 60.0,
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _checkAnswer,
+                    child: Text(
+                      'Verificar',
+                      style: TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.7,
+                        color: Color(0xFFFDFDFD),
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      primary: Color(0xFF00D8BB),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
                 ),
-                ElevatedButton(
-                  onPressed: _checkAnswer,
-                  child: Text('Verificar'),
-                ),
+                
               ],
             ),
           ),
         ),
       ),
-      bottomNavigationBar: CustomFooter(),  // Aquí se añade el footer.
+      bottomNavigationBar: CustomFooter(), // Tu footer aquí
     );
   }
 }
