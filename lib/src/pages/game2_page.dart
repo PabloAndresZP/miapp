@@ -96,8 +96,8 @@ class _Game2PageState extends State<Game2Page> {
 
 void _checkAnswer() {
   if (selectedAnswer == correctAnswers[currentExerciseIndex]) {
-    CustomSnackbarContent.show(context, '¡Bien!');
-    _playSound('conteo4.mp3');
+    CustomSnackbarContent.show(context, "¡Perfecto! Continúa así.", true);
+    _playSound('correcto.mp3');
 
     setState(() {
       completedExercises += 1;
@@ -114,8 +114,9 @@ void _checkAnswer() {
     } else {
       _goToNextExercise();
     }
-  } else {
-    CustomSnackbarContent.show(context, 'Incorrecto');
+  } 
+  else {
+    CustomSnackbarContent.show(context, "¡Eso estuvo cerca! Prueba una vez más.", false);
     _playSound('acento.mp3');
     
     setState(() {
@@ -123,27 +124,103 @@ void _checkAnswer() {
     });
 
     if (hearts <= 0) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Juego Terminado'),
-          content: Text('Has perdido todos tus corazones. ¿Quieres intentarlo de nuevo?'),
-          actions: [
-            TextButton(
-              child: Text('Sí'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
+    // Llama a esta función donde necesites mostrar el cuadro de diálogo
+
+        Future.delayed(Duration(seconds: 2), () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              insetPadding: EdgeInsets.all(0),
+              contentPadding: EdgeInsets.all(0),
+              titlePadding: EdgeInsets.all(16),
+              actionsPadding: EdgeInsets.all(8),
+              buttonPadding: EdgeInsets.all(8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              content: Container(
+                width: 252,
+                height: 252,
+                padding: EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Color(0xFF00D8BB),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      '¡Ánimo!',
+                      style: TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.7,
+                        color: Color(0xFFFDFDFD),
+                      ),
+                    ),
+                    Text(
+                      'Aunque se han agotado tus corazones, sabemos que puedes hacerlo mejor.',
+                      style: TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFFDFDFD),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    //SizedBox(height: 12), // Esto agregará un espacio adicional entre los dos textos
+                    Text(
+                      '¿Te gustaría intentarlo de nuevo?',
+                      style: TextStyle(
+                        fontFamily: 'WorkSans',
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFFFDFDFD),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        TextButton(
+                          child: Text(
+                            'Sí',
+                            style: TextStyle(
+                              fontFamily: 'WorkSans',
+                              fontSize: 18.7,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFFDFDFD),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                                builder: (context) => Game2Page())); 
+                          },
+                        ),
+                        TextButton(
+                          child: Text(
+                            'No',
+                            style: TextStyle(
+                              fontFamily: 'WorkSans',
+                              fontSize: 18.7,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFFDFDFD),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop(); 
+                          },
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
             ),
-            TextButton(
-              child: Text('No'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        ),
-      );
+          );
+        });
+
     }
   }
 }

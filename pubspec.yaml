@@ -4,15 +4,19 @@ publish_to: 'none'
 version: 1.0.0+1
 environment:
   sdk: '>=3.1.0 <4.0.0'
+
 dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
   audioplayers: ^0.20.1
+  provider: ^5.0.0 # Aquí está la dependencia añadida
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+
 flutter:
   uses-material-design: true
   assets:
@@ -45,6 +49,7 @@ flutter:
     - assets/sounds/esccromatica.mp3
     - assets/sounds/modofrigio.mp3
     - assets/sounds/eschexatonica.mp3
+    - assets/sounds/correcto.mp3
   fonts:
     - family: WorkSans
       fonts:

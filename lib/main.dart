@@ -4,10 +4,16 @@ import 'src/pages/level2_screen.dart';
 import 'src/pages/theory_page.dart';
 import 'src/pages/game3_page.dart';
 import 'src/pages/register_page.dart';
-
+import 'package:provider/provider.dart';
+import 'package:mi_app_imgsound/models/coin_model.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CoinModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

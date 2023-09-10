@@ -11,7 +11,7 @@ class HeartsIndicator extends StatelessWidget {
       children: List.generate(hearts, (index) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.0),
-          child: Icon(Icons.favorite, color: Colors.red, size: 24),
+          child: Icon(Icons.favorite, color: Color(0xFFC92771), size: 24),
         );
       }),
     );

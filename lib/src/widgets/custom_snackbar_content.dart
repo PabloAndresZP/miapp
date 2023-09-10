@@ -1,16 +1,15 @@
-// custom_snackbar_content.dart
-
 import 'package:flutter/material.dart';
 
 class CustomSnackbarContent extends StatefulWidget {
   final String message;
+  final bool isSuccess;
 
-  CustomSnackbarContent({required this.message});
+  CustomSnackbarContent({required this.message, required this.isSuccess});
 
-  static void show(BuildContext context, String message) {
+  static void show(BuildContext context, String message, bool isSuccess) {
     final overlay = Overlay.of(context);
     final overlayEntry = OverlayEntry(
-      builder: (context) => CustomSnackbarContent(message: message),
+      builder: (context) => CustomSnackbarContent(message: message, isSuccess: isSuccess),
     );
 
     overlay.insert(overlayEntry);
@@ -54,12 +53,12 @@ class _CustomSnackbarContentState extends State<CustomSnackbarContent>
         child: ScaleTransition(
           scale: _scaleAnimation,
           child: Container(
-            width: 150,
-            height: 150,
+            width: 288,
+            height: 288,
             padding: EdgeInsets.all(20.0),
             decoration: BoxDecoration(
-              color: Color(0xFF030328),
-              borderRadius: BorderRadius.circular(20),
+              color: widget.isSuccess ? Color(0xFF00D8BB) : Color(0xFFC92771),
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Center(
               child: Text(
@@ -67,7 +66,8 @@ class _CustomSnackbarContentState extends State<CustomSnackbarContent>
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'WorkSans',
-                  fontSize: 15.0,
+                  fontSize: 18.7,
+                  fontWeight: FontWeight.bold,
                   color: Color(0xFFFDFDFD),
                 ),
               ),

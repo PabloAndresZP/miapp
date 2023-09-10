@@ -4,6 +4,10 @@ import 'package:mi_app_imgsound/src/widgets/coin_counter.dart';
 import 'package:mi_app_imgsound/src/widgets/hearts_indicator.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_snackbar_content.dart';
+import 'package:mi_app_imgsound/src/pages/game2_page.dart';
+import 'package:mi_app_imgsound/src/pages/coin1_game2_page.dart'; 
+import 'package:mi_app_imgsound/models/coin_model.dart';
+import 'package:provider/provider.dart';
 
 class Game2Eje3Page extends StatefulWidget {
   final int initialHearts;
@@ -69,8 +73,132 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
   }
 
   void _checkAnswer() {
-    // ... (mismo código)
+  if (selectedAnswer == correctAnswer) {
+    CustomSnackbarContent.show(context, '¡Impresionante! Sigues avanzando.', true);
+    _playSound('correcto.mp3');
+
+    setState(() {
+      coins += 1;
+    });
+
+    // Actualización del estado de la moneda en el modelo
+    Provider.of<CoinModel>(context, listen: false).winCoin1();
+
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => Coin1Game2Page())); 
+    });
+
+  } else {
+    CustomSnackbarContent.show(context, '¡No te preocupes! Inténtalo de nuevo.', false);
+    _playSound('acento.mp3');
+
+    setState(() {
+      hearts -= 1;
+    });
+
+    if (hearts <= 0) {
+      Future.delayed(Duration(seconds: 2), () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            insetPadding: EdgeInsets.all(0),
+            contentPadding: EdgeInsets.all(0),
+            titlePadding: EdgeInsets.all(16),
+            actionsPadding: EdgeInsets.all(8),
+            buttonPadding: EdgeInsets.all(8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            content: Container(
+              width: 252,
+              height: 252,
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Color(0xFF00D8BB),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    '¡Ánimo!',
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.7,
+                      color: Color(0xFFFDFDFD),
+                    ),
+                  ),
+                  Text(
+                    'Aunque se han agotado tus corazones, sabemos que puedes hacerlo mejor.',
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFFDFDFD),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    '¿Te gustaría intentarlo de nuevo?',
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFFDFDFD),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton(
+                        child: Text(
+                          'Sí',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 18.7,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFFDFDFD),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop(); 
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              builder: (context) => Game2Page()));
+                        },
+                      ),
+                      TextButton(
+                        child: Text(
+                          'No',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 18.7,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFFDFDFD),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop(); 
+                        },
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      });
+    }
   }
+}
+
+void _playSound(String soundFile) async {
+  final player = AudioCache(prefix: 'sounds/');
+  player.play(soundFile);
+}
 
   @override
   Widget build(BuildContext context) {
