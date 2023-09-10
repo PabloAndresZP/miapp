@@ -260,6 +260,19 @@ void _playSound(String soundFile) async {
                     backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00D8BB)),
                   ),
                 ),
+
+                SizedBox(height: 12.0),
+                Text(
+                  'Escala Mayor',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFF030328),
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.0,
+                  ),
+                ),
+
                 SizedBox(height: 24.0),
                 Column(
                   children: exerciseImages.map((imagePath) {
