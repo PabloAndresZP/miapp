@@ -5,9 +5,15 @@ import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 const List<String> instructions = [
   'Asocia imágenes con escalas musicales.',
   'Descubre la relación entre las escalas musicales y las imágenes. Una escala musical es una secuencia organizada de notas que se desplazan en intervalos determinados. Es fundamental en la música y nos ayuda tanto a componer como a analizar melodías.',
-  'Ejercicios de asociación. En estos ejercicios, se te presentará una imagen acompañada de dos audios, uno por cada escala. Tu misión es vincular la imagen con la escala que mejor la represente.',
+  'En estos ejercicios, se te presentará una imagen acompañada de dos audios, uno por cada escala. Tu misión es vincular la imagen con la escala que mejor la represente.',
   '¡Un giro inesperado! A veces, las dinámicas cambian. Se te ofrecerá una escala y dos imágenes. Tu tarea será seleccionar la imagen que mejor se relacione con esa escala. Considera las emociones o estados de ánimo que evocan las escalas al tomar tu decisión.',
-  // ... (resto de tus instrucciones)
+];
+
+const List<String?> images = [
+  null,
+  'assets/images/instruccion_2.png',
+  'assets/images/instruccion_3.png',
+  'assets/images/instruccion_4.png',
 ];
 
 class Instructions2Page extends StatefulWidget {
@@ -59,6 +65,7 @@ class _Instructions2PageState extends State<Instructions2Page> {
             itemBuilder: (context, index) {
               return InstructionPage(
                 text: instructions[index],
+                imagePath: images[index],
               );
             },
             itemCount: instructions.length,
@@ -127,9 +134,11 @@ class _Instructions2PageState extends State<Instructions2Page> {
 
 class InstructionPage extends StatelessWidget {
   final String text;
+  final String? imagePath;
 
   const InstructionPage({
     required this.text,
+    this.imagePath,
   });
 
   @override
@@ -139,6 +148,10 @@ class InstructionPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          if (imagePath != null) ...[
+            Image.asset(imagePath!, height: 150),
+            SizedBox(height: 20),
+          ],
           Text(
             text,
             textAlign: TextAlign.center,

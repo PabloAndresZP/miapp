@@ -23,21 +23,23 @@ class _Game2PageState extends State<Game2Page> {
   int currentExerciseIndex = 0;
   List<String> exerciseImages = [
     'assets/images/bosquet.png',
-    'assets/images/personam.png',
+    'assets/images/instruccion_3.png',
   ];
   List<String> exerciseAudios1 = [
     'assets/sounds/escmayor.mp3',
-    'assets/sounds/esccromatica.mp3',
+    'assets/sounds/escmayor.mp3',
   ];
   List<String> exerciseAudios2 = [
     'assets/sounds/escmenor.mp3',
-    'assets/sounds/modofrigio.mp3',
+    'assets/sounds/escmenor.mp3',
+    
+    
   ];
 
   // Lista para manejar las etiquetas debajo de los círculos
   List<List<String>> labels = [
   ['Escala Mayor', 'Escala Menor'],
-  ['Escala Cromática', 'Modo Frigio']
+  ['Escala Mayor', 'Escala Menor']
   ];
 
   @override

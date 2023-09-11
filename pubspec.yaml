@@ -44,12 +44,37 @@ flutter:
     - assets/images/personam.png
     - assets/images/icon_menu.png
     - assets/images/icon_teoria.png
+    - assets/images/moneda.png
+    - assets/images/paisajei.png
+    - assets/images/instruccion_2.png
+    - assets/images/instruccion_3.png
+    - assets/images/instruccion_4.png
+    - assets/images/personas_amor.png
+    - assets/images/persona_miedo.png
+    - assets/images/instruccion_2_lienzo_sonoro.png
+    - assets/images/instruccion_3_lienzo_sonoro.png
+    - assets/images/trafico_nivel_intermedio_ls.png
+    - assets/images/voz_nivel_avanzado_ls.png
+    - assets/images/puerta_nivel_inicial_ls.png
+    - assets/images/foley_nivel_experto_ls.png
+    - assets/images/intruccion_1_rp.png
+    - assets/images/intruccion_2_rp.png
+    - assets/images/intruccion_3_rp.png
+    - assets/images/componente_rp.png
+    - assets/images/nivel_1_rp.png
+    - assets/images/nivel_2_rp.png
+    - assets/images/nivel_3_rp.png
+    - assets/images/nivel_4_rp.png
     - assets/sounds/escmayor.mp3
     - assets/sounds/escmenor.mp3
     - assets/sounds/esccromatica.mp3
     - assets/sounds/modofrigio.mp3
     - assets/sounds/eschexatonica.mp3
     - assets/sounds/correcto.mp3
+    - assets/sounds/ritmo nivel inicial 3.mp3
+    - assets/sounds/ritmo nivel intermedio.mp3
+    - assets/sounds/ritmo nivel avanzado.mp3
+    - assets/sounds/ritmo nivel experto.mp3
   fonts:
     - family: WorkSans
       fonts:

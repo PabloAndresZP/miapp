@@ -35,14 +35,16 @@ class Coin1Game2Page extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset('assets/images/coin_yellow.png', height: 100, width: 100), // Imagen de la moneda
-                  SizedBox(height: 20),
+         Padding(
+  padding: const EdgeInsets.all(16.0),
+  child: SingleChildScrollView(
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Center(
+          child: Image.asset('assets/images/moneda.png', height: 100, width: 100), // Imagen de la moneda centrada horizontalmente
+        ),
+        SizedBox(height: 20),
                   Text(
                     'Teoría:',
                     style: TextStyle(
@@ -61,7 +63,7 @@ class Coin1Game2Page extends StatelessWidget {
                       fontSize: 15,
                     ),
                   ),
-                  // ... después del primer fragmento del texto de teoría
+                  
 Text(
   'Una escala mayor se compone de notas que siguen un patrón específico de tonos y semitonos: tono - tono - semitono - tono - tono - tono - semitono. Por ejemplo, la escala de Do mayor incluye las siguientes notas: Do - Re - Mi - Fa - Sol - La - Si - Do. Esta escala se asocia comúnmente con emociones positivas, como la felicidad, la alegría y la energía, debido a su sonoridad brillante y alegre.',
   style: TextStyle(

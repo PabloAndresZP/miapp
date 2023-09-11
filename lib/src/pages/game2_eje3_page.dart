@@ -44,8 +44,9 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
   int correctAnswer = 1;
 
   List<String> exerciseImages = [
-    'assets/images/bosquet.png',
-    'assets/images/personam.png',
+    'assets/images/persona_miedo.png',
+    'assets/images/personas_amor.png',
+    
   ];
 
   List<String> exerciseAudios = [
