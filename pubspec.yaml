@@ -65,6 +65,13 @@ flutter:
     - assets/images/nivel_2_rp.png
     - assets/images/nivel_3_rp.png
     - assets/images/nivel_4_rp.png
+    - assets/images/nivel_2_ps.png
+    - assets/images/nivel_2_2_ps.png
+    - assets/images/nivel_4_ps.png
+    - assets/images/nivel_4_2_ps.png
+    - assets/images/nivel_3_ps.png
+    - assets/sounds/cumpleaños.mp3
+    - assets/sounds/cumpleaños02.mp3
     - assets/sounds/escmayor.mp3
     - assets/sounds/escmenor.mp3
     - assets/sounds/esccromatica.mp3
@@ -75,6 +82,8 @@ flutter:
     - assets/sounds/ritmo nivel intermedio.mp3
     - assets/sounds/ritmo nivel avanzado.mp3
     - assets/sounds/ritmo nivel experto.mp3
+    - assets/sounds/melodia modo frigio.mp3
+    - assets/sounds/melodia modo lido.mp3
   fonts:
     - family: WorkSans
       fonts:

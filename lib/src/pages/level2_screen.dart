@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/pages/lesson_two_screen.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
+import 'package:mi_app_imgsound/src/pages/game2_level_intermediate.dart';
+import 'package:mi_app_imgsound/src/pages/game2_level_advanced.dart';
+import 'package:mi_app_imgsound/src/pages/game2_level_expert.dart';
 
 class Level2Screen extends StatelessWidget {
   @override
@@ -41,11 +44,11 @@ class Level2Screen extends StatelessWidget {
               children: <Widget>[
                 buildTextButton('Nivel Inicial', context, LessonTwoScreen()),
                 SizedBox(height: 24),
-                buildTextButton('Nivel Intermedio', context, null, active: false),
+                buildTextButton('Nivel Intermedio', context, GameLevelIntermediate()),
                 SizedBox(height: 24),
-                buildTextButton('Nivel Avanzado', context, null, active: false),
+                buildTextButton('Nivel Avanzado', context, GameLevelAdvanced()),
                 SizedBox(height: 24),
-                buildTextButton('Nivel Experto', context, null, active: false),
+                buildTextButton('Nivel Experto', context, GameLevelExpert()),
               ],
             ),
           ),
