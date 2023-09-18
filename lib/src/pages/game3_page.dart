@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:mi_app_imgsound/src/pages/level3_screen.dart';// Considera actualizar este import si game3_page tiene una navegación diferente.
+import 'package:mi_app_imgsound/src/pages/level3_screen.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 const List<String> instructions = [
   'Aprende sobre la grabación / registro de sonido.',
   'Observa la imagen mostrada y graba el sonido que crees que produce ese objeto.',
   ' Luego, utiliza los controles para ajustar y eliminar cualquier ruido o eco detectado por la aplicación.',
-  
 ];
 
 const List<String?> images = [
   null,
   'assets/images/instruccion_2_lienzo_sonoro.png',
   'assets/images/instruccion_3_lienzo_sonoro.png',
-  
 ];
 
 class Game3Page extends StatefulWidget {
@@ -99,7 +97,7 @@ class _Game3PageState extends State<Game3Page> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Level3Screen()), // Considera actualizar esta navegación si es diferente para Game3Page.
+                    MaterialPageRoute(builder: (context) => Level3Screen()),
                   );
                 },
                 style: ButtonStyle(
@@ -112,16 +110,16 @@ class _Game3PageState extends State<Game3Page> {
                   ),
                   shadowColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.3)),
                   elevation: MaterialStateProperty.all<double>(5.0),
-                  textStyle: MaterialStateProperty.all<TextStyle>(
-                    TextStyle(
-                      color: Color(0xFFFDFDFD),
-                      fontFamily: 'WorkSans',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
+                ),
+                child: Text(
+                  'Jugar',
+                  style: TextStyle(
+                    color: Color(0xFFFDFDFD),
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
                   ),
                 ),
-                child: Text('Jugar'),
               ),
             ),
           ),

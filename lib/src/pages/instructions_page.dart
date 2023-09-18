@@ -99,7 +99,7 @@ class _InstructionsPageState extends State<InstructionsPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                     MaterialPageRoute(builder: (context) => Level1Screen()),
+                    MaterialPageRoute(builder: (context) => Level1Screen()),
                   );
                 },
                 style: ButtonStyle(
@@ -112,16 +112,16 @@ class _InstructionsPageState extends State<InstructionsPage> {
                   ),
                   shadowColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.3)),
                   elevation: MaterialStateProperty.all<double>(5.0),
-                  textStyle: MaterialStateProperty.all<TextStyle>(
-                    TextStyle(
-                      color: Color(0xFFFDFDFD),
-                      fontFamily: 'WorkSans',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
+                ),
+                child: Text(
+                  'Jugar',
+                  style: TextStyle(
+                    color: Color(0xFFFDFDFD),  // Aquí se cambió el color del texto a blanco.
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
                   ),
                 ),
-                child: Text('Jugar'),
               ),
             ),
           ),

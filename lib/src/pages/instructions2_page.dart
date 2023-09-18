@@ -112,16 +112,16 @@ class _Instructions2PageState extends State<Instructions2Page> {
                   ),
                   shadowColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.3)),
                   elevation: MaterialStateProperty.all<double>(5.0),
-                  textStyle: MaterialStateProperty.all<TextStyle>(
-                    TextStyle(
-                      color: Color(0xFFFDFDFD),
-                      fontFamily: 'WorkSans',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    ),
+                ),
+                child: Text(
+                  'Jugar',
+                  style: TextStyle(
+                    color: Color(0xFFFDFDFD),  // Color blanco para el texto "Jugar"
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
                   ),
                 ),
-                child: Text('Jugar'),
               ),
             ),
           ),
