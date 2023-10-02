@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'src/pages/instructions_page.dart';
-//import 'package:mi_app_imgsound/src/pages/instructions2_page.dart';
 import 'src/pages/level2_screen.dart';
-import 'src/widgets/coin_counter.dart';
+import 'src/pages/theory_page.dart';
+import 'src/pages/game3_page.dart';
+import 'src/pages/register_page.dart';
+import 'package:provider/provider.dart';
+import 'package:mi_app_imgsound/models/coin_model.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => CoinModel(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +31,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'Paisaje Sonoro'),
+      home: const HomePage(title: 'Sonido Visual'),
     );
   }
 }
@@ -32,224 +41,184 @@ class HomePage extends StatelessWidget {
 
   final String title;
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFEE715D),
-        leading: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.menu, color: Colors.white),
-              onPressed: () {
-                // Lógica para abrir el menú hamburguesa
-              },
-            ),
-            Text(
-              'Menú',
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'WorkSans',
-                fontSize: 8,
-              ),
-            ),
-          ],
-        ),
-        title: Image.asset('assets/logo.png'), // Ruta a tu logo
-        actions: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+  void _showMenu(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Color(0xFF030328),
+      builder: (context) {
+        return Container(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              IconButton(
-                icon: const Icon(Icons.search, color: Colors.white),
-                onPressed: () {
-                  // Lógica para abrir el buscador
+              ListTile(
+                title: Text(
+                  'Teoría',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TheoryPage()),
+                  );
                 },
               ),
-              Text(
-                'Buscar',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: 'WorkSans',
-                  fontSize: 8,
+
+              ListTile(
+                title: Text(
+                  'Ritmo Pictórico',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
                 ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => InstructionsPage()),
+                  );
+                },
               ),
+              
+              ListTile(
+                title: Text(
+                  'Pintando Sonido',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Level2Screen()),
+                  );
+                },
+              ),
+              ListTile(
+                title: Text(
+                  'Lienzo Sonoro',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Game3Page()),
+                  );
+                },
+              ),
+
+                ListTile(
+                title: Text(
+                  'Regístrate',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
+                ),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegisterPage()),
+                  );
+                },
+              )
             ],
           ),
-        ],
+        );
+      },
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final button = (String imagePath, String label, VoidCallback onPressed, {double imgHeight = 48}) => GestureDetector(
+  onTap: onPressed,
+  child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Image.asset(imagePath, height: imgHeight), // imgHeight se usa aquí
+      SizedBox(height: 8),
+      Text(label,
+          style: TextStyle(
+            color: Color(0xFF7CF8FF),
+            fontFamily: 'WorkSans',
+            fontWeight: FontWeight.bold,
+            fontSize: 15,
+          )),
+    ],
+  ),
+);
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF030328),
+        centerTitle: true,
+        title: Image.asset('logo_3.png', height: 80),
+        toolbarHeight: 80,
       ),
-      
-      body: SingleChildScrollView(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/textura_5.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CoinCounter(0),
+            const SizedBox(height: 16),
             Text(
               '¿Qué quieres jugar?',
               style: TextStyle(
-                color: Color(0xFF075B96),
+                color: Color(0xFF7CF8FF),
                 fontFamily: 'WorkSans',
                 fontWeight: FontWeight.bold,
-                fontSize: 21.5,
+                fontSize: 29.3,
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 16), // Espacio entre elementos
-            ElevatedButton(
-              onPressed: () {
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                button('assets/images/ritmo.png', 'Ritmo Pictórico', () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => InstructionsPage()),
+                  );
+                }),
+                button('assets/images/pintando.png', 'Pintando Sonido', () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Level2Screen()),
+                  );
+                }),
+              ],
+            ),
+            Center(
+              child: button('assets/images/lienzo_sonoro.png', 'Lienzo Sonoro', () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => InstructionsPage()),
+                  MaterialPageRoute(builder: (context) => Game3Page()),
                 );
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFAAD4E2),
-                minimumSize: Size(216, 216),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(108),
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.music_note, size: 48, color: Colors.white),
-                  SizedBox(height: 8),
-                  Text('Ritmo Pictórico', 
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  )),
-                ],
-              ),
+              }, imgHeight: 72), // Ajustado el tamaño de imagen para el botón "Lienzo Sonoro"
             ),
-            const SizedBox(height: 36), // Espacio entre elementos
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Level2Screen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFAAD4E2),
-                minimumSize: Size(216, 216),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(108),
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.brush, size: 48, color: Colors.white),
-                  SizedBox(height: 8),
-                  Text('Pintando Sonido',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  )),
-                ],
-              ),
-            ),
-            const SizedBox(height: 36), // Espacio entre elementos
-            ElevatedButton(
-              onPressed: () {
-                // Lógica para el botón Lienzo Sonoro
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFFAAD4E2),
-                minimumSize: Size(216, 216),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(108),
-                ),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.brush, size: 48, color: Colors.white), // Icono que desees
-                  SizedBox(height: 8), // Espacio entre el icono y el texto
-                  Text('Lienzo Sonoro',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                  )),
-                ],
-              ),
-            ),
-            const SizedBox(height: 36), // Espacio adicional antes del footer
+            const SizedBox(height: 48),
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Color(0xFFEE715D),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.help, color: Colors.white),
-                  onPressed: () {
-                    // Lógica para el icono de ayuda
-                  },
-                ),
-                Text(
-                  'Teoría',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'WorkSans',
-                    fontSize: 8,
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.home, color: Colors.white),
-                  onPressed: () {
-                    // Lógica para el icono de home
-                  },
-                ),
-                Text(
-                  'Home',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'WorkSans',
-                    fontSize: 8,
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_forward, color: Colors.white),
-                  onPressed: () {
-                    // Lógica para avanzar
-                  },
-                ),
-                Text(
-                  'Avanzar',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'WorkSans',
-                    fontSize: 8,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
+       bottomNavigationBar: CustomFooter(currentPageIndex: 2),
     );
   }
 }

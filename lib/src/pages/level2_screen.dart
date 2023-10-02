@@ -1,100 +1,78 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/pages/lesson_two_screen.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
+import 'package:mi_app_imgsound/src/pages/game2_level_intermediate.dart';
+import 'package:mi_app_imgsound/src/pages/game2_level_advanced.dart';
+import 'package:mi_app_imgsound/src/pages/game2_level_expert.dart';
 
 class Level2Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pintando Sonido'),
+        backgroundColor: Color(0xFF030328),
+        leading: IconButton(
+          icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        title: Text(
+          'Pintando Sonido',
+          style: TextStyle(
+            color: Color(0xFF044A1D6),
+            fontFamily: 'WorkSans',
+            fontWeight: FontWeight.bold,
+            fontSize: 23.4,
+          ),
+        ),
+        centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => LessonTwoScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF00D8BB),
-                minimumSize: Size(313, 48),
+      body: Stack(
+        children: [
+          Container(  // Textura de fondo
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/textura_5.png'),
+                fit: BoxFit.cover,
               ),
-              child: Text('Nivel Inicial',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Color(0xFFFDFDFD),
-                  )),
             ),
-            SizedBox(height: 20),
-            Container(
-              width: 5,
-              height: 40,
-              color: Color(0xFF00D8BB),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                buildTextButton('Nivel Inicial', context, LessonTwoScreen()),
+                SizedBox(height: 24),
+                buildTextButton('Nivel Intermedio', context, GameLevelIntermediate()),
+                SizedBox(height: 24),
+                buildTextButton('Nivel Avanzado', context, GameLevelAdvanced()),
+                SizedBox(height: 24),
+                buildTextButton('Nivel Experto', context, GameLevelExpert()),
+              ],
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: null,  // Desactivado
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF00D8BB),
-                minimumSize: Size(313, 48),
-              ),
-              child: Text('Nivel Intermedio',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Color(0xFFFDFDFD),
-                  )),
-            ),
-            SizedBox(height: 20),
-            Container(
-              width: 5,
-              height: 40,
-              color: Color(0xFF00D8BB),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: null,  // Desactivado
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF00D8BB),
-                minimumSize: Size(313, 48),
-              ),
-              child: Text('Nivel Avanzado',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Color(0xFFFDFDFD),
-                  )),
-            ),
-            SizedBox(height: 20),
-            Container(
-              width: 5,
-              height: 40,
-              color: Color(0xFF00D8BB),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: null,  // Desactivado
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF00D8BB),
-                minimumSize: Size(313, 48),
-              ),
-              child: Text('Nivel Experto',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12,
-                    color: Color(0xFFFDFDFD),
-                  )),
-            ),
-          ],
+          ),
+        ],
+      ),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
+    );
+  }
+
+  Widget buildTextButton(String label, BuildContext context, Widget? page, {bool active = true}) {
+    return TextButton(
+      onPressed: page == null ? null : () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => page),
+        );
+      },
+      child: Text(
+        label,
+        style: TextStyle(
+          color: active ? Color(0xFF044A1D6) : Colors.grey,
+          fontFamily: 'WorkSans',
+          fontWeight: FontWeight.bold,
+          fontSize: 18.7,
         ),
       ),
     );

@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:mi_app_imgsound/src/pages/level1_screen.dart';
+import 'package:mi_app_imgsound/src/pages/level3_screen.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 const List<String> instructions = [
-  'Aprende a sincronizar imagen y sonido.',
-  'Los acentos en la imagen en movimiento ocurren cuando los objetos colisionan, aparecen o alcanzan un punto culminante en la narrativa visual.',
-  'Por otro lado, los silencios en la imagen en movimiento ocurren cuando los objetos desaparecen, salen de escena o se ocultan de alguna manera.',
-  'Tu objetivo es sincronizar la imagen con el sonido. Utiliza el controlador Graph Editor para lograr una perfecta armonía entre ambos. ¡Presta atención a los detalles y busca la perfecta sincronización para avanzar!',
+  'Aprende sobre la grabación / registro de sonido.',
+  'Observa la imagen mostrada y graba el sonido que crees que produce ese objeto.',
+  ' Luego, utiliza los controles para ajustar y eliminar cualquier ruido o eco detectado por la aplicación.',
 ];
 
 const List<String?> images = [
   null,
-  'assets/images/intruccion_1_rp.png',
-  'assets/images/intruccion_2_rp.png',
-  'assets/images/intruccion_3_rp.png',
+  'assets/images/instruccion_2_lienzo_sonoro.png',
+  'assets/images/instruccion_3_lienzo_sonoro.png',
 ];
 
-class InstructionsPage extends StatefulWidget {
+class Game3Page extends StatefulWidget {
   @override
-  _InstructionsPageState createState() => _InstructionsPageState();
+  _Game3PageState createState() => _Game3PageState();
 }
 
-class _InstructionsPageState extends State<InstructionsPage> {
+class _Game3PageState extends State<Game3Page> {
   int currentPage = 0;
 
   @override
@@ -99,7 +97,7 @@ class _InstructionsPageState extends State<InstructionsPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Level1Screen()),
+                    MaterialPageRoute(builder: (context) => Level3Screen()),
                   );
                 },
                 style: ButtonStyle(
@@ -116,7 +114,7 @@ class _InstructionsPageState extends State<InstructionsPage> {
                 child: Text(
                   'Jugar',
                   style: TextStyle(
-                    color: Color(0xFFFDFDFD),  // Aquí se cambió el color del texto a blanco.
+                    color: Color(0xFFFDFDFD),
                     fontFamily: 'WorkSans',
                     fontWeight: FontWeight.bold,
                     fontSize: 15,

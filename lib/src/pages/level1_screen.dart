@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mi_app_imgsound/src/pages/instructions2_page.dart';
-import 'package:mi_app_imgsound/src/widgets/custom_footer.dart'; // Asegúrate de que esta importación esté correcta.
+import 'package:mi_app_imgsound/src/pages/game1_level_initial.dart';
+import 'package:mi_app_imgsound/src/pages/game1_level_intermediate.dart';
+import 'package:mi_app_imgsound/src/pages/game1_level_advanced.dart';
+import 'package:mi_app_imgsound/src/pages/game1_level_expert.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
-class LessonTwoScreen extends StatelessWidget {
+class Level1Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +18,7 @@ class LessonTwoScreen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Pintando Sonido',
+          'Lienzo Sonoro',
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
@@ -35,19 +38,17 @@ class LessonTwoScreen extends StatelessWidget {
               ),
             ),
           ),
-          Center( // <-- Para centrar los botones
+          Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                buildTextButton('Lección 1', context, Instructions2Page()),
+              children: <Widget>[
+                buildTextButton('Nivel Inicial', context, Game1LevelInitial()),
                 SizedBox(height: 24),
-                buildTextButton('Lección 2', context, null, active: false),
+                buildTextButton('Nivel Intermedio', context, Game1LevelIntermediate()),
                 SizedBox(height: 24),
-                buildTextButton('Lección 3', context, null, active: false),
+                buildTextButton('Nivel Avanzado', context, Game1LevelAdvanced()),
                 SizedBox(height: 24),
-                buildTextButton('Lección 4', context, null, active: false),
-                SizedBox(height: 24),
-                buildTextButton('Lección 5', context, null, active: false),
+                buildTextButton('Nivel Experto', context, Game1LevelExpert()),
               ],
             ),
           ),
@@ -65,7 +66,8 @@ class LessonTwoScreen extends StatelessWidget {
           MaterialPageRoute(builder: (context) => page),
         );
       },
-      child: Text(label,
+      child: Text(
+        label,
         style: TextStyle(
           color: active ? Color(0xFF044A1D6) : Colors.grey,
           fontFamily: 'WorkSans',

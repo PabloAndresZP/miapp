@@ -6,12 +6,12 @@ import 'package:mi_app_imgsound/src/pages/game2_eje3_page.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_snackbar_content.dart';
 
-class Game2Page extends StatefulWidget {
+class GameLevelIntermediate extends StatefulWidget {
   @override
-  _Game2PageState createState() => _Game2PageState();
+  _GameLevelIntermediateState createState() => _GameLevelIntermediateState();
 }
 
-class _Game2PageState extends State<Game2Page> {
+class _GameLevelIntermediateState extends State<GameLevelIntermediate> {
   late AudioPlayer _audioPlayer1, _audioPlayer2;
   bool isPlaying1 = false;
   bool isPlaying2 = false;
@@ -22,24 +22,24 @@ class _Game2PageState extends State<Game2Page> {
   List<int> correctAnswers = [1, 0];
   int currentExerciseIndex = 0;
   List<String> exerciseImages = [
-    'assets/images/bosquet.png',
-    'assets/images/instruccion_3.png',
+    'assets/images/nivel_2_ps.png',
+    'assets/images/nivel_2_2_ps.png',
   ];
   List<String> exerciseAudios1 = [
-    'assets/sounds/escmayor.mp3',
-    'assets/sounds/escmayor.mp3',
+    'assets/sounds/modofrigio.mp3',
+    'assets/sounds/modofrigio.mp3',
   ];
   List<String> exerciseAudios2 = [
-    'assets/sounds/escmenor.mp3',
-    'assets/sounds/escmenor.mp3',
+    'assets/sounds/esccromatica.mp3',
+    'assets/sounds/esccromatica.mp3',
     
     
   ];
 
   // Lista para manejar las etiquetas debajo de los círculos
   List<List<String>> labels = [
-  ['Escala Mayor', 'Escala Menor'],
-  ['Escala Mayor', 'Escala Menor']
+  ['Modo Frigio', 'Escala Cromatica'],
+  ['Modo Frigio', 'Escala Cromatica'],
   ];
 
   @override
@@ -197,7 +197,7 @@ void _checkAnswer() {
                           onPressed: () {
                             Navigator.of(context).pop();
                             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (context) => Game2Page())); 
+                                builder: (context) => GameLevelIntermediate())); 
                           },
                         ),
                         TextButton(
@@ -266,25 +266,19 @@ Widget build(BuildContext context) {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CoinCounter(coins),
-                    Container(
-                      height: 24.0, // Ajusta la altura de la barra de progreso aquí
-                      width: 200.0, // Ajusta el ancho de la barra de progreso aquí
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.0), // Establece el radio de borde circular
-                        border: Border.all(
-                          color: Colors.transparent, // Establece el color del borde como transparente cuando la barra está vacía
-                          width: 1.0, // Ancho del borde
+                      Row(
+                        children: List.generate(
+                          3,
+                          (index) => Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 3.0),
+                            child: Icon(
+                              index < completedExercises ? Icons.radio_button_checked : Icons.radio_button_unchecked,
+                              size: 12.0,
+                              color: Color(0xFF44A1D6),
+                            ),
+                          ),
                         ),
                       ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12.0), // Agrega bordes redondeados al contenido
-                        child: LinearProgressIndicator(
-                          value: completedExercises / 3, // Cambia 3 al número total de ejercicios
-                          backgroundColor: Colors.transparent, // Establece el fondo como transparente cuando la barra está vacía
-                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF00D8BB)), // Establece el color de la barra de progreso
-                        ),
-                      ),
-                    ),
                       HeartsIndicator(hearts),
                     ],
                   ),
@@ -386,8 +380,4 @@ bottomNavigationBar: CustomFooter(currentPageIndex: 5),
 );
 }
 }
-
-
-
-
 
