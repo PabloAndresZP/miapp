@@ -54,7 +54,7 @@ class Level2Screen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 

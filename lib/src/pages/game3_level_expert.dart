@@ -133,7 +133,7 @@ class _Game3LevelExpertState extends State<Game3LevelExpert> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 }

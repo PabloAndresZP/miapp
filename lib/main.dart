@@ -6,6 +6,7 @@ import 'src/pages/game3_page.dart';
 import 'src/pages/register_page.dart';
 import 'package:provider/provider.dart';
 import 'package:mi_app_imgsound/models/coin_model.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 void main() {
   runApp(
@@ -217,77 +218,7 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomAppBar(
-        color: Color(0xFF030328),
-        child: Container(
-          height: 80.0,
-          child: SingleChildScrollView(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Image.asset('assets/images/icon_teoria.png', height: 24, width: 24),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => TheoryPage()),
-                        );
-                      },
-                    ),
-                    Text(
-                      'Teoría',
-                      style: TextStyle(
-                        color: Color(0xFFFDFDFD),
-                        fontFamily: 'WorkSans',
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Image.asset('assets/images/icon_home.png', height: 24, width: 24),
-                      onPressed: () {
-                        Navigator.of(context).popUntil((route) => route.isFirst);
-                      },
-                    ),
-                    Text(
-                      'Home',
-                      style: TextStyle(
-                        color: Color(0xFFFDFDFD),
-                        fontFamily: 'WorkSans',
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Image.asset('assets/images/icon_menu.png', height: 24, width: 24),
-                      onPressed: () => _showMenu(context),
-                    ),
-                    Text(
-                      'Menú',
-                      style: TextStyle(
-                        color: Color(0xFFFDFDFD),
-                        fontFamily: 'WorkSans',
-                        fontSize: 12,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+       bottomNavigationBar: CustomFooter(currentPageIndex: 2),
     );
   }
 }

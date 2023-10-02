@@ -125,7 +125,7 @@ class _Game3PageState extends State<Game3Page> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 }

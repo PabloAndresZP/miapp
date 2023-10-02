@@ -127,7 +127,7 @@ class _Instructions2PageState extends State<Instructions2Page> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 }

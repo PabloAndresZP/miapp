@@ -116,7 +116,7 @@ class TheoryPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(), // Tu footer aquí
+      bottomNavigationBar: CustomFooter(currentPageIndex: 1),
     );
   }
 }

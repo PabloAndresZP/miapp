@@ -135,7 +135,7 @@ class _Game1LevelAdvancedState extends State<Game1LevelAdvanced> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 

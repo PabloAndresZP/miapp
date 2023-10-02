@@ -266,19 +266,25 @@ Widget build(BuildContext context) {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       CoinCounter(coins),
-                      Row(
-                        children: List.generate(
-                          3,
-                          (index) => Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 3.0),
-                            child: Icon(
-                              index < completedExercises ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-                              size: 12.0,
-                              color: Color(0xFF44A1D6),
-                            ),
-                          ),
+                    Container(
+                      height: 24.0, // Ajusta la altura de la barra de progreso aquí
+                      width: 200.0, // Ajusta el ancho de la barra de progreso aquí
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.0), // Establece el radio de borde circular
+                        border: Border.all(
+                          color: Colors.transparent, // Establece el color del borde como transparente cuando la barra está vacía
+                          width: 1.0, // Ancho del borde
                         ),
                       ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0), // Agrega bordes redondeados al contenido
+                        child: LinearProgressIndicator(
+                          value: completedExercises / 3, // Cambia 3 al número total de ejercicios
+                          backgroundColor: Colors.transparent, // Establece el fondo como transparente cuando la barra está vacía
+                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF00D8BB)), // Establece el color de la barra de progreso
+                        ),
+                      ),
+                    ),
                       HeartsIndicator(hearts),
                     ],
                   ),
@@ -376,7 +382,7 @@ Widget build(BuildContext context) {
 ),
 ],
 ),
-bottomNavigationBar: CustomFooter(),
+bottomNavigationBar: CustomFooter(currentPageIndex: 5),
 );
 }
 }

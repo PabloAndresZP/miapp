@@ -53,7 +53,7 @@ class LessonTwoScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(), // Aquí está el CustomFooter añadido
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 

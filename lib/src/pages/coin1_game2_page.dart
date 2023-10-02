@@ -121,7 +121,7 @@ Text(
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 1),
     );
   }
 }

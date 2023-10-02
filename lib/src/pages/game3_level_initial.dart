@@ -133,7 +133,7 @@ class _Game3LevelInitialState extends State<Game3LevelInitial> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 }

@@ -135,7 +135,7 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 

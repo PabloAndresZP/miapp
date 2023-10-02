@@ -135,7 +135,7 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 3),
     );
   }
 }

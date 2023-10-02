@@ -232,12 +232,24 @@ void _playSound(String soundFile) async {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CoinCounter(coins),
-                    Row(
-                      children: [
-                        ProgressCircle(isFilled: true), 
-                        ProgressCircle(isFilled: true), 
-                        ProgressCircle(isFilled: coins > 0), 
-                      ],
+                    Container(
+                      height: 24.0, // Ajusta la altura de la barra de progreso aquí
+                      width: 200.0, // Ajusta el ancho de la barra de progreso aquí
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.0), // Establece el radio de borde circular
+                        border: Border.all(
+                          color: Color(0xFF00D8BB), // Color del borde
+                          width: 1.0, // Ancho del borde
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0), // Agrega bordes redondeados al contenido
+                        child: LinearProgressIndicator(
+                          value: (coins == 1) ? 1.0 : 2 / 3, // Dos de los tres espacios llenos
+                          backgroundColor: Colors.transparent, // Establece el fondo como transparente cuando la barra está vacía
+                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF00D8BB)), // Establece el color de la barra de progreso
+                        ),
+                      ),
                     ),
                     HeartsIndicator(hearts),
                   ],
@@ -339,7 +351,7 @@ void _playSound(String soundFile) async {
           ),
         ),
       ),
-      bottomNavigationBar: CustomFooter(), // Tu footer aquí
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 }

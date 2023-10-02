@@ -135,7 +135,7 @@ class _Game1LevelExpertState extends State<Game1LevelExpert> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 

@@ -376,7 +376,7 @@ Widget build(BuildContext context) {
 ),
 ],
 ),
-bottomNavigationBar: CustomFooter(),
+bottomNavigationBar: CustomFooter(currentPageIndex: 5),
 );
 }
 }

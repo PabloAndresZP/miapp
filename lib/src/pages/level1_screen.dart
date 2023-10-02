@@ -54,7 +54,7 @@ class Level1Screen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(),
+      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
     );
   }
 
