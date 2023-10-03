@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
           Container(  // Textura de fondo
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/images/textura_6.png'),
+                image: AssetImage('assets/images/textura_5.png'),
                 fit: BoxFit.cover,
               ),
             ),
@@ -136,7 +136,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ],
       ),
       bottomNavigationBar: CustomFooter(
-  currentPageIndex: 3,
+  currentPageIndex: 5,
   onNotificationDismiss: () {
     // Coloca aquí la lógica para despedir la notificación en esta página específica
     // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.

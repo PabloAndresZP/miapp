@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'Sonido Visual'),
+      home: const HomePage(title: 'RAV'),
     );
   }
 }
