@@ -218,7 +218,13 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-       bottomNavigationBar: CustomFooter(currentPageIndex: 2),
+              bottomNavigationBar: CustomFooter(
+        currentPageIndex: 2,
+        onNotificationDismiss: () {
+          // Coloca aquí la lógica para despedir la notificación en esta página específica
+          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+        },
+      ),
     );
   }
 }

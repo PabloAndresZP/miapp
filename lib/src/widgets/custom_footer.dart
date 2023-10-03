@@ -9,8 +9,14 @@ import '../pages/register_page.dart';
 
 class CustomFooter extends StatefulWidget {
   final int currentPageIndex; // Índice de la página actual
+  final bool hasWonCoin1; // Valor para verificar si se ha ganado una moneda en TheoryPage
+  final VoidCallback onNotificationDismiss; // Función para despedir la notificación
 
-  CustomFooter({required this.currentPageIndex});
+  CustomFooter({
+    required this.currentPageIndex,
+    this.hasWonCoin1 = false,
+    required this.onNotificationDismiss,
+  });
 
   @override
   _CustomFooterState createState() => _CustomFooterState();
@@ -51,6 +57,8 @@ class _CustomFooterState extends State<CustomFooter> {
                   ),
                 ),
                 onTap: () {
+                  // Marcar la notificación como leída (desaparecerla)
+                  widget.onNotificationDismiss();
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => TheoryPage()),
@@ -139,6 +147,11 @@ class _CustomFooterState extends State<CustomFooter> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildFooterItem(
+                iconPath: 'assets/images/icon_home.png',
+                text: 'Inicio',
+                index: 2,
+              ),
+              _buildFooterItem(
                 iconPath: 'assets/images/icon_perfil2.png',
                 text: 'Perfil',
                 index: 0, // Índice de la página a la que se navegará
@@ -147,11 +160,7 @@ class _CustomFooterState extends State<CustomFooter> {
                 iconPath: 'assets/images/icon_teoria.png',
                 text: 'Teoría',
                 index: 1,
-              ),
-              _buildFooterItem(
-                iconPath: 'assets/images/icon_home.png',
-                text: 'Inicio',
-                index: 2,
+                showNotification: widget.hasWonCoin1, // Mostrar notificación si hasWonCoin1 es true
               ),
               _buildFooterItem(
                 iconPath: 'assets/images/icon_menu.png',
@@ -169,8 +178,10 @@ class _CustomFooterState extends State<CustomFooter> {
     required String iconPath,
     required String text,
     required int index,
+    bool showNotification = false, // Agregar un parámetro para mostrar notificación
   }) {
     final isActive = index == widget.currentPageIndex;
+    final iconColor = isActive ? Color(0xFF00D8BB) : Color(0xFFFDFDFD);
 
     return InkWell(
       onTap: () {
@@ -179,10 +190,12 @@ class _CustomFooterState extends State<CustomFooter> {
           case 0:
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()), // Reemplaza con la página de perfil
+              MaterialPageRoute(builder: (context) => ProfilePage()),
             );
             break;
           case 1:
+            // Marcar la notificación como leída (desaparecerla)
+            widget.onNotificationDismiss();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => TheoryPage()),
@@ -199,18 +212,45 @@ class _CustomFooterState extends State<CustomFooter> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: isActive ? Color(0xFF00D8BB) : Colors.transparent,
-              shape: BoxShape.circle,
-            ),
-            padding: EdgeInsets.all(8),
-            child: Image.asset(
-              iconPath,
-              height: 24,
-              width: 24,
-              color: isActive ? Colors.white : null,
-            ),
+          Stack(
+            alignment: Alignment.topRight,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: isActive ? Colors.transparent : null,
+                  shape: BoxShape.circle,
+                ),
+                padding: EdgeInsets.all(8),
+                child: Image.asset(
+                  iconPath,
+                  height: 24,
+                  width: 24,
+                  color: iconColor,
+                ),
+              ),
+              if (showNotification)
+                GestureDetector(
+                  onTap: () {
+                    // Marcar la notificación como leída (desaparecerla)
+                    widget.onNotificationDismiss();
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(4),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Color(0xFFC92771),
+                    ),
+                    child: Text(
+                      '1',
+                      style: TextStyle(
+                        color: Color(0xFFFDFDFD),
+                        fontFamily: 'WorkSans',
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+            ],
           ),
           Text(
             text,

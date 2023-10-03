@@ -135,7 +135,13 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
+             bottomNavigationBar: CustomFooter(
+        currentPageIndex: 5,
+        onNotificationDismiss: () {
+          // Coloca aquí la lógica para despedir la notificación en esta página específica
+          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+        },
+      ),
     );
   }
 

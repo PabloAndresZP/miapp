@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/models/coin_model.dart';
 import 'package:provider/provider.dart';
 import 'package:mi_app_imgsound/src/pages/coin1_game2_page.dart';
-import 'package:mi_app_imgsound/src/widgets/custom_footer.dart'; // Import para el footer
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 class TheoryPage extends StatelessWidget {
   @override
@@ -66,49 +66,58 @@ class TheoryPage extends StatelessWidget {
                   ),
                   SizedBox(height: 24),
                   ListTile(
-                    title: Text('Ritmo Pictórico', 
-                    style: TextStyle(color: Color(0xFF7CF8FF)
-                    ,fontFamily: 'WorkSans', fontSize: 18.7)),
+                    title: Text('Ritmo Pictórico',
+                        style: TextStyle(
+                            color: Color(0xFF7CF8FF),
+                            fontFamily: 'WorkSans',
+                            fontSize: 18.7)),
                   ),
                   SizedBox(height: 24),
                   ListTile(
-  title: Text(
-    'Pintando Sonido', 
-    style: TextStyle(color: Color(0xFF7CF8FF), fontFamily: 'WorkSans', fontSize: 18.7),
-  ),
-  subtitle: hasWonCoin1 
-  ? Column(
-    children: [
-      SizedBox(height: 12),
-      GestureDetector(
-        onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => Coin1Game2Page(),
-            ),
-          );
-        },
-        child: Padding(
-          padding: EdgeInsets.only(bottom: 12.0),
-          child: Text(
-            'Moneda 1',
-            style: TextStyle(
-              color: Color(0xFF00D8BB),
-              fontFamily: 'WorkSans',
-              fontSize: 18.7,
-              decoration: TextDecoration.underline,
-            ),
-          ),
-        ),
-      ),
-    ],
-  )
-  : null,
-),
+                    title: Text(
+                      'Pintando Sonido',
+                      style: TextStyle(
+                          color: Color(0xFF7CF8FF),
+                          fontFamily: 'WorkSans',
+                          fontSize: 18.7),
+                    ),
+                    subtitle: hasWonCoin1
+                        ? Column(
+                            children: [
+                              SizedBox(height: 12),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          Coin1Game2Page(),
+                                    ),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: EdgeInsets.only(bottom: 12.0),
+                                  child: Text(
+                                    'Moneda 1',
+                                    style: TextStyle(
+                                      color: Color(0xFF00D8BB),
+                                      fontFamily: 'WorkSans',
+                                      fontSize: 18.7,
+                                      decoration: TextDecoration.underline,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          )
+                        : null,
+                  ),
                   SizedBox(height: 24),
                   ListTile(
-                    title: Text('Lienzo Sonoro', 
-                    style: TextStyle(color: Color(0xFF7CF8FF),fontFamily: 'WorkSans', fontSize: 18.0)),
+                    title: Text('Lienzo Sonoro',
+                        style: TextStyle(
+                            color: Color(0xFF7CF8FF),
+                            fontFamily: 'WorkSans',
+                            fontSize: 18.0)),
                   ),
                 ],
               ),
@@ -116,7 +125,14 @@ class TheoryPage extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(currentPageIndex: 1),
+      bottomNavigationBar: CustomFooter(
+        currentPageIndex: 1,
+        hasWonCoin1: hasWonCoin1,
+        onNotificationDismiss: () {
+          // Lógica para despedir la notificación (ocultarla)
+          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+        },
+      ),
     );
   }
 }

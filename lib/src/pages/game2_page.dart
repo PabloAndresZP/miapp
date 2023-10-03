@@ -267,7 +267,7 @@ Widget build(BuildContext context) {
                     children: [
                       CoinCounter(coins),
                     Container(
-                      height: 24.0, // Ajusta la altura de la barra de progreso aquí
+                      height: 8.0, // Ajusta la altura de la barra de progreso aquí
                       width: 200.0, // Ajusta el ancho de la barra de progreso aquí
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0), // Establece el radio de borde circular
@@ -280,7 +280,7 @@ Widget build(BuildContext context) {
                         borderRadius: BorderRadius.circular(12.0), // Agrega bordes redondeados al contenido
                         child: LinearProgressIndicator(
                           value: completedExercises / 3, // Cambia 3 al número total de ejercicios
-                          backgroundColor: Colors.transparent, // Establece el fondo como transparente cuando la barra está vacía
+                          backgroundColor: Color(0xFF0A0A53), // Establece el fondo de la barra de progreso
                           valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF00D8BB)), // Establece el color de la barra de progreso
                         ),
                       ),
@@ -382,7 +382,13 @@ Widget build(BuildContext context) {
 ),
 ],
 ),
-bottomNavigationBar: CustomFooter(currentPageIndex: 5),
+       bottomNavigationBar: CustomFooter(
+        currentPageIndex: 5,
+        onNotificationDismiss: () {
+          // Coloca aquí la lógica para despedir la notificación en esta página específica
+          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+        },
+      ),
 );
 }
 }
