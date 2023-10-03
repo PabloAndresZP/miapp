@@ -5,12 +5,11 @@ import '../pages/level2_screen.dart';
 import '../pages/theory_page.dart';
 import '../pages/profile_page.dart';
 import '../pages/game3_page.dart';
-import '../pages/register_page.dart';
 
 class CustomFooter extends StatefulWidget {
-  final int currentPageIndex; // Índice de la página actual
-  final bool hasWonCoin1; // Valor para verificar si se ha ganado una moneda en TheoryPage
-  final VoidCallback onNotificationDismiss; // Función para despedir la notificación
+  final int currentPageIndex;
+  final bool hasWonCoin1;
+  final VoidCallback onNotificationDismiss;
 
   CustomFooter({
     required this.currentPageIndex,
@@ -34,6 +33,7 @@ class _CustomFooterState extends State<CustomFooter> {
             mainAxisSize: MainAxisSize.min,
             children: [
               ListTile(
+                leading: Image.asset('assets/images/icon_perfil2.png', height: 24, width: 24),
                 title: Text(
                   'Perfil',
                   style: TextStyle(
@@ -43,11 +43,15 @@ class _CustomFooterState extends State<CustomFooter> {
                   ),
                 ),
                 onTap: () {
-                  // Agrega aquí la navegación o acciones para la pantalla de perfil.
-                  Navigator.pop(context); // Cierra el menú.
+                  Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilePage(name: 'Nombre del Usuario', email: 'usuario@correo.com')),
+                  );
                 },
               ),
               ListTile(
+                leading: Image.asset('assets/images/icon_teoria.png', height: 24, width: 24),
                 title: Text(
                   'Teoría',
                   style: TextStyle(
@@ -57,7 +61,6 @@ class _CustomFooterState extends State<CustomFooter> {
                   ),
                 ),
                 onTap: () {
-                  // Marcar la notificación como leída (desaparecerla)
                   widget.onNotificationDismiss();
                   Navigator.push(
                     context,
@@ -66,6 +69,7 @@ class _CustomFooterState extends State<CustomFooter> {
                 },
               ),
               ListTile(
+                leading: Image.asset('assets/images/rp_01.png', height: 24, width: 24),
                 title: Text(
                   'Ritmo Pictórico',
                   style: TextStyle(
@@ -82,6 +86,7 @@ class _CustomFooterState extends State<CustomFooter> {
                 },
               ),
               ListTile(
+                leading: Image.asset('assets/images/ps_01.png', height: 24, width: 24),
                 title: Text(
                   'Pintando Sonido',
                   style: TextStyle(
@@ -98,6 +103,7 @@ class _CustomFooterState extends State<CustomFooter> {
                 },
               ),
               ListTile(
+                leading: Image.asset('assets/images/ls_01.png', height: 24, width: 24),
                 title: Text(
                   'Lienzo Sonoro',
                   style: TextStyle(
@@ -110,22 +116,6 @@ class _CustomFooterState extends State<CustomFooter> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => Game3Page()),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text(
-                  'Regístrate',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontSize: 15,
-                    color: Color(0xFF7CF8FF),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
                   );
                 },
               ),
@@ -154,13 +144,13 @@ class _CustomFooterState extends State<CustomFooter> {
               _buildFooterItem(
                 iconPath: 'assets/images/icon_perfil2.png',
                 text: 'Perfil',
-                index: 0, // Índice de la página a la que se navegará
+                index: 0,
               ),
               _buildFooterItem(
                 iconPath: 'assets/images/icon_teoria.png',
                 text: 'Teoría',
                 index: 1,
-                showNotification: widget.hasWonCoin1, // Mostrar notificación si hasWonCoin1 es true
+                showNotification: widget.hasWonCoin1,
               ),
               _buildFooterItem(
                 iconPath: 'assets/images/icon_menu.png',
@@ -178,23 +168,21 @@ class _CustomFooterState extends State<CustomFooter> {
     required String iconPath,
     required String text,
     required int index,
-    bool showNotification = false, // Agregar un parámetro para mostrar notificación
+    bool showNotification = false,
   }) {
     final isActive = index == widget.currentPageIndex;
     final iconColor = isActive ? Color(0xFF00D8BB) : Color(0xFFFDFDFD);
 
     return InkWell(
       onTap: () {
-        // Navegar a la página correspondiente cuando se toque el ícono.
         switch (index) {
           case 0:
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),
+              MaterialPageRoute(builder: (context) => ProfilePage(name: 'Nombre del Usuario', email: 'usuario@correo.com')),
             );
             break;
           case 1:
-            // Marcar la notificación como leída (desaparecerla)
             widget.onNotificationDismiss();
             Navigator.push(
               context,
@@ -231,7 +219,6 @@ class _CustomFooterState extends State<CustomFooter> {
               if (showNotification)
                 GestureDetector(
                   onTap: () {
-                    // Marcar la notificación como leída (desaparecerla)
                     widget.onNotificationDismiss();
                   },
                   child: Container(

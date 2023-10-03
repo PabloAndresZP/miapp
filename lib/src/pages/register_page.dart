@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
+import '../pages/profile_page.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -11,6 +12,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
+
+  String? _name;
+  String? _email;
 
   @override
   void dispose() {
@@ -25,8 +29,41 @@ class _RegisterPageState extends State<RegisterPage> {
       labelText: label,
       labelStyle: TextStyle(
         fontFamily: 'WorkSans',
-        fontSize: 15,
-        color: Color(0xFF044A1D6),
+        fontSize: 18.7,
+        color: Color(0xFF7CF8FF),
+      ),
+      enabledBorder: UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: Color(0x0A0A53),
+        ),
+      ),
+      focusedBorder: UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: Color(0x0A0A53),
+        ),
+      ),
+      focusedErrorBorder: UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.red,
+        ),
+      ),
+      errorStyle: TextStyle(
+        color: Colors.red,
+      ),
+      contentPadding: EdgeInsets.symmetric(vertical: 16.0),
+    );
+  }
+
+  void _registerUser() {
+    setState(() {
+      _name = _nameController.text;
+      _email = _emailController.text;
+    });
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ProfilePage(name: _name, email: _email),
       ),
     );
   }
@@ -55,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       body: Stack(
         children: [
-          Container(  // Textura de fondo
+          Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/textura_5.png'),
@@ -69,6 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
               key: _formKey,
               child: ListView(
                 children: <Widget>[
+                  SizedBox(height: 24.0),
                   TextFormField(
                     controller: _nameController,
                     decoration: _inputDecoration('Nombre completo'),
@@ -78,8 +116,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       }
                       return null;
                     },
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 15,
+                      color: Color(0xFFFDFDFD),
+                    ),
+                    textAlignVertical: TextAlignVertical.center,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 24.0),
                   TextFormField(
                     controller: _emailController,
                     decoration: _inputDecoration('Correo electrónico'),
@@ -92,8 +138,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       }
                       return null;
                     },
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 15,
+                      color: Color(0xFFFDFDFD),
+                    ),
+                    textAlignVertical: TextAlignVertical.center,
+                    keyboardType: TextInputType.emailAddress,
+                    textInputAction: TextInputAction.next,
                   ),
-                  SizedBox(height: 16),
+                  SizedBox(height: 24.0),
                   TextFormField(
                     controller: _passwordController,
                     decoration: _inputDecoration('Contraseña'),
@@ -107,12 +161,20 @@ class _RegisterPageState extends State<RegisterPage> {
                       }
                       return null;
                     },
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 15,
+                      color: Color(0xFFFDFDFD),
+                    ),
+                    textAlignVertical: TextAlignVertical.center,
+                    keyboardType: TextInputType.text,
+                    textInputAction: TextInputAction.done,
                   ),
-                  SizedBox(height: 32),
+                  SizedBox(height: 32.0),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        // Implementar la lógica de registro aquí
+                        _registerUser();
                       }
                     },
                     child: Text('REGISTRARSE', style: TextStyle(
@@ -136,12 +198,12 @@ class _RegisterPageState extends State<RegisterPage> {
         ],
       ),
       bottomNavigationBar: CustomFooter(
-  currentPageIndex: 5,
-  onNotificationDismiss: () {
-    // Coloca aquí la lógica para despedir la notificación en esta página específica
-    // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
-  },
-),
+        currentPageIndex: 5,
+        onNotificationDismiss: () {
+          // Coloca aquí la lógica para despedir la notificación en esta página específica
+          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+        },
+      ),
     );
   }
 }
