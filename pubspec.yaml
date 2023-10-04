@@ -76,6 +76,22 @@ flutter:
     - assets/images/nivel_4_ps.png
     - assets/images/nivel_4_2_ps.png
     - assets/images/nivel_3_ps.png
+    - assets/images/moneda_icon.png
+    - assets/images/ultimo_icono_lienzo_sonoro.png
+    - assets/images/pincel_1.png
+    - assets/images/pincel_2.png
+    - assets/images/pincel_3.png
+    - assets/images/pincel_4.png
+    - assets/images/lec1_ps.png
+    - assets/images/lec2_ps.png
+    - assets/images/lec3_ps.png
+    - assets/images/lec4_ps.png
+    - assets/images/lec5_ps.png
+    - assets/images/cisnes.png
+    - assets/images/parejaa.png
+    - assets/images/animo.png
+    - assets/images/cerca.png
+    - assets/images/perfecto.png
     - assets/sounds/cumpleaños.mp3
     - assets/sounds/cumpleaños02.mp3
     - assets/sounds/escmayor.mp3

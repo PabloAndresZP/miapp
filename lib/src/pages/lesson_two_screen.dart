@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/pages/instructions2_page.dart';
-import 'package:mi_app_imgsound/src/widgets/custom_footer.dart'; // Asegúrate de que esta importación esté correcta.
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 class LessonTwoScreen extends StatelessWidget {
   @override
@@ -15,7 +15,7 @@ class LessonTwoScreen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Pintando Sonido',
+          'Lecciones',
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
@@ -27,7 +27,7 @@ class LessonTwoScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Container(  // Textura de fondo
+          Container( // Textura de fondo
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/textura_5.png'),
@@ -35,25 +35,60 @@ class LessonTwoScreen extends StatelessWidget {
               ),
             ),
           ),
-          Center( // <-- Para centrar los botones
+          Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                buildTextButton('Lección 1', context, Instructions2Page()),
+                Text(
+                  'Progresa a través de cada lección para dominar completamente las habilidades del nivel.',
+                  style: TextStyle(
+                    color: Color(0xFF7CF8FF),
+                    fontFamily: 'WorkSans',
+                    fontSize: 18.7,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
                 SizedBox(height: 24),
-                buildTextButton('Lección 2', context, null, active: false),
+                Text(
+                  '¡Adelante, comienza tu aprendizaje!',
+                  style: TextStyle(
+                    color: Color(0xFF7CF8FF),
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
                 SizedBox(height: 24),
-                buildTextButton('Lección 3', context, null, active: false),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    buildTextButton('Lección', context, Instructions2Page(), 'assets/images/lec1_ps.png'),
+                    buildTextButton('Lección', context, null, 'assets/images/lec2_ps.png', active: false),
+                  ],
+                ),
                 SizedBox(height: 24),
-                buildTextButton('Lección 4', context, null, active: false),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    buildTextButton('Lección', context, null, 'assets/images/lec3_ps.png', active: false),
+                  ],
+                ),
                 SizedBox(height: 24),
-                buildTextButton('Lección 5', context, null, active: false),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    buildTextButton('Lección', context, null, 'assets/images/lec4_ps.png', active: false),
+                    buildTextButton('Lección', context, null, 'assets/images/lec5_ps.png', active: false),
+                  ],
+                ),
               ],
             ),
           ),
         ],
       ),
-             bottomNavigationBar: CustomFooter(
+      bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
           // Coloca aquí la lógica para despedir la notificación en esta página específica
@@ -63,22 +98,29 @@ class LessonTwoScreen extends StatelessWidget {
     );
   }
 
-  Widget buildTextButton(String label, BuildContext context, Widget? page, {bool active = true}) {
-    return TextButton(
-      onPressed: page == null ? null : () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => page),
-        );
-      },
-      child: Text(label,
-        style: TextStyle(
-          color: active ? Color(0xFF044A1D6) : Colors.grey,
-          fontFamily: 'WorkSans',
-          fontWeight: FontWeight.bold,
-          fontSize: 18.7,
+  Widget buildTextButton(String label, BuildContext context, Widget? page, String imageAsset, {bool active = true}) {
+    return Column(
+      children: [
+        Image.asset(imageAsset, height: 60, width: 60), // Agregamos la imagen
+        SizedBox(height: 12), // Separación vertical
+        TextButton(
+          onPressed: page == null ? null : () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => page),
+            );
+          },
+          child: Text(
+            label,
+            style: TextStyle(
+              color: active ? Color(0xFF7CF8FF) : Color(0xFF044A1D6),
+              fontFamily: 'WorkSans',
+              fontSize: 15,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 }

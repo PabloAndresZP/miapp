@@ -53,8 +53,8 @@ class _CustomSnackbarContentState extends State<CustomSnackbarContent>
         child: ScaleTransition(
           scale: _scaleAnimation,
           child: Container(
-            width: 288,
-            height: 288,
+            width: 312,
+            height: 312,
             padding: EdgeInsets.all(20.0),
             decoration: BoxDecoration(
               color: widget.isSuccess ? Color(0xFF00D8BB) : Color(0xFFC92771),

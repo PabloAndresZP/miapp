@@ -45,7 +45,7 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
 
   List<String> exerciseImages = [
     'assets/images/persona_miedo.png',
-    'assets/images/personas_amor.png',
+    'assets/images/cisnes.png',
     
   ];
 
@@ -204,7 +204,7 @@ void _playSound(String soundFile) async {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFDFDFD),
+      backgroundColor: Color(0xFF060630),
       appBar: AppBar(
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png'),
@@ -217,7 +217,9 @@ void _playSound(String soundFile) async {
             fontFamily: 'WorkSans',
             fontWeight: FontWeight.bold,
             fontSize: 23.4,
+            
           ),
+          textAlign: TextAlign.center,
         ),
         backgroundColor: Color(0xFF030328),
       ),
@@ -259,27 +261,33 @@ void _playSound(String soundFile) async {
                   'Selecciona la imagen que se asocia con la escala',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0xFF030328),
+                    color: Color(0xFFFDFDFD),
                     fontFamily: 'WorkSans',
                     fontWeight: FontWeight.bold,
                     fontSize: 21.5,
                   ),
                 ),
                 SizedBox(height: 24.0),
-                ElevatedButton(
-                  onPressed: () => _playPause(exerciseAudios[0]),
-                  child: Icon(Icons.play_arrow, color: Colors.white),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00D8BB)),
-                  ),
-                ),
-
+              Center(
+  child: Container(
+    width: 48.0, // Ancho deseado
+    height: 48.0, // Alto deseado
+    decoration: BoxDecoration(
+      shape: BoxShape.circle, // Hace que el contenedor sea circular
+      color: Color(0xFF00D8BB),
+    ),
+    child: IconButton(
+      onPressed: () => _playPause(exerciseAudios[0]),
+      icon: Icon(Icons.play_arrow, color: Colors.white),
+    ),
+  ),
+),
                 SizedBox(height: 12.0),
                 Text(
                   'Escala Mayor',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0xFF030328),
+                    color: Color(0xFFFDFDFD),
                     fontFamily: 'WorkSans',
                     fontWeight: FontWeight.bold,
                     fontSize: 12.0,
