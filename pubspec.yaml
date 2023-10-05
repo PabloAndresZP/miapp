@@ -92,6 +92,11 @@ flutter:
     - assets/images/animo.png
     - assets/images/cerca.png
     - assets/images/perfecto.png
+    - assets/images/moneda_ls_inactive.png
+    - assets/images/moneda_ps_active.png
+    - assets/images/moneda_ps_inactive.png
+    - assets/images/moneda_rp_inactive.png
+    - assets/images/icon_abajo.png
     - assets/sounds/cumpleaños.mp3
     - assets/sounds/cumpleaños02.mp3
     - assets/sounds/escmayor.mp3
