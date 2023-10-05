@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'src/pages/instructions_page.dart';
 import 'src/pages/level2_screen.dart';
-import 'src/pages/theory_page.dart';
 import 'src/pages/game3_page.dart';
-import 'src/pages/register_page.dart';
 import 'package:provider/provider.dart';
 import 'package:mi_app_imgsound/models/coin_model.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
@@ -41,105 +39,7 @@ class HomePage extends StatelessWidget {
 
   final String title;
 
-  void _showMenu(BuildContext context) {
-    showModalBottomSheet(
-      context: context,
-      backgroundColor: Color(0xFF030328),
-      builder: (context) {
-        return Container(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              ListTile(
-                title: Text(
-                  'Teoría',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontSize: 15,
-                    color: Color(0xFF7CF8FF),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TheoryPage()),
-                  );
-                },
-              ),
-
-              ListTile(
-                title: Text(
-                  'Ritmo Pictórico',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontSize: 15,
-                    color: Color(0xFF7CF8FF),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => InstructionsPage()),
-                  );
-                },
-              ),
-              
-              ListTile(
-                title: Text(
-                  'Pintando Sonido',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontSize: 15,
-                    color: Color(0xFF7CF8FF),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Level2Screen()),
-                  );
-                },
-              ),
-              ListTile(
-                title: Text(
-                  'Lienzo Sonoro',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontSize: 15,
-                    color: Color(0xFF7CF8FF),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Game3Page()),
-                  );
-                },
-              ),
-
-                ListTile(
-                title: Text(
-                  'Regístrate',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontSize: 15,
-                    color: Color(0xFF7CF8FF),
-                  ),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => RegisterPage()),
-                  );
-                },
-              )
-            ],
-          ),
-        );
-      },
-    );
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -193,25 +93,39 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 button('assets/images/ritmo.png', 'Ritmo Pictórico', () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => InstructionsPage()),
-                  );
+                 Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration.zero, // Desactiva la animación
+                    pageBuilder: (context, animation1, animation2) => InstructionsPage(),
+                  ),
+                );
                 }),
                 button('assets/images/pintando.png', 'Pintando Sonido', () {
+
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Level2Screen()),
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => Level2Screen(),
+                    ),
                   );
+
+                  
                 }),
               ],
             ),
             Center(
               child: button('assets/images/lienzo_sonoro.png', 'Lienzo Sonoro', () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Game3Page()),
-                );
+
+                    Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => Game3Page(),
+                    ),
+                  );
+                
               }, imgHeight: 72), // Ajustado el tamaño de imagen para el botón "Lienzo Sonoro"
             ),
             const SizedBox(height: 48),
