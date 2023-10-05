@@ -236,7 +236,7 @@ _playSound(String soundFile) async {
 Widget build(BuildContext context) {
   return Scaffold(
     backgroundColor: Color(0xFF030328),
-    appBar: AppBar(
+    appBar: AppBar( toolbarHeight: 80,
       leading: IconButton(
         icon: Image.asset('assets/images/icon_atras.png'),
         onPressed: () => Navigator.of(context).pop(),

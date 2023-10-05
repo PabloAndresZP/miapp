@@ -45,9 +45,12 @@ class _CustomFooterState extends State<CustomFooter> {
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProfilePage(name: 'Nombre del Usuario', email: 'usuario@correo.com')),
-                  );
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration.zero, // Desactiva la animación
+                    pageBuilder: (context, animation1, animation2) => ProfilePage(name: 'Nombre del Usuario', email: 'usuario@correo.com'),
+                  ),
+                );
                 },
               ),
               ListTile(
@@ -62,9 +65,11 @@ class _CustomFooterState extends State<CustomFooter> {
                 ),
                 onTap: () {
                   widget.onNotificationDismiss();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => TheoryPage()),
+                  Navigator.of(context).pushReplacement(
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => TheoryPage(),
+                    ),
                   );
                 },
               ),
@@ -79,9 +84,12 @@ class _CustomFooterState extends State<CustomFooter> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => InstructionsPage()),
+
+                Navigator.of(context).pushReplacement(
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => InstructionsPage(),
+                    ),
                   );
                 },
               ),
@@ -96,10 +104,14 @@ class _CustomFooterState extends State<CustomFooter> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Level2Screen()),
+
+                    Navigator.of(context).pushReplacement(
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => Level2Screen(),
+                    ),
                   );
+                  
                 },
               ),
               ListTile(
@@ -115,7 +127,10 @@ class _CustomFooterState extends State<CustomFooter> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Game3Page()),
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => Game3Page(),
+                    ),
                   );
                 },
               ),
@@ -178,16 +193,22 @@ class _CustomFooterState extends State<CustomFooter> {
         switch (index) {
           case 0:
             Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ProfilePage(name: 'Nombre del Usuario', email: 'usuario@correo.com')),
-            );
+            context,
+            PageRouteBuilder(
+              transitionDuration: Duration.zero, // Desactiva la animación
+              pageBuilder: (context, animation1, animation2) => ProfilePage(name: 'Nombre del Usuario', email: 'usuario@correo.com'),
+            ),
+          );
             break;
           case 1:
             widget.onNotificationDismiss();
             Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => TheoryPage()),
-            );
+            context,
+            PageRouteBuilder(
+              transitionDuration: Duration.zero, // Desactiva la animación
+              pageBuilder: (context, animation1, animation2) => TheoryPage(),
+            ),
+          );
             break;
           case 2:
             Navigator.of(context).popUntil((route) => route.isFirst);

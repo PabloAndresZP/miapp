@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'RAV',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -165,7 +165,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF030328),
         centerTitle: true,
-        title: Image.asset('logo_3.png', height: 80),
+        title: Image.asset('logo_3.png', height: 48),
         toolbarHeight: 80,
       ),
       body: Container(

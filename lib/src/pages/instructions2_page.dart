@@ -27,7 +27,7 @@ class _Instructions2PageState extends State<Instructions2Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( 
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
@@ -45,7 +45,7 @@ class _Instructions2PageState extends State<Instructions2Page> {
           ),
         ),
         centerTitle: true,
-        toolbarHeight: 100, // Ajustar esta altura según sea necesario
+        toolbarHeight: 80, // Ajustar esta altura según sea necesario
       ),
       body: Stack(
         children: [
