@@ -81,7 +81,7 @@ class _LsAccordionWidgetState extends State<LsAccordionWidget> {
   // Es una cadena de texto regular
   return ListTile(
     contentPadding: EdgeInsets.only(left: 12), // Agrega espacio izquierdo para las monedas
-    leading: Image.asset('assets/images/moneda_rp_inactive.png', height: 24, width: 24),
+    leading: Image.asset('assets/images/moneda_ls_inactive.png', height: 24, width: 24),
     title: Text(
       item,
       style: TextStyle(

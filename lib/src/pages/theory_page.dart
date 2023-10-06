@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/models/coin_model.dart';
 import 'package:provider/provider.dart';
-import 'package:mi_app_imgsound/src/pages/coin1_game2_page.dart';
+
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:mi_app_imgsound/src/widgets/rp_accordion_widget.dart';
+import 'package:mi_app_imgsound/src/widgets/ps_accordion_widget.dart';
 import 'package:mi_app_imgsound/src/widgets/ls_accordion_widget.dart';
 
 class TheoryPage extends StatelessWidget {
@@ -12,7 +13,8 @@ class TheoryPage extends StatelessWidget {
     final hasWonCoin1 = context.watch<CoinModel>().hasWonCoin1;
 
     return Scaffold(
-      appBar: AppBar( toolbarHeight: 80,
+      appBar: AppBar(
+        toolbarHeight: 80,
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
@@ -34,12 +36,7 @@ class TheoryPage extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/textura_5.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
+            color: Color(0xFF060630), // Fondo de color
           ),
           Padding(
             padding: const EdgeInsets.all(24.0),
@@ -68,14 +65,10 @@ class TheoryPage extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  
-
-
-                  
                   AccordionWidget(
                     title: 'Ritmo Pictórico',
                     items: [
-                      'InicialStyle', // Usamos una cadena especial para indicar estilo diferente
+                      'InicialStyle',
                       'Acentos y silencios en la imagen y la música.',
                       'Los \'silencios\' dentro de una secuencia visual.',
                       'Yuxtaposición de acentos y silencios para crear un ritmo visual.',
@@ -92,82 +85,66 @@ class TheoryPage extends StatelessWidget {
                       'ExpertoStyle',
                       'La polirritmia y la coordinación con movimientos visuales.',
                       'La sincronización avanzada de animación y ritmo.',
-
                       // Agrega más elementos aquí según sea necesario
                     ],
                   ),
-
-
-  
-                 
-                  SizedBox(height: 24),
-                  ListTile(
-                    leading: Image.asset('assets/images/ps_01.png', height: 36, width: 36),
-                    title: Text(
-                      'Pintando Sonido',
-                      style: TextStyle(
-                          color: Color(0xFF7CF8FF),
-                          fontFamily: 'WorkSans',
-                          fontSize: 18.7),
-                    ),
-                    subtitle: hasWonCoin1
-                        ? Column(
-                            children: [
-                              SizedBox(height: 12),
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          Coin1Game2Page(),
-                                    ),
-                                  );
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.only(bottom: 12.0),
-                                  child: Text(
-                                    'Escalas Mayores y Menores',
-                                    style: TextStyle(
-                                      color: Color(0xFF00D8BB),
-                                      fontFamily: 'WorkSans',
-                                      fontSize: 12,
-                                      decoration: TextDecoration.underline,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        : null,
-                  ),
                   
-                  SizedBox(height: 24),
-                  ListTile(
-                    leading: Image.asset('assets/images/ultimo_icono_lienzo_sonoro.png',height: 36, width: 24), // Icono para Lienzo Sonoro
-                    title: Text('Lienzo Sonoro',
-                        style: TextStyle(
-                            color: Color(0xFF7CF8FF),
-                            fontFamily: 'WorkSans',
-                            fontSize: 18.7)),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        
-                        
-                      ],
-                    ),
+                  PsAccordionWidget(
+                    title: 'Pintando Sonido',
+                    items: [
+                      'InicialStyle',
+                      'Escalas Mayores y Menores',
+                      'Construcción de las escalas menor melódica y menor armónica y su relación con la imagen.',
+                      'Introducción a los modos.',
+                      'Construcción de escalas modales.',
+                      'Escala cromática y escala hexatonal.',
+
+                      'IntermedioStyle',
+                      'Qué es un DAW.',
+                      'Cómo construir una escala en un DAW.',
+                      'De un DAW a un programa audiovisual.',
+
+                      'AvanzadoStyle',
+                      'Análisis de canciones.',
+                      'Asociación de imágenes con canciones.',
+                      'Creación de emociones en música.',
+
+                      'ExpertoStyle',
+                      'Composición de melodías.',
+                      'Asociación de imágenes con melodías.',
+                      'Creación de un viaje emocional.',
+
+                    ],
+                    hasWonCoin: hasWonCoin1, 
+                  ),
+
+                  LsAccordionWidget(
+                    title: 'Lienzo Sonoro',
+                    items: [
+                      'InicialStyle',
+                      'Fundamentos del sonido.',
+                      'Preparación para la grabación.',
+                      'Reducción de ruido y eco.',
+                      'Modificación del sonido.',
+                      'Análisis de grabaciones.',
+                      'IntermedioStyle',
+                      'Grabación de secuencias de sonido.',
+                      'Modificación avanzada del sonido.',
+                      'Mejorar de la calidad de la grabación.',
+                      'AvanzadoStyle',
+                      'Grabación de Voz.',
+                      'Creación de escenas sonoras.',
+                      'Niveles de Volumen.',
+                      'ExpertoStyle',
+                      'Creación de Sonidos de Foley.',
+                      'Edición de Escenas Sonoras Complejas.',
+                      'Mezcla Final.',
+                    ],
                   ),
                 ],
-
-                
               ),
             ),
           ),
-          LsAccordionWidget(
-  title: 'Título del Lienzo Sonoro',
-  items: ['Item 1', 'Item 2', 'Item 3'],
-)
-
         ],
       ),
       bottomNavigationBar: CustomFooter(
