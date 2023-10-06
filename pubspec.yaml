@@ -97,6 +97,8 @@ flutter:
     - assets/images/moneda_ps_inactive.png
     - assets/images/moneda_rp_inactive.png
     - assets/images/icon_abajo.png
+    - assets/images/escala_mayor.png
+    - assets/images/escala_menor.png
     - assets/sounds/cumpleaños.mp3
     - assets/sounds/cumpleaños02.mp3
     - assets/sounds/escmayor.mp3

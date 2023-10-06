@@ -40,7 +40,7 @@ class Coin1Game2Page extends StatelessWidget {
                   Center(
                     child: Image.asset('assets/images/moneda.png', height: 100, width: 100), // Imagen de la moneda centrada horizontalmente
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 12),
                   Text(
                     'Teoría:',
                     style: TextStyle(
@@ -50,42 +50,162 @@ class Coin1Game2Page extends StatelessWidget {
                       fontSize: 18.7,
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Las escalas mayores y menores son dos de las escalas más fundamentales y comúnmente utilizadas en la música occidental.',
-                    style: TextStyle(
-                      color: Color(0xFF7CF8FF),
-                      fontFamily: 'WorkSans',
-                      fontSize: 15,
+                  SizedBox(height: 12),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Color(0xFF7CF8FF),
+                        fontFamily: 'WorkSans',
+                        fontSize: 12,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Las escalas mayores y menores son dos de las escalas más fundamentales y comúnmente utilizadas en la música occidental.',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    'Una escala mayor se compone de notas que siguen un patrón específico de tonos y semitonos: tono - tono - semitono - tono - tono - tono - semitono. Por ejemplo, la escala de Do mayor incluye las siguientes notas: Do - Re - Mi - Fa - Sol - La - Si - Do. Esta escala se asocia comúnmente con emociones positivas, como la felicidad, la alegría y la energía, debido a su sonoridad brillante y alegre.',
-                    style: TextStyle(
-                      color: Color(0xFF7CF8FF),
-                      fontFamily: 'WorkSans',
-                      fontSize: 15,
+                  SizedBox(height: 12),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Color(0xFF7CF8FF),
+                        fontFamily: 'WorkSans',
+                        fontSize: 12,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Una escala mayor se compone de notas que siguen un patrón específico de tonos y semitonos: ',
+                        ),
+                        TextSpan(
+                          text: 'tono - tono - semitono - tono - tono - tono - semitono.',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Por otro lado, una escala menor sigue un patrón diferente de tonos y semitonos: tono - semitono - tono - tono - semitono - tono - tono. Por ejemplo, la escala de La menor incluye las siguientes notas: La - Si - Do - Re - Mi - Fa - Sol - La. Esta escala se asocia comúnmente con emociones negativas, como la tristeza, la melancolía y la ansiedad, debido a su sonoridad más oscura y melancólica.',
-                    style: TextStyle(
-                      color: Color(0xFF7CF8FF),
-                      fontFamily: 'WorkSans',
-                      fontSize: 15,
+                  SizedBox(height: 12),
+                  Image.asset('assets/images/escala_mayor.png'), // Imagen de la escala mayor
+                  SizedBox(height: 12),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Color(0xFF7CF8FF),
+                        fontFamily: 'WorkSans',
+                        fontSize: 12,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Por ejemplo, la escala de Do mayor incluye las siguientes notas: ',
+                        ),
+                        TextSpan(
+                          text: 'Do - Re - Mi - Fa - Sol - La - Si - Do.',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 10),
-                  Text(
-                    'Es importante entender que esta asociación entre las escalas mayores y menores y las emociones positivas y negativas, respectivamente, es en general y puede variar de una persona a otra. Además, la música es un lenguaje complejo y los compositores pueden usar una variedad de técnicas, como la armonización, la modulación y la instrumentación, para evocar una amplia gama de emociones en una pieza musical.',
-                    style: TextStyle(
-                      color: Color(0xFF7CF8FF),
-                      fontFamily: 'WorkSans',
-                      fontSize: 15,
+                  
+                  SizedBox(height: 12),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Color(0xFF7CF8FF),
+                        fontFamily: 'WorkSans',
+                        fontSize: 12,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Esta escala se asocia comúnmente con emociones positivas, como ',
+                        ),
+                        TextSpan(
+                          text: 'la felicidad, la alegría',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        TextSpan(
+                          text: ', debido a su sonoridad brillante y alegre.',
+                        ),
+                      ],
                     ),
                   ),
-                  SizedBox(height: 30),
+
+
+                  
+                  SizedBox(height: 12),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Color(0xFF7CF8FF),
+                        fontFamily: 'WorkSans',
+                        fontSize: 12,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Por otro lado, una escala menor sigue un patrón diferente de tonos y semitonos: ',
+                        ),
+                        TextSpan(
+                          text: 'tono - semitono - tono - tono - semitono - tono - tono.',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                        TextSpan(
+                          text: ' Por ejemplo, la escala de La menor incluye las siguientes notas: ',
+                        ),
+                        TextSpan(
+                          text: 'La - Si - Do - Re - Mi - Fa - Sol - La.',
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: 12),
+                  Image.asset('assets/images/escala_menor.png'), // Imagen de la escala menor
+
+
+                 SizedBox(height: 12),
+RichText(
+  text: TextSpan(
+    style: TextStyle(
+      color: Color(0xFF7CF8FF),
+      fontFamily: 'WorkSans',
+      fontSize: 12,
+    ),
+    children: [
+      TextSpan(
+        text: 'Esta escala se asocia comúnmente con emociones negativas, como ',
+      ),
+      TextSpan(
+        text: 'la tristeza, la melancolía y la ansiedad',
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      TextSpan(
+        text: ', debido a su sonoridad más oscura y melancólica.',
+      ),
+    ],
+  ),
+),
+
+                  SizedBox(height: 12),
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        color: Color(0xFF7CF8FF),
+                        fontFamily: 'WorkSans',
+                        fontSize: 12,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Es importante entender que esta asociación entre las escalas mayores y menores y las emociones positivas y negativas, respectivamente, es en general y puede variar de una persona a otra. Además, la música es un lenguaje complejo y los compositores pueden usar una variedad de técnicas, como la armonización, la modulación y la instrumentación, para evocar una amplia gama de emociones en una pieza musical.',
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 24),
                   Container(
                     height: 60.0,
                     width: double.infinity,
