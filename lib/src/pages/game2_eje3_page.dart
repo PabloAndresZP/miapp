@@ -236,7 +236,7 @@ void _playSound(String soundFile) async {
                     CoinCounter(coins),
                     Container(
                       height: 8.0, // Ajusta la altura de la barra de progreso aquí
-                      width: 200.0, // Ajusta el ancho de la barra de progreso aquí
+                      width: 168.0, // Ajusta el ancho de la barra de progreso aquí
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0), // Establece el radio de borde circular
                         border: Border.all(

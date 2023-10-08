@@ -11,6 +11,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   audioplayers: ^0.20.1
   provider: ^5.0.0 # Aquí está la dependencia añadida
+ 
 
 dev_dependencies:
   flutter_test:
@@ -99,6 +100,7 @@ flutter:
     - assets/images/icon_abajo.png
     - assets/images/escala_mayor.png
     - assets/images/escala_menor.png
+    - assets/images/stars.png
     - assets/sounds/cumpleaños.mp3
     - assets/sounds/cumpleaños02.mp3
     - assets/sounds/escmayor.mp3

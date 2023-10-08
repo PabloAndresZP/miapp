@@ -13,6 +13,7 @@ class Game2Page extends StatefulWidget {
 
 class _Game2PageState extends State<Game2Page> {
   bool _showOverlay = false; // Declarar aquí la variable _showOverlay
+  bool _showStars = false; // Declarar aquí la variable _showStars
 
   late AudioPlayer _audioPlayer1, _audioPlayer2;
   bool isPlaying1 = false;
@@ -102,6 +103,12 @@ class _Game2PageState extends State<Game2Page> {
       duration: Duration(seconds: 2),
     );
 
+    // Mostrar el fondo oscurecido y las estrellas
+    setState(() {
+      _showOverlay = true;
+      _showStars = true;
+    });
+
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.black.withOpacity(0.5), // Fondo oscurecido
@@ -114,10 +121,20 @@ class _Game2PageState extends State<Game2Page> {
               dismissible: false,
             ),
             snackBar, // Mostrar el SnackBar original
+            if (_showStars) // Mostrar las estrellas si _showStars es true
+              Image.asset(
+                'assets/images/stars.png', // Reemplaza 'stars.png' con tu imagen de estrellas
+                width: 100, // Ajusta el tamaño de las estrellas según tus necesidades
+                height: 100,
+              ),
             Positioned(
               bottom: 20, // Ajusta la posición vertical según tus necesidades
               child: ElevatedButton(
                 onPressed: () {
+                  setState(() {
+                    _showOverlay = false; // Ocultar el fondo oscurecido
+                    _showStars = false; // Ocultar las estrellas
+                  });
                   ScaffoldMessenger.of(context).hideCurrentSnackBar();
                 },
                 child: Text(
@@ -134,16 +151,21 @@ class _Game2PageState extends State<Game2Page> {
     );
   }
 
-  void _checkAnswer() {
-    if (selectedAnswer == correctAnswers[currentExerciseIndex]) {
-      CustomSnackbarContent.show(context, "¡Perfecto! Continúa así.", true);
-      _playSound('correcto.mp3');
-
+ void _checkAnswer() {
+  if (selectedAnswer == correctAnswers[currentExerciseIndex]) {
+    CustomSnackbarContent.show(  imageAsset: 'assets/images/perfecto.png', // Ruta de la imagen
+      context,
+      "¡Perfecto! Continúa así.",
+      true, // isSuccess
+      textColor: Color(0xFF00D8BB), // Cambiar el color del texto aquí
+      
+    );
+    _playSound('correcto.mp3');
+    
       setState(() {
         completedExercises += 1;
         if (completedExercises % 3 == 0) {
           coins += 1;
-          _showOverlay = true; // Mostrar el fondo oscurecido
         }
       });
 
@@ -156,112 +178,116 @@ class _Game2PageState extends State<Game2Page> {
         _goToNextExercise();
       }
     } else {
-      CustomSnackbarContent.show(context, "¡Eso estuvo cerca! Prueba una vez más.", false);
+      CustomSnackbarContent.show( imageAsset: 'assets/images/cerca.png',
+        context,
+        "¡Eso estuvo cerca! Prueba una vez más.",
+        false, // isSuccess
+        textColor: Color(0xFFC92771), // Cambiar el color del texto aquí
+      );
       _playSound('acento.mp3');
 
       setState(() {
         hearts -= 1;
-        _showOverlay = true; // Mostrar el fondo oscurecido
       });
+    }
 
-      if (hearts <= 0) {
-        // Llama a esta función donde necesites mostrar el cuadro de diálogo
-        Future.delayed(Duration(seconds: 2), () {
-          showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              insetPadding: EdgeInsets.all(0),
-              contentPadding: EdgeInsets.all(0),
-              titlePadding: EdgeInsets.all(16),
-              actionsPadding: EdgeInsets.all(8),
-              buttonPadding: EdgeInsets.all(8),
-              shape: RoundedRectangleBorder(
+    if (hearts <= 0) {
+      // Llama a esta función donde necesites mostrar el cuadro de diálogo
+      Future.delayed(Duration(seconds: 2), () {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            insetPadding: EdgeInsets.all(0),
+            contentPadding: EdgeInsets.all(0),
+            titlePadding: EdgeInsets.all(16),
+            actionsPadding: EdgeInsets.all(8),
+            buttonPadding: EdgeInsets.all(8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            content: Container(
+              width: 312,//width: double.infinity, // Ancho de pantalla completo
+              height: 312,//height: double.infinity, // Alto de pantalla completo
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+              color: Color(0xFF00D8BB), // color: Colors.transparent,
                 borderRadius: BorderRadius.circular(12),
               ),
-              content: Container(
-                width: 312,
-                height: 312,
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Color(0xFF00D8BB),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Image.asset('assets/images/animo.png', width: 80, height: 80), // Imagen para ¡Ánimo!
-                    Text(
-                      '¡Ánimo!',
-                      style: TextStyle(
-                        fontFamily: 'WorkSans',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.7,
-                        color: Color(0xFFFDFDFD),
-                      ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image.asset('assets/images/animo.png', width: 80, height: 80), // Imagen para ¡Ánimo!
+                  Text(
+                    '¡Ánimo!',
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.7,
+                      color: Color(0xFFFDFDFD),
                     ),
-                    Text(
-                      'Aunque se han agotado tus corazones, sabemos que puedes hacerlo mejor.',
-                      style: TextStyle(
-                        fontFamily: 'WorkSans',
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal,
-                        color: Color(0xFFFDFDFD),
-                      ),
-                      textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    'Aunque se han agotado tus corazones, sabemos que puedes hacerlo mejor.',
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                      color: Color(0xFFFDFDFD),
                     ),
-                    Text(
-                      '¿Te gustaría intentarlo de nuevo?',
-                      style: TextStyle(
-                        fontFamily: 'WorkSans',
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFFFDFDFD),
-                      ),
-                      textAlign: TextAlign.center,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    '¿Te gustaría intentarlo de nuevo?',
+                    style: TextStyle(
+                      fontFamily: 'WorkSans',
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFFDFDFD),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        TextButton(
-                          child: Text(
-                            'Sí',
-                            style: TextStyle(
-                              fontFamily: 'WorkSans',
-                              fontSize: 18.7,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFFFDFDFD),
-                            ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      TextButton(
+                        child: Text(
+                          'Sí',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 18.7,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFFDFDFD),
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            _showOverlay = false; // Restaurar el fondo normal
-                            Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (context) => Game2Page()));
-                          },
                         ),
-                        TextButton(
-                          child: Text(
-                            'No',
-                            style: TextStyle(
-                              fontFamily: 'WorkSans',
-                              fontSize: 18.7,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFFFDFDFD),
-                            ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          _showOverlay = false; // Restaurar el fondo normal
+                          Navigator.of(context).pushReplacement(MaterialPageRoute(
+                              builder: (context) => Game2Page()));
+                        },
+                      ),
+                      TextButton(
+                        child: Text(
+                          'No',
+                          style: TextStyle(
+                            fontFamily: 'WorkSans',
+                            fontSize: 18.7,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFFFDFDFD),
                           ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
                         ),
-                      ],
-                    )
-                  ],
-                ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
-          );
-        });
-      }
+          ),
+        );
+      });
     }
   }
 
@@ -274,7 +300,8 @@ class _Game2PageState extends State<Game2Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF060630),
-      appBar: AppBar( toolbarHeight: 80,
+      appBar: AppBar(
+        toolbarHeight: 80,
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png'),
           onPressed: () => Navigator.of(context).pop(),
@@ -306,7 +333,7 @@ class _Game2PageState extends State<Game2Page> {
                         CoinCounter(coins),
                         Container(
                           height: 8.0, // Ajusta la altura de la barra de progreso aquí
-                          width: 200.0, // Ajusta el ancho de la barra de progreso aquí
+                          width: 168.0, // Ajusta el ancho de la barra de progreso aquí
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0), // Establece el radio de borde circular
                             border: Border.all(
@@ -442,5 +469,3 @@ class _Game2PageState extends State<Game2Page> {
     );
   }
 }
-
-
