@@ -164,17 +164,17 @@ class InstructionPage extends StatelessWidget {
     FontWeight fontWeight;
     Color textColor;
 
-    if (text.contains('Asocia imágenes con escalas musicales.')) {
+    if (instructions[0].contains('Asocia imágenes con escalas musicales.')) {
       fontSize = 18.7;
       fontWeight = FontWeight.bold; // Negrita
-      textColor = Color(0xFF7CF8FF);
-    } else if (text.contains('Descubre la relación entre las escalas musicales y las imágenes.') ||
+      textColor = Color.fromARGB(255, 119, 4, 29);
+    } else if (instructions[1].contains('Descubre la relación entre las escalas musicales y las imágenes.') ||
         text.contains('En estos ejercicios, se te presentará una imagen acompañada de dos audios, uno por cada escala.') ||
         text.contains('¡Un giro inesperado! A veces, las dinámicas cambian. Se te ofrecerá una escala y dos imágenes.')) {
       fontSize = 18.7;
-      fontWeight = FontWeight.bold; // Negrita
+      fontWeight = FontWeight.normal; // Normal
       textColor = Color(0xFF7CF8FF);
-    } else if (text.contains('Una escala musical es una secuencia organizada de notas que se desplazan en intervalos determinados.')) {
+    } else if (instructions[2].contains('Una escala musical es una secuencia organizada de notas que se desplazan en intervalos determinados.')) {
       fontSize = 15;
       fontWeight = FontWeight.normal;
       textColor = Color(0xFF7CF8FF);

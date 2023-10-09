@@ -13,10 +13,10 @@ class _InstructionsPageState extends State<InstructionsPage> {
   int currentPage = 0;
 
   final List<String> instructions = [
-    'Aprende a sincronizar imagen y sonido',
+    '\n\n\n\n\n\n\n\n\nAprende a sincronizar imagen y sonido',
     'Los acentos en la imagen en movimiento ocurren cuando los objetos colisionan, aparecen o alcanzan un punto culminante en la narrativa visual.',
     'Por otro lado, los silencios en la imagen en movimiento ocurren cuando los objetos desaparecen, salen de escena o se ocultan de alguna manera.',
-    'Tu objetivo es sincronizar la imagen con el sonido. \nUtiliza el controlador Graph Editor para lograr una perfecta armonía entre ambos. \n¡Presta atención a los detalles y busca la perfecta sincronización para avanzar!',
+    'Tu objetivo es sincronizar la imagen con el sonido. \n\nUtiliza el controlador Graph Editor para lograr una perfecta armonía entre ambos. \n\n¡Presta atención a los detalles y busca la perfecta sincronización para avanzar!',
   ];
 
   final List<String> videoPaths = [
@@ -121,6 +121,8 @@ class InstructionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> textParts = text.split('\n');
+
     return Container(
       padding: EdgeInsets.all(16.0),
       child: Column(
@@ -131,9 +133,23 @@ class InstructionPage extends StatelessWidget {
               videoPath: videoPath,
             ),
           SizedBox(height: 16.0),
-          BoldTextWidget(
-            text: text,
-            textColor: Color(0xFF7CF8FF), // Aplicamos el color definido en BoldTextWidget
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: textParts.map((part) {
+              return part.trim().startsWith('Utiliza el controlador Graph Editor')
+                  ? Text(textAlign: TextAlign.center,
+                      part,
+                      style: TextStyle(
+                        fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF7CF8FF),
+                      ),
+                    )
+                  : BoldTextWidget(
+                      text: part,
+                      textColor: Color(0xFF7CF8FF),
+                    );
+            }).toList(),
           ),
         ],
       ),
