@@ -9,7 +9,7 @@ class Level3Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( toolbarHeight: 80,
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
@@ -54,7 +54,13 @@ class Level3Screen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
+            bottomNavigationBar: CustomFooter(
+        currentPageIndex: 5,
+        onNotificationDismiss: () {
+          // Coloca aquí la lógica para despedir la notificación en esta página específica
+          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+        },
+      ),
     );
   }
 

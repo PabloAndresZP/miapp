@@ -45,7 +45,7 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
 
   List<String> exerciseImages = [
     'assets/images/persona_miedo.png',
-    'assets/images/personas_amor.png',
+    'assets/images/cisnes.png',
     
   ];
 
@@ -204,8 +204,8 @@ void _playSound(String soundFile) async {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFDFDFD),
-      appBar: AppBar(
+      backgroundColor: Color(0xFF060630),
+      appBar: AppBar( toolbarHeight: 80,
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png'),
           onPressed: () => Navigator.of(context).pop(),
@@ -217,7 +217,9 @@ void _playSound(String soundFile) async {
             fontFamily: 'WorkSans',
             fontWeight: FontWeight.bold,
             fontSize: 23.4,
+            
           ),
+          textAlign: TextAlign.center,
         ),
         backgroundColor: Color(0xFF030328),
       ),
@@ -233,8 +235,8 @@ void _playSound(String soundFile) async {
                   children: [
                     CoinCounter(coins),
                     Container(
-                      height: 24.0, // Ajusta la altura de la barra de progreso aquí
-                      width: 200.0, // Ajusta el ancho de la barra de progreso aquí
+                      height: 8.0, // Ajusta la altura de la barra de progreso aquí
+                      width: 168.0, // Ajusta el ancho de la barra de progreso aquí
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0), // Establece el radio de borde circular
                         border: Border.all(
@@ -246,7 +248,7 @@ void _playSound(String soundFile) async {
                         borderRadius: BorderRadius.circular(12.0), // Agrega bordes redondeados al contenido
                         child: LinearProgressIndicator(
                           value: (coins == 1) ? 1.0 : 2 / 3, // Dos de los tres espacios llenos
-                          backgroundColor: Colors.transparent, // Establece el fondo como transparente cuando la barra está vacía
+                          backgroundColor: Color(0xFF0A0A53), // Establece el fondo de la barra de progreso
                           valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF00D8BB)), // Establece el color de la barra de progreso
                         ),
                       ),
@@ -259,27 +261,33 @@ void _playSound(String soundFile) async {
                   'Selecciona la imagen que se asocia con la escala',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0xFF030328),
+                    color: Color(0xFFFDFDFD),
                     fontFamily: 'WorkSans',
                     fontWeight: FontWeight.bold,
                     fontSize: 21.5,
                   ),
                 ),
                 SizedBox(height: 24.0),
-                ElevatedButton(
-                  onPressed: () => _playPause(exerciseAudios[0]),
-                  child: Icon(Icons.play_arrow, color: Colors.white),
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00D8BB)),
-                  ),
-                ),
-
+              Center(
+  child: Container(
+    width: 48.0, // Ancho deseado
+    height: 48.0, // Alto deseado
+    decoration: BoxDecoration(
+      shape: BoxShape.circle, // Hace que el contenedor sea circular
+      color: Color(0xFF00D8BB),
+    ),
+    child: IconButton(
+      onPressed: () => _playPause(exerciseAudios[0]),
+      icon: Icon(Icons.play_arrow, color: Colors.white),
+    ),
+  ),
+),
                 SizedBox(height: 12.0),
                 Text(
                   'Escala Mayor',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color(0xFF030328),
+                    color: Color(0xFFFDFDFD),
                     fontFamily: 'WorkSans',
                     fontWeight: FontWeight.bold,
                     fontSize: 12.0,
@@ -351,7 +359,13 @@ void _playSound(String soundFile) async {
           ),
         ),
       ),
-      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
+             bottomNavigationBar: CustomFooter(
+        currentPageIndex: 5,
+        onNotificationDismiss: () {
+          // Coloca aquí la lógica para despedir la notificación en esta página específica
+          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+        },
+      ),
     );
   }
 }

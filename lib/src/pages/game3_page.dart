@@ -25,7 +25,7 @@ class _Game3PageState extends State<Game3Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: AppBar( toolbarHeight: 80,
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
@@ -125,7 +125,13 @@ class _Game3PageState extends State<Game3Page> {
           ),
         ],
       ),
-      bottomNavigationBar: CustomFooter(currentPageIndex: 5),
+             bottomNavigationBar: CustomFooter(
+        currentPageIndex: 5,
+        onNotificationDismiss: () {
+          // Coloca aquí la lógica para despedir la notificación en esta página específica
+          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+        },
+      ),
     );
   }
 }
