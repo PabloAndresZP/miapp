@@ -16,7 +16,7 @@ class _InstructionsPageState extends State<InstructionsPage> {
     'Aprende a sincronizar imagen y sonido',
     'Los acentos en la imagen en movimiento ocurren cuando los objetos colisionan, aparecen o alcanzan un punto culminante en la narrativa visual.',
     'Por otro lado, los silencios en la imagen en movimiento ocurren cuando los objetos desaparecen, salen de escena o se ocultan de alguna manera.',
-    'Tu objetivo es sincronizar la imagen con el sonido. Utiliza el controlador Graph Editor para lograr una perfecta armonía entre ambos. ¡Presta atención a los detalles y busca la perfecta sincronización para avanzar!',
+    'Tu objetivo es sincronizar la imagen con el sonido. \nUtiliza el controlador Graph Editor para lograr una perfecta armonía entre ambos. \n¡Presta atención a los detalles y busca la perfecta sincronización para avanzar!',
   ];
 
   final List<String> videoPaths = [
