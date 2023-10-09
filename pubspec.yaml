@@ -11,6 +11,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   audioplayers: ^0.20.1
   provider: ^5.0.0 # Aquí está la dependencia añadida
+  video_player: ^2.2.22  # Agrega esta línea
  
 
 dev_dependencies:
@@ -115,6 +116,8 @@ flutter:
     - assets/sounds/ritmo nivel experto.mp3
     - assets/sounds/melodia modo frigio.mp3
     - assets/sounds/melodia modo lido.mp3
+    - assets/videos/instrucion_002.mp4
+    - assets/videos/instrucion_003.mp4
   fonts:
     - family: WorkSans
       fonts:

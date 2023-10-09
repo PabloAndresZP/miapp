@@ -1,20 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mi_app_imgsound/src/pages/level1_screen.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
-
-const List<String> instructions = [
-  'Aprende a sincronizar imagen y sonido.',
-  'Los acentos en la imagen en movimiento ocurren cuando los objetos colisionan, aparecen o alcanzan un punto culminante en la narrativa visual.',
-  'Por otro lado, los silencios en la imagen en movimiento ocurren cuando los objetos desaparecen, salen de escena o se ocultan de alguna manera.',
-  'Tu objetivo es sincronizar la imagen con el sonido. Utiliza el controlador Graph Editor para lograr una perfecta armonía entre ambos. ¡Presta atención a los detalles y busca la perfecta sincronización para avanzar!',
-];
-
-const List<String?> images = [
-  null,
-  'assets/images/intruccion_1_rp.png',
-  'assets/images/intruccion_2_rp.png',
-  'assets/images/intruccion_3_rp.png',
-];
+import 'package:mi_app_imgsound/src/widgets/video_player_widget.dart';
+import 'package:mi_app_imgsound/src/widgets/bold_text_widget.dart';
 
 class InstructionsPage extends StatefulWidget {
   @override
@@ -22,12 +9,28 @@ class InstructionsPage extends StatefulWidget {
 }
 
 class _InstructionsPageState extends State<InstructionsPage> {
+  final PageController _pageController = PageController();
   int currentPage = 0;
+
+  final List<String> instructions = [
+    'Aprende a sincronizar imagen y sonido',
+    'Los acentos en la imagen en movimiento ocurren cuando los objetos colisionan, aparecen o alcanzan un punto culminante en la narrativa visual.',
+    'Por otro lado, los silencios en la imagen en movimiento ocurren cuando los objetos desaparecen, salen de escena o se ocultan de alguna manera.',
+    'Tu objetivo es sincronizar la imagen con el sonido. Utiliza el controlador Graph Editor para lograr una perfecta armonía entre ambos. ¡Presta atención a los detalles y busca la perfecta sincronización para avanzar!',
+  ];
+
+  final List<String> videoPaths = [
+    '', // Deja el primer videoPath en blanco para que no muestre el video
+    'assets/videos/instrucion_002.mp4',
+    'assets/videos/instrucion_003.mp4',
+    'assets/videos/instrucion_002.mp4',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( toolbarHeight: 80,
+      appBar: AppBar(
+        toolbarHeight: 80,
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
@@ -57,18 +60,21 @@ class _InstructionsPageState extends State<InstructionsPage> {
             ),
           ),
           PageView.builder(
+            controller: _pageController,
             onPageChanged: (page) {
               setState(() {
                 currentPage = page;
               });
             },
+            itemCount: instructions.length,
             itemBuilder: (context, index) {
-              return InstructionPage(
-                text: instructions[index],
-                imagePath: images[index],
+              return Center(
+                child: InstructionPage(
+                  text: instructions[index],
+                  videoPath: videoPaths[index],
+                ),
               );
             },
-            itemCount: instructions.length,
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -82,7 +88,7 @@ class _InstructionsPageState extends State<InstructionsPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: CircleAvatar(
                       radius: 8,
-                      backgroundColor: i <= currentPage
+                      backgroundColor: i == currentPage
                           ? Color(0xFF044A1D6)
                           : Color(0xFF044A1D6).withOpacity(0.5),
                     ),
@@ -91,43 +97,9 @@ class _InstructionsPageState extends State<InstructionsPage> {
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 30.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => Level1Screen()),
-                  );
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00D8BB)),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(313, 48)),
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  shadowColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.3)),
-                  elevation: MaterialStateProperty.all<double>(5.0),
-                ),
-                child: Text(
-                  'Jugar',
-                  style: TextStyle(
-                    color: Color(0xFFFDFDFD),  // Aquí se cambió el color del texto a blanco.
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-          ),
         ],
       ),
-             bottomNavigationBar: CustomFooter(
+      bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
           // Coloca aquí la lógica para despedir la notificación en esta página específica
@@ -140,36 +112,37 @@ class _InstructionsPageState extends State<InstructionsPage> {
 
 class InstructionPage extends StatelessWidget {
   final String text;
-  final String? imagePath;
+  final String videoPath;
 
   const InstructionPage({
     required this.text,
-    this.imagePath,
+    required this.videoPath,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (imagePath != null) ...[
-            Image.asset(imagePath!, height: 150),
-            SizedBox(height: 20),
-          ],
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color(0xFF44A1D6),
-              fontFamily: 'WorkSans',
-              fontWeight: FontWeight.bold,
-              fontSize: 18.7,
+          if (videoPath.isNotEmpty)
+            VideoPlayerWidget(
+              videoPath: videoPath,
             ),
+          SizedBox(height: 16.0),
+          BoldTextWidget(
+            text: text,
+            textColor: Color(0xFF7CF8FF), // Aplicamos el color definido en BoldTextWidget
           ),
         ],
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: InstructionsPage(),
+  ));
 }
