@@ -10,7 +10,7 @@ class NormalTextWidget extends StatelessWidget {
   NormalTextWidget({
     required this.text,
     this.fontFamily = 'WorkSans',
-    this.fontSize = 15.0,
+    this.fontSize = 18.7,
     this.fontWeight = FontWeight.normal,
     this.textColor = const Color(0xFF044A1D6),
   });
@@ -19,6 +19,7 @@ class NormalTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      textAlign: TextAlign.center, // Ahora puedes centrar el texto aquí
       style: TextStyle(
         fontFamily: fontFamily,
         fontWeight: fontWeight,

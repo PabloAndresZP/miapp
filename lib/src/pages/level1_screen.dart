@@ -4,21 +4,53 @@ import 'package:mi_app_imgsound/src/pages/game1_level_intermediate.dart';
 import 'package:mi_app_imgsound/src/pages/game1_level_advanced.dart';
 import 'package:mi_app_imgsound/src/pages/game1_level_expert.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
+import 'package:video_player/video_player.dart';
 
-class Level1Screen extends StatelessWidget {
+class Level1Screen extends StatefulWidget {
+  @override
+  _Level1ScreenState createState() => _Level1ScreenState();
+}
+
+class _Level1ScreenState extends State<Level1Screen> {
+  late VideoPlayerController _videoController;
+
+  @override
+  void initState() {
+    super.initState();
+    // Inicializar el controlador de video aquí
+    _videoController = VideoPlayerController.asset('assets/videos/your_video.mp4')
+      ..initialize().then((_) {
+        // Asegurarse de que el video se repita
+        _videoController.setLooping(true);
+        // Iniciar la reproducción del video
+        _videoController.play();
+      });
+  }
+
+  @override
+  void dispose() {
+    // Detener y liberar el controlador de video cuando se dispose la página
+    _videoController.pause(); // Pausar el video antes de liberar los recursos
+    _videoController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( toolbarHeight: 80,
+      appBar: AppBar(
+        toolbarHeight: 80,
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
           onPressed: () {
+            // Detener la reproducción de video y volver atrás
+            _videoController.pause();
             Navigator.of(context).pop();
           },
         ),
         title: Text(
-          'Lienzo Sonoro',
+          'Ritmo Pictórico',
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
@@ -30,7 +62,8 @@ class Level1Screen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Container(  // Textura de fondo
+          Container(
+            // Textura de fondo
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/textura_5.png'),
@@ -54,7 +87,7 @@ class Level1Screen extends StatelessWidget {
           ),
         ],
       ),
-            bottomNavigationBar: CustomFooter(
+      bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
           // Coloca aquí la lógica para despedir la notificación en esta página específica
@@ -66,12 +99,14 @@ class Level1Screen extends StatelessWidget {
 
   Widget buildTextButton(String label, BuildContext context, Widget? page, {bool active = true}) {
     return TextButton(
-      onPressed: page == null ? null : () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => page),
-        );
-      },
+      onPressed: page == null
+          ? null
+          : () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );
+            },
       child: Text(
         label,
         style: TextStyle(

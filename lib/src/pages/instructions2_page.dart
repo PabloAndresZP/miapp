@@ -3,10 +3,10 @@ import 'package:mi_app_imgsound/src/pages/game2_page.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 const List<String> instructions = [
-  'Asocia imágenes con escalas musicales.',
-  'Descubre la relación entre las escalas musicales y las imágenes.\nUna escala musical es una secuencia organizada de notas que se desplazan en intervalos determinados.\nEs fundamental en la música y nos ayuda tanto a componer como a analizar melodías.',
-  'En estos ejercicios, se te presentará una imagen acompañada de dos audios, uno por cada escala.\nTu misión es vincular la imagen con la escala que mejor la represente.',
-  '¡Un giro inesperado! A veces, las dinámicas cambian. Se te ofrecerá una escala y dos imágenes.\nTu tarea será seleccionar la imagen que mejor se relacione con esa escala.\nConsidera las emociones o estados de ánimo que evocan las escalas al tomar tu decisión.',
+  'Asocia Style/imágenes con Style/escalas Style/musicales.',
+  'Descubre la relación entre las Style/escalas Style/musicales y las Style/imágenes. \n\nUna escala musical es una Style/secuencia Style/organizada de Style/notas que se desplazan en Style/intervalos Style/determinados. \n\nEs fundamental en la Style/música y nos ayuda tanto a Style/componer como a Style/analizar Style/melodías.',
+  'En estos ejercicios, se te presentará una Style/imagen acompañada de dos Style/audios, uno por cada escala. \n\nTu misión es vincular la Style/imagen con la Style/escala que mejor la represente.',
+  'Style/¡Un Style/giro Style/inesperado.!\n A veces, las dinámicas cambian. \n\nSe te ofrecerá una Style/escala y dos Style/imágenes. \n\nTu tarea será seleccionar la Style/imagen que mejor se relacione con esa Style/escala. \n\nConsidera las Style/emociones o Style/estados de Style/ánimo que evocan las Style/escalas al tomar tu decisión.',
 ];
 
 const List<String?> images = [
@@ -103,7 +103,10 @@ class _Instructions2PageState extends State<Instructions2Page> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Game2Page()),
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => Game2Page(),
+                    ),
                   );
                 },
                 style: ButtonStyle(
@@ -159,37 +162,7 @@ class InstructionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle textStyle;
-    double fontSize;
-    FontWeight fontWeight;
-    Color textColor;
-
-    if (instructions[0].contains('Asocia imágenes con escalas musicales.')) {
-      fontSize = 18.7;
-      fontWeight = FontWeight.bold; // Negrita
-      textColor = Color.fromARGB(255, 119, 4, 29);
-    } else if (instructions[1].contains('Descubre la relación entre las escalas musicales y las imágenes.') ||
-        text.contains('En estos ejercicios, se te presentará una imagen acompañada de dos audios, uno por cada escala.') ||
-        text.contains('¡Un giro inesperado! A veces, las dinámicas cambian. Se te ofrecerá una escala y dos imágenes.')) {
-      fontSize = 18.7;
-      fontWeight = FontWeight.normal; // Normal
-      textColor = Color(0xFF7CF8FF);
-    } else if (instructions[2].contains('Una escala musical es una secuencia organizada de notas que se desplazan en intervalos determinados.')) {
-      fontSize = 15;
-      fontWeight = FontWeight.normal;
-      textColor = Color(0xFF7CF8FF);
-    } else {
-      fontSize = 15;
-      fontWeight = FontWeight.normal;
-      textColor = Color(0xFF044A1D6);
-    }
-
-    textStyle = TextStyle(
-      color: textColor,
-      fontFamily: 'WorkSans',
-      fontSize: fontSize,
-      fontWeight: fontWeight,
-    );
+    final List<String> textParts = text.split('\n');
 
     return Container(
       padding: EdgeInsets.only(left: 16.0, right: 16.0, top: marginTop),
@@ -202,10 +175,45 @@ class InstructionPage extends StatelessWidget {
             Image.asset(imagePath!, height: null, width: isCenteredHorizontal ? null : 150),
             SizedBox(height: 12),
           ],
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: textStyle,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: textParts.map((part) {
+              final List<InlineSpan> inlineSpans = [];
+              final List<String> words = part.trim().split(' ');
+
+              for (final word in words) {
+                if (word.startsWith('Style/')) {
+                  inlineSpans.add(
+                    TextSpan(
+                      text: '${word.substring(6)} ', // Ocultar "Style/"
+                      style: TextStyle(
+                        fontSize: 18.7,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF7CF8FF),
+                      ),
+                    ),
+                  );
+                } else {
+                  inlineSpans.add(
+                    TextSpan(
+                      text: '$word ',
+                      style: TextStyle(
+                        fontSize: 18.7,
+                        fontWeight: FontWeight.normal,
+                        color: Color(0xFF7CF8FF),
+                      ),
+                    ),
+                  );
+                }
+              }
+
+              return RichText(
+                textAlign: TextAlign.center, // Centrar el texto
+                text: TextSpan(
+                  children: inlineSpans,
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),

@@ -12,6 +12,7 @@ dependencies:
   audioplayers: ^0.20.1
   provider: ^5.0.0 # Aquí está la dependencia añadida
   video_player: ^2.2.22  # Agrega esta línea
+  auto_route: ^7.8.4 # Asegúrate de utilizar la última versión de auto_route
  
 
 dev_dependencies:
