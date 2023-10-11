@@ -137,6 +137,13 @@ flutter:
     - assets/sounds/melodia modo lido.mp3
     - assets/videos/instrucion_002.mp4
     - assets/videos/instrucion_003.mp4
+    - assets/videos/instrucion_004.mp4
+    - assets/videos/nivel_inicial.mp4
+    - assets/videos/nivel_intermedio.mp4
+    - assets/videos/nivel_avanzado_01.mp4
+    - assets/videos/nivel_avanzado_02.mp4
+    - assets/videos/nivel_experto_01.mp4
+    - assets/videos/nivel_experto_02.mp4
   fonts:
     - family: WorkSans
       fonts:

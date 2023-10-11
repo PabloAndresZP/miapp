@@ -23,7 +23,7 @@ class _InstructionsPageState extends State<InstructionsPage> {
     '', // Deja el primer videoPath en blanco para que no muestre el video
     'assets/videos/instrucion_002.mp4',
     'assets/videos/instrucion_003.mp4',
-    'assets/videos/instrucion_002.mp4',
+    'assets/videos/instrucion_004.mp4',
   ];
 
   @override

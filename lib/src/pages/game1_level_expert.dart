@@ -3,6 +3,7 @@ import 'package:mi_app_imgsound/src/widgets/coin_counter.dart';
 import 'package:mi_app_imgsound/src/widgets/hearts_indicator.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:video_player/video_player.dart';
 
 class Game1LevelExpert extends StatefulWidget {
   @override
@@ -10,16 +11,30 @@ class Game1LevelExpert extends StatefulWidget {
 }
 
 class _Game1LevelExpertState extends State<Game1LevelExpert> {
-  int coins = 0;
-  int hearts = 1;
-  int completedExercises = 1;
-  int totalExercises = 3; // Cambia el número total de ejercicios aquí
+  int coins = 1;
+  int hearts = 3;
+  int completedExercises = 2;
+  int totalExercises = 3;
   late AudioPlayer audioPlayer;
+  late VideoPlayerController _videoController1;
+  late VideoPlayerController _videoController2;
 
-  @override
+ @override
   void initState() {
     super.initState();
     audioPlayer = AudioPlayer();
+    _videoController1 = VideoPlayerController.asset('assets/videos/nivel_experto_01.mp4')
+      ..initialize().then((_) {
+        _videoController1.setLooping(true);
+        _videoController1.play(); // Agrega esta línea
+        setState(() {});
+      });
+    _videoController2 = VideoPlayerController.asset('assets/videos/nivel_experto_02.mp4')
+      ..initialize().then((_) {
+        _videoController2.setLooping(true);
+        _videoController2.play(); // Agrega esta línea
+        setState(() {});
+      });
   }
 
   @override
@@ -33,7 +48,7 @@ class _Game1LevelExpertState extends State<Game1LevelExpert> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'Nivel Inicial RP',
+          'Nivel Experto RP',
           style: TextStyle(
             color: Color(0xFF44A1D6),
             fontFamily: 'WorkSans',
@@ -82,7 +97,7 @@ class _Game1LevelExpertState extends State<Game1LevelExpert> {
                     SizedBox(height: 20.0),
                     Center(
                       child: Text(
-                        'Sincroniza la siguiente animación con el audio',
+                        'Elige la animación que coincide con el audio',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Color(0xFFFDFDFD),
@@ -92,10 +107,6 @@ class _Game1LevelExpertState extends State<Game1LevelExpert> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.0),
-                    Image.asset('assets/images/nivel_4_rp.png'),
-                    SizedBox(height: 20.0),
-                    Image.asset('assets/images/componente_rp.png'),
                     SizedBox(height: 20.0),
                     Center(
                       child: Container(
@@ -113,6 +124,22 @@ class _Game1LevelExpertState extends State<Game1LevelExpert> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 20.0),
+                    _videoController1.value.isInitialized
+                        ? AspectRatio(
+                            aspectRatio: _videoController1.value.aspectRatio,
+                            child: VideoPlayer(_videoController1),
+                          )
+                        : Container(),
+                    SizedBox(height: 20.0),
+                    _videoController2.value.isInitialized
+                        ? AspectRatio(
+                            aspectRatio: _videoController2.value.aspectRatio,
+                            child: VideoPlayer(_videoController2),
+                            
+
+                          )
+                        : Container(),
                     SizedBox(height: 20.0),
                     ElevatedButton(
                       onPressed: () {},
@@ -144,16 +171,15 @@ class _Game1LevelExpertState extends State<Game1LevelExpert> {
       ),
       bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
-        onNotificationDismiss: () {
-          // Coloca aquí la lógica para despedir la notificación en esta página específica
-          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
-        },
+        onNotificationDismiss: () {},
       ),
     );
   }
 
   @override
   void dispose() {
+    _videoController1.dispose();
+    _videoController2.dispose();
     audioPlayer.dispose();
     super.dispose();
   }

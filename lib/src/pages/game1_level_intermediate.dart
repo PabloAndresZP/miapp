@@ -3,6 +3,7 @@ import 'package:mi_app_imgsound/src/widgets/coin_counter.dart';
 import 'package:mi_app_imgsound/src/widgets/hearts_indicator.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:video_player/video_player.dart';
 
 class Game1LevelIntermediate extends StatefulWidget {
   @override
@@ -15,11 +16,18 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
   int completedExercises = 2;
   int totalExercises = 3; // Cambia el número total de ejercicios aquí
   late AudioPlayer audioPlayer;
+  late VideoPlayerController _videoController;
 
   @override
   void initState() {
     super.initState();
     audioPlayer = AudioPlayer();
+    _videoController = VideoPlayerController.asset('assets/videos/nivel_intermedio.mp4')
+      ..initialize().then((_) {
+        _videoController.setLooping(true);
+        _videoController.play(); // Agrega esta línea
+        setState(() {});
+      });
   }
 
   @override
@@ -33,7 +41,7 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'Nivel Inicial RP',
+          'Nivel Intermedio RP',
           style: TextStyle(
             color: Color(0xFF44A1D6),
             fontFamily: 'WorkSans',
@@ -93,16 +101,21 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
                       ),
                     ),
                     SizedBox(height: 20.0),
-                    Image.asset('assets/images/nivel_2_rp.png'),
+                    _videoController.value.isInitialized
+                        ? AspectRatio(
+                            aspectRatio: _videoController.value.aspectRatio,
+                            child: VideoPlayer(_videoController),
+                          )
+                        : Container(),
                     SizedBox(height: 20.0),
                     Image.asset('assets/images/componente_rp.png'),
                     SizedBox(height: 20.0),
                     Center(
                       child: Container(
-                        width: 48.0, // Ancho deseado
-                        height: 48.0, // Alto deseado
+                        width: 48.0,
+                        height: 48.0,
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle, // Hace que el contenedor sea circular
+                          shape: BoxShape.circle,
                           color: Color(0xFF00D8BB),
                         ),
                         child: IconButton(
@@ -144,16 +157,14 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
       ),
       bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
-        onNotificationDismiss: () {
-          // Coloca aquí la lógica para despedir la notificación en esta página específica
-          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
-        },
+        onNotificationDismiss: () {},
       ),
     );
   }
 
   @override
   void dispose() {
+    _videoController.dispose();
     audioPlayer.dispose();
     super.dispose();
   }

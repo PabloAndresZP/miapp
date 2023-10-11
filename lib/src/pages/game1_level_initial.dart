@@ -3,6 +3,7 @@ import 'package:mi_app_imgsound/src/widgets/coin_counter.dart';
 import 'package:mi_app_imgsound/src/widgets/hearts_indicator.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:video_player/video_player.dart';
 
 class Game1LevelInitial extends StatefulWidget {
   @override
@@ -13,14 +14,24 @@ class _Game1LevelInitialState extends State<Game1LevelInitial> {
   int coins = 0;
   int hearts = 3;
   int completedExercises = 1;
-  int totalExercises = 3; // Cambia el número total de ejercicios aquí
+  int totalExercises = 3;
   late AudioPlayer audioPlayer;
+  late VideoPlayerController _videoController;
 
-  @override
-  void initState() {
-    super.initState();
-    audioPlayer = AudioPlayer();
-  }
+ @override
+void initState() {
+  super.initState();
+  audioPlayer = AudioPlayer();
+  _videoController = VideoPlayerController.asset('assets/videos/nivel_inicial.mp4')
+    ..initialize().then((_) {
+      // Configura el video para que se reproduzca en bucle
+      _videoController.setLooping(true);
+      print("Video initialization status: ${_videoController.value.isInitialized}");
+      _videoController.play(); // Agrega esta línea
+      setState(() {});
+    });
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +96,7 @@ class _Game1LevelInitialState extends State<Game1LevelInitial> {
                         'Sincroniza la siguiente animación con el audio',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Color(0xFFFDFDFD),
+                          color: Color(0xFFFDFFFD),
                           fontFamily: 'WorkSans',
                           fontWeight: FontWeight.bold,
                           fontSize: 21.5,
@@ -93,16 +104,21 @@ class _Game1LevelInitialState extends State<Game1LevelInitial> {
                       ),
                     ),
                     SizedBox(height: 20.0),
-                    Image.asset('assets/images/nivel_1_rp.png'),
+                    _videoController.value.isInitialized
+                        ? AspectRatio(
+                            aspectRatio: _videoController.value.aspectRatio,
+                            child: VideoPlayer(_videoController),
+                          )
+                        : Container(),
                     SizedBox(height: 20.0),
                     Image.asset('assets/images/componente_rp.png'),
                     SizedBox(height: 20.0),
                     Center(
                       child: Container(
-                        width: 48.0, // Ancho deseado
-                        height: 48.0, // Alto deseado
+                        width: 48.0,
+                        height: 48.0,
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle, // Hace que el contenedor sea circular
+                          shape: BoxShape.circle,
                           color: Color(0xFF00D8BB),
                         ),
                         child: IconButton(
@@ -124,7 +140,7 @@ class _Game1LevelInitialState extends State<Game1LevelInitial> {
                             fontFamily: 'WorkSans',
                             fontWeight: FontWeight.bold,
                             fontSize: 18.7,
-                            color: Color(0xFFFDFDFD),
+                            color: Color(0xFFFDFFFD),
                           ),
                         ),
                       ),
@@ -144,16 +160,14 @@ class _Game1LevelInitialState extends State<Game1LevelInitial> {
       ),
       bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
-        onNotificationDismiss: () {
-          // Coloca aquí la lógica para despedir la notificación en esta página específica
-          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
-        },
+        onNotificationDismiss: () {},
       ),
     );
   }
 
   @override
   void dispose() {
+    _videoController.dispose();
     audioPlayer.dispose();
     super.dispose();
   }
