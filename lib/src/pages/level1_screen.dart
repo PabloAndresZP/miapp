@@ -1,69 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/pages/game1_level_initial.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:mi_app_imgsound/src/pages/game1_level_intermediate.dart';
 import 'package:mi_app_imgsound/src/pages/game1_level_advanced.dart';
 import 'package:mi_app_imgsound/src/pages/game1_level_expert.dart';
-import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
-import 'package:video_player/video_player.dart';
 
-class Level1Screen extends StatefulWidget {
-  @override
-  _Level1ScreenState createState() => _Level1ScreenState();
-}
-
-class _Level1ScreenState extends State<Level1Screen> {
-  late VideoPlayerController _videoController;
-
-  @override
-  void initState() {
-    super.initState();
-    // Inicializar el controlador de video aquí
-    _videoController = VideoPlayerController.asset('assets/videos/your_video.mp4')
-      ..initialize().then((_) {
-        // Asegurarse de que el video se repita
-        _videoController.setLooping(true);
-        // Iniciar la reproducción del video
-        _videoController.play();
-      });
-  }
-
-  @override
-  void dispose() {
-    // Detener y liberar el controlador de video cuando se dispose la página
-    _videoController.pause(); // Pausar el video antes de liberar los recursos
-    _videoController.dispose();
-    super.dispose();
-  }
-
+class Level1Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
-        backgroundColor: Color(0xFF030328),
+        backgroundColor: const Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
           onPressed: () {
-            // Detener la reproducción de video y volver atrás
-            _videoController.pause();
             Navigator.of(context).pop();
           },
         ),
         title: Text(
-          'Ritmo Pictórico',
+          '       Niveles RP',
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
             fontWeight: FontWeight.bold,
             fontSize: 23.4,
           ),
+          //centerTitle: true,
         ),
-        centerTitle: true,
       ),
       body: Stack(
         children: [
           Container(
-            // Textura de fondo
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/textura_5.png'),
@@ -71,18 +39,49 @@ class _Level1ScreenState extends State<Level1Screen> {
               ),
             ),
           ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                buildTextButton('Nivel Inicial', context, Game1LevelInitial()),
-                SizedBox(height: 24),
-                buildTextButton('Nivel Intermedio', context, Game1LevelIntermediate()),
-                SizedBox(height: 24),
-                buildTextButton('Nivel Avanzado', context, Game1LevelAdvanced()),
-                SizedBox(height: 24),
-                buildTextButton('Nivel Experto', context, Game1LevelExpert()),
-              ],
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Cada nivel representa un desafío en el fascinante mundo del ritmo pictórico.\n\n',
+                    style: TextStyle(
+                      color: Color(0xFF7CF8FF),
+                      fontFamily: 'WorkSans',
+                      fontSize: 18.7,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    '¡Que comience tu aventura!\n\n',
+                    style: TextStyle(
+                      color: Color(0xFF7CF8FF),
+                      fontFamily: 'WorkSans',
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildTextButton('Inicial', context, Game1LevelInitial(), 'assets/images/niveles_rp_01.png'),
+                      buildTextButton('Intermedio', context, Game1LevelIntermediate(), 'assets/images/niveles_rp_02.png'),
+                    ],
+                  ),
+                  SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildTextButton('Avanzado', context, Game1LevelAdvanced(), 'assets/images/niveles_rp_03.png'),
+                      buildTextButton('Experto', context, Game1LevelExpert(), 'assets/images/niveles_rp_04.png'),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -97,25 +96,35 @@ class _Level1ScreenState extends State<Level1Screen> {
     );
   }
 
-  Widget buildTextButton(String label, BuildContext context, Widget? page, {bool active = true}) {
-    return TextButton(
-      onPressed: page == null
-          ? null
-          : () {
+  Widget buildTextButton(String label, BuildContext context, Widget? page, String imageAsset) {
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () {
+            if (page != null) {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => page),
               );
-            },
-      child: Text(
-        label,
-        style: TextStyle(
-          color: active ? Color(0xFF044A1D6) : Colors.grey,
-          fontFamily: 'WorkSans',
-          fontWeight: FontWeight.bold,
-          fontSize: 18.7,
+            }
+          },
+          child: Column(
+            children: [
+              Image.asset(imageAsset, height: 60, width: 60),
+              SizedBox(height: 12),
+              Text(
+                label,
+                style: TextStyle(
+                  color: Color(0xFF7CF8FF),
+                  fontFamily: 'WorkSans',
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

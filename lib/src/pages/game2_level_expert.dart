@@ -265,7 +265,7 @@ class _GameLevelExpertState extends State<GameLevelExpert> {
 ),
                 SizedBox(height: 12.0),
                 Text(
-                  'Cumpleaños Feliz',
+                  'Cumpleaños Feliz \nEn Escala Menor',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFFFDFDFD),

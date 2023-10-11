@@ -78,8 +78,7 @@ class Level2Screen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                     buildTextButton('Avanzado', context, GameLevelAdvanced(initialHearts: 2), 'assets/images/pincel_3.png'),
-
+                      buildTextButton('Avanzado', context, GameLevelAdvanced(initialHearts: 2), 'assets/images/pincel_3.png'),
                       buildTextButton('Experto', context, GameLevelExpert(initialHearts: 1), 'assets/images/pincel_4.png'),
                     ],
                   ),
@@ -102,23 +101,29 @@ class Level2Screen extends StatelessWidget {
   Widget buildTextButton(String label, BuildContext context, Widget? page, String imageAsset) {
     return Column(
       children: [
-        Image.asset(imageAsset, height: 60, width: 60),
-        SizedBox(height: 12),
-        TextButton(
-          onPressed: page == null ? null : () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => page),
-            );
+        GestureDetector(
+          onTap: () {
+            if (page != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );
+            }
           },
-          child: Text(
-            label,
-            style: TextStyle(
-              color: Color(0xFF7CF8FF),
-              fontFamily: 'WorkSans',
-              fontSize: 15,
-              fontWeight: FontWeight.normal,
-            ),
+          child: Column(
+            children: [
+              Image.asset(imageAsset, height: 60, width: 60),
+              SizedBox(height: 12),
+              Text(
+                label,
+                style: TextStyle(
+                  color: Color(0xFF7CF8FF),
+                  fontFamily: 'WorkSans',
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ],
           ),
         ),
       ],

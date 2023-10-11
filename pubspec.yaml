@@ -113,6 +113,14 @@ flutter:
     - assets/images/ojos_na.png
     - assets/images/ojos_na_2.png
     - assets/images/desierto.png
+    - assets/images/niveles_rp_01.png
+    - assets/images/niveles_rp_02.png
+    - assets/images/niveles_rp_03.png
+    - assets/images/niveles_rp_04.png
+    - assets/images/niveles_ls_01.png
+    - assets/images/niveles_ls_02.png
+    - assets/images/niveles_ls_03.png
+    - assets/images/niveles_ls_04.png
     - assets/sounds/cumpleaños.mp3
     - assets/sounds/cumpleaños02.mp3
     - assets/sounds/escmayor.mp3

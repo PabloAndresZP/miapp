@@ -6,7 +6,8 @@ class LessonTwoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( toolbarHeight: 80,
+      appBar: AppBar(
+        toolbarHeight: 80,
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
@@ -27,7 +28,7 @@ class LessonTwoScreen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Container( // Textura de fondo
+          Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/textura_5.png'),
@@ -101,23 +102,29 @@ class LessonTwoScreen extends StatelessWidget {
   Widget buildTextButton(String label, BuildContext context, Widget? page, String imageAsset, {bool active = true}) {
     return Column(
       children: [
-        Image.asset(imageAsset, height: 60, width: 60), // Agregamos la imagen
-        SizedBox(height: 12), // Separación vertical
-        TextButton(
-          onPressed: page == null ? null : () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => page),
-            );
+        GestureDetector(
+          onTap: () {
+            if (page != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );
+            }
           },
-          child: Text(
-            label,
-            style: TextStyle(
-              color: active ? Color(0xFF7CF8FF) : Color(0xFF044A1D6),
-              fontFamily: 'WorkSans',
-              fontSize: 15,
-              fontWeight: FontWeight.normal,
-            ),
+          child: Column(
+            children: [
+              Image.asset(imageAsset, height: 60, width: 60), // Agregamos la imagen
+              SizedBox(height: 12), // Separación vertical
+              Text(
+                label,
+                style: TextStyle(
+                  color: active ? Color(0xFF7CF8FF) : Color(0xFF044A1D6),
+                  fontFamily: 'WorkSans',
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ],
           ),
         ),
       ],

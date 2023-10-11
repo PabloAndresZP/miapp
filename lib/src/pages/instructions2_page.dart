@@ -6,7 +6,7 @@ const List<String> instructions = [
   'Asocia Style/imágenes con Style/escalas Style/musicales.',
   'Descubre la relación entre las Style/escalas Style/musicales y las Style/imágenes. \n\nUna escala musical es una Style/secuencia Style/organizada de Style/notas que se desplazan en Style/intervalos Style/determinados. \n\nEs fundamental en la Style/música y nos ayuda tanto a Style/componer como a Style/analizar Style/melodías.',
   'En estos ejercicios, se te presentará una Style/imagen acompañada de dos Style/audios, uno por cada escala. \n\nTu misión es vincular la Style/imagen con la Style/escala que mejor la represente.',
-  'Style/¡Un Style/giro Style/inesperado.!\n A veces, las dinámicas cambian. \n\nSe te ofrecerá una Style/escala y dos Style/imágenes. \n\nTu tarea será seleccionar la Style/imagen que mejor se relacione con esa Style/escala. \n\nConsidera las Style/emociones o Style/estados de Style/ánimo que evocan las Style/escalas al tomar tu decisión.',
+  'Prepárate para un giro inesperado en las dinámicas.\n\nEn este desafío, se te presentará una Style/escala junto con dos Style/imágenes. \n\nTu misión consiste en elegir la Style/imagen que mejor se relacione con esa Style/escala, teniendo en cuenta las Style/emociones o Style/estados Style/de Style/ánimo que cada Style/escala evoca.',
 ];
 
 const List<String?> images = [

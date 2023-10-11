@@ -9,7 +9,8 @@ class Level3Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( toolbarHeight: 80,
+      appBar: AppBar(
+        toolbarHeight: 80,
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
@@ -18,7 +19,7 @@ class Level3Screen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Lienzo Sonoro',
+          'Niveles LS',
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
@@ -38,23 +39,55 @@ class Level3Screen extends StatelessWidget {
               ),
             ),
           ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                buildTextButton('Nivel Inicial', context, Game3LevelInitial()),
-                SizedBox(height: 24),
-                buildTextButton('Nivel Intermedio', context, Game3LevelIntermediate()),
-                SizedBox(height: 24),
-                buildTextButton('Nivel Avanzado', context, Game3LevelAdvanced()),
-                SizedBox(height: 24),
-                buildTextButton('Nivel Experto', context, Game3LevelExpert()),
-              ],
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'Cada nivel representa un desafío en la fascinante\n\n',
+                    style: TextStyle(
+                      color: Color(0xFF7CF8FF),
+                      fontFamily: 'WorkSans',
+                      fontSize: 18.7,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    '¡Que comience tu aventura!',
+                    style: TextStyle(
+                      color: Color(0xFF7CF8FF),
+                      fontFamily: 'WorkSans',
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: 72),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildTextButton('Inicial', context, Game3LevelInitial(), 'assets/images/niveles_ls_01.png'),
+                      buildTextButton('Intermedio', context, Game3LevelIntermediate(), 'assets/images/niveles_ls_02.png'),
+                    ],
+                  ),
+                  SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildTextButton('Avanzado', context, Game3LevelAdvanced(), 'assets/images/niveles_ls_03.png'),
+                      buildTextButton('Experto', context, Game3LevelExpert(), 'assets/images/niveles_ls_04.png'),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
       ),
-            bottomNavigationBar: CustomFooter(
+      bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
           // Coloca aquí la lógica para despedir la notificación en esta página específica
@@ -64,22 +97,30 @@ class Level3Screen extends StatelessWidget {
     );
   }
 
-  Widget buildTextButton(String label, BuildContext context, Widget? page, {bool active = true}) {
-    return TextButton(
-      onPressed: page == null ? null : () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => page),
-        );
+  Widget buildTextButton(String label, BuildContext context, Widget? page, String imageAsset) {
+    return GestureDetector(
+      onTap: () {
+        if (page != null) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => page),
+          );
+        }
       },
-      child: Text(
-        label,
-        style: TextStyle(
-          color: active ? Color(0xFF044A1D6) : Colors.grey,
-          fontFamily: 'WorkSans',
-          fontWeight: FontWeight.bold,
-          fontSize: 18.7,
-        ),
+      child: Column(
+        children: [
+          Image.asset(imageAsset, height: 60, width: 60),
+          SizedBox(height: 12),
+          Text(
+            label,
+            style: TextStyle(
+              color: Color(0xFF7CF8FF),
+              fontFamily: 'WorkSans',
+              fontSize: 15,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        ],
       ),
     );
   }
