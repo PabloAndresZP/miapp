@@ -3,15 +3,16 @@ import 'package:mi_app_imgsound/src/pages/level3_screen.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
 const List<String> instructions = [
-  'Aprende sobre la grabación / registro de sonido.',
-  'Observa la imagen mostrada y graba el sonido que crees que produce ese objeto.',
-  ' Luego, utiliza los controles para ajustar y eliminar cualquier ruido o eco detectado por la aplicación.',
+  'Aprende sobre la Style/grabación / Style/registro Style/de Style/sonido.',
+  '\n\nObserva la Style/imagen mostrada y Style/graba el sonido que crees que produce ese objeto.',
+  '\n\nLuego, utiliza los controles para Style/ajustar y Style/eliminar cualquier Style/ruido o Style/eco detectado por la aplicación.',
 ];
 
 const List<String?> images = [
   null,
-  'assets/images/instruccion_2_lienzo_sonoro.png',
+  'assets/images/mouse.png',
   'assets/images/instruccion_3_lienzo_sonoro.png',
+ 
 ];
 
 class Game3Page extends StatefulWidget {
@@ -25,7 +26,8 @@ class _Game3PageState extends State<Game3Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( toolbarHeight: 80,
+      appBar: AppBar(
+        toolbarHeight: 80,
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
@@ -64,6 +66,9 @@ class _Game3PageState extends State<Game3Page> {
               return InstructionPage(
                 text: instructions[index],
                 imagePath: images[index],
+                isCenteredHorizontal: true,
+                isCenteredVertical: index == 0,
+                marginTop: index == 0 ? 216.0 : 0.0,
               );
             },
             itemCount: instructions.length,
@@ -80,7 +85,7 @@ class _Game3PageState extends State<Game3Page> {
                     padding: const EdgeInsets.symmetric(horizontal: 4.0),
                     child: CircleAvatar(
                       radius: 8,
-                      backgroundColor: i <= currentPage
+                      backgroundColor: i == currentPage
                           ? Color(0xFF044A1D6)
                           : Color(0xFF044A1D6).withOpacity(0.5),
                     ),
@@ -89,7 +94,8 @@ class _Game3PageState extends State<Game3Page> {
               ),
             ),
           ),
-          Align(
+
+Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 30.0),
@@ -97,7 +103,10 @@ class _Game3PageState extends State<Game3Page> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Level3Screen()),
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => Level3Screen(),
+                    ),
                   );
                 },
                 style: ButtonStyle(
@@ -114,7 +123,7 @@ class _Game3PageState extends State<Game3Page> {
                 child: Text(
                   'Jugar',
                   style: TextStyle(
-                    color: Color(0xFFFDFDFD),
+                    color: Color(0xFFFDFDFD),  // Color blanco para el texto "Jugar"
                     fontFamily: 'WorkSans',
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -123,9 +132,10 @@ class _Game3PageState extends State<Game3Page> {
               ),
             ),
           ),
+
         ],
       ),
-             bottomNavigationBar: CustomFooter(
+      bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
           // Coloca aquí la lógica para despedir la notificación en esta página específica
@@ -139,32 +149,72 @@ class _Game3PageState extends State<Game3Page> {
 class InstructionPage extends StatelessWidget {
   final String text;
   final String? imagePath;
+  final bool isCenteredHorizontal;
+  final bool isCenteredVertical;
+  final double marginTop;
 
   const InstructionPage({
     required this.text,
     this.imagePath,
+    this.isCenteredHorizontal = false,
+    this.isCenteredVertical = false,
+    this.marginTop = 0.0,
   });
 
   @override
   Widget build(BuildContext context) {
+    final List<String> textParts = text.split('\n');
+
     return Container(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.only(left: 16.0, right: 16.0, top: marginTop),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: isCenteredHorizontal ? CrossAxisAlignment.center : CrossAxisAlignment.start,
         children: [
           if (imagePath != null) ...[
-            Image.asset(imagePath!, height: 150),
-            SizedBox(height: 20),
+            SizedBox(height: 12),
+            Image.asset(imagePath!, height: null, width: isCenteredHorizontal ? null : 150),
+            SizedBox(height: 12),
           ],
-          Text(
-            text,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Color(0xFF44A1D6),
-              fontFamily: 'WorkSans',
-              fontWeight: FontWeight.bold,
-              fontSize: 18.7,
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: textParts.map((part) {
+              final List<InlineSpan> inlineSpans = [];
+              final List<String> words = part.trim().split(' ');
+
+              for (final word in words) {
+                if (word.startsWith('Style/')) {
+                  inlineSpans.add(
+                    TextSpan(
+                      text: '${word.substring(6)} ', // Ocultar "Style/"
+                      style: TextStyle(
+                        fontSize: 18.7,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF7CF8FF),
+                      ),
+                    ),
+                  );
+                } else {
+                  inlineSpans.add(
+                    TextSpan(
+                      text: '$word ',
+                      style: TextStyle(
+                        fontSize: 18.7,
+                        fontWeight: FontWeight.normal,
+                        color: Color(0xFF7CF8FF),
+                      ),
+                    ),
+                  );
+                }
+              }
+
+              return RichText(
+                textAlign: TextAlign.center, // Centrar el texto
+                text: TextSpan(
+                  children: inlineSpans,
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),

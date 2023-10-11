@@ -17,7 +17,8 @@ class _Game3LevelIntermediateState extends State<Game3LevelIntermediate> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF030328),
-      appBar: AppBar( toolbarHeight: 80,
+      appBar: AppBar(
+        toolbarHeight: 80,
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png'),
           onPressed: () => Navigator.of(context).pop(),
@@ -47,16 +48,22 @@ class _Game3LevelIntermediateState extends State<Game3LevelIntermediate> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CoinCounter(coins),
-                        Row(
-                          children: List.generate(
-                            3,
-                            (index) => Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 3.0),
-                              child: Icon(
-                                index < completedExercises ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-                                size: 12.0,
-                                color: Color(0xFF44A1D6),
-                              ),
+                        Container(
+                          height: 8.0, // Ajusta la altura de la barra de progreso aquí
+                          width: 168.0, // Ajusta el ancho de la barra de progreso aquí
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0), // Establece el radio de borde circular
+                            border: Border.all(
+                              color: Colors.transparent, // Establece el color del borde como transparente cuando la barra está vacía
+                              width: 1.0, // Ancho del borde
+                            ),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0), // Agrega bordes redondeados al contenido
+                            child: LinearProgressIndicator(
+                              value: completedExercises / 3, // Cambia 3 al número total de ejercicios
+                              backgroundColor: Color(0xFF0A0A53), // Establece el fondo de la barra de progreso
+                              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF00D8BB)), // Establece el color de la barra de progreso
                             ),
                           ),
                         ),
@@ -77,7 +84,7 @@ class _Game3LevelIntermediateState extends State<Game3LevelIntermediate> {
                       ),
                     ),
                     SizedBox(height: 20.0),
-                    Image.asset('assets/images/trafico_nivel_intermedio_ls.png'),  // Asegúrate de actualizar la ruta de la imagen si es diferente.
+                    Image.asset('assets/images/ciudad_ls.png'),  // Asegúrate de actualizar la ruta de la imagen si es diferente.
                     SizedBox(height: 20.0),
                     Center(
                       child: Column(
@@ -133,7 +140,7 @@ class _Game3LevelIntermediateState extends State<Game3LevelIntermediate> {
           ),
         ],
       ),
-             bottomNavigationBar: CustomFooter(
+      bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
           // Coloca aquí la lógica para despedir la notificación en esta página específica

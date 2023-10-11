@@ -9,7 +9,8 @@ class Level2Screen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( toolbarHeight: 80,
+      appBar: AppBar(
+        toolbarHeight: 80,
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
@@ -30,7 +31,7 @@ class Level2Screen extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Container( // Textura de fondo
+          Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/textura_5.png'),
@@ -39,7 +40,7 @@ class Level2Screen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12), // Ajuste de márgenes
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,9 +53,9 @@ class Level2Screen extends StatelessWidget {
                       fontSize: 18.7,
                       fontWeight: FontWeight.bold,
                     ),
-                    textAlign: TextAlign.center, // Alineado al centro
+                    textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 24, width: 48,), // Separación vertical
+                  SizedBox(height: 24, width: 48),
                   Text(
                     '¡Que comience tu aventura!',
                     style: TextStyle(
@@ -63,9 +64,9 @@ class Level2Screen extends StatelessWidget {
                       fontSize: 15,
                       fontWeight: FontWeight.normal,
                     ),
-                    textAlign: TextAlign.center, // Alineado al centro
+                    textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 72, width: 10,), // Separación vertical
+                  SizedBox(height: 72, width: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -73,12 +74,13 @@ class Level2Screen extends StatelessWidget {
                       buildTextButton('Intermedio', context, GameLevelIntermediate(), 'assets/images/pincel_2.png'),
                     ],
                   ),
-                  SizedBox(height: 12), // Separación vertical reducida
+                  SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      buildTextButton('Avanzado', context, GameLevelAdvanced(), 'assets/images/pincel_3.png'),
-                      buildTextButton('Experto', context, GameLevelExpert(), 'assets/images/pincel_4.png'),
+                     buildTextButton('Avanzado', context, GameLevelAdvanced(initialHearts: 2), 'assets/images/pincel_3.png'),
+
+                      buildTextButton('Experto', context, GameLevelExpert(initialHearts: 1), 'assets/images/pincel_4.png'),
                     ],
                   ),
                 ],
@@ -100,8 +102,8 @@ class Level2Screen extends StatelessWidget {
   Widget buildTextButton(String label, BuildContext context, Widget? page, String imageAsset) {
     return Column(
       children: [
-        Image.asset(imageAsset, height: 60, width: 60), // Agregamos la imagen
-        SizedBox(height: 12), // Separación vertical
+        Image.asset(imageAsset, height: 60, width: 60),
+        SizedBox(height: 12),
         TextButton(
           onPressed: page == null ? null : () {
             Navigator.push(
@@ -115,7 +117,7 @@ class Level2Screen extends StatelessWidget {
               color: Color(0xFF7CF8FF),
               fontFamily: 'WorkSans',
               fontSize: 15,
-              fontWeight: FontWeight.normal, // Cambiamos a normal
+              fontWeight: FontWeight.normal,
             ),
           ),
         ),

@@ -2,132 +2,83 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:mi_app_imgsound/src/widgets/coin_counter.dart';
 import 'package:mi_app_imgsound/src/widgets/hearts_indicator.dart';
-import 'package:mi_app_imgsound/src/pages/game2_eje3_page.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_snackbar_content.dart';
+import 'package:mi_app_imgsound/src/pages/game2_page.dart';
+import 'package:mi_app_imgsound/src/pages/coin1_game2_page.dart';
+import 'package:mi_app_imgsound/models/coin_model.dart';
+import 'package:provider/provider.dart';
+import 'package:mi_app_imgsound/src/pages/level2_screen.dart';
 
 class GameLevelAdvanced extends StatefulWidget {
+  final int initialHearts;
+
+  GameLevelAdvanced({Key? key, required this.initialHearts}) : super(key: key);
+
   @override
   _GameLevelAdvancedState createState() => _GameLevelAdvancedState();
 }
 
 class _GameLevelAdvancedState extends State<GameLevelAdvanced> {
-  late AudioPlayer _audioPlayer1, _audioPlayer2;
-  bool isPlaying1 = false;
-  bool isPlaying2 = false;
+  late AudioPlayer _audioPlayer;
   int selectedAnswer = -1;
-  int completedExercises = 0;
   int coins = 0;
-  int hearts = 3;
-  List<int> correctAnswers = [1, 0];
-  int currentExerciseIndex = 0;
+  late int hearts;
+  int correctAnswer = 1;
   List<String> exerciseImages = [
-    'assets/images/nivel_4_ps.png',
-    'assets/images/nivel_4_2_ps.png',
-  ];
-  List<String> exerciseAudios1 = [
-    'assets/sounds/cumpleaños.mp3',
-    'assets/sounds/cumpleaños.mp3',
-  ];
-  List<String> exerciseAudios2 = [
-    'assets/sounds/cumpleaños02.mp3',
-    'assets/sounds/cumpleaños02.mp3',
-    
-    
+    'assets/images/ojos_na_2.png',
+    'assets/images/ojos_na.png',
   ];
 
-  // Lista para manejar las etiquetas debajo de los círculos
-  List<List<String>> labels = [
-  ['En Escala Mayor', 'En Escala menor'],
-  ['En Escala Mayor', 'En Escala menor'],
+  List<String> exerciseAudios = [
+    'assets/sounds/esccromatica.mp3',
   ];
 
   @override
   void initState() {
     super.initState();
-    _audioPlayer1 = AudioPlayer();
-    _audioPlayer2 = AudioPlayer();
+    _audioPlayer = AudioPlayer();
+    hearts = widget.initialHearts;
   }
 
   @override
   void dispose() {
-    _audioPlayer1.dispose();
-    _audioPlayer2.dispose();
+    _audioPlayer.dispose();
     super.dispose();
   }
 
-  void _playPause(String audioUrl, int playerNumber) async {
-    AudioPlayer currentPlayer = (playerNumber == 1) ? _audioPlayer1 : _audioPlayer2;
-    AudioPlayer otherPlayer = (playerNumber == 1) ? _audioPlayer2 : _audioPlayer1;
-    bool currentPlaying = (playerNumber == 1) ? isPlaying1 : isPlaying2;
-
-    if (currentPlaying) {
-      await currentPlayer.pause();
-    } else {
-      await otherPlayer.stop(); // Detener el otro audio.
-      int result = await currentPlayer.play(audioUrl);
-      if (result != 1) {
-        print("Error al reproducir el audio");
-      }
+  void _playPause(String audioUrl) async {
+    int result = await _audioPlayer.play(audioUrl);
+    if (result != 1) {
+      print("Error al reproducir el audio");
     }
-
-    setState(() {
-      if (playerNumber == 1) {
-        isPlaying1 = !isPlaying1;
-        isPlaying2 = false;
-      } else {
-        isPlaying2 = !isPlaying2;
-        isPlaying1 = false;
-      }
-    });
   }
 
-  void _goToNextExercise() {
-    if (currentExerciseIndex < exerciseImages.length - 1) {
+  void _checkAnswer() {
+    if (selectedAnswer == correctAnswer) {
+      CustomSnackbarContent.show(context, '¡Impresionante! Sigues avanzando.', true);
+      _playSound('correcto.mp3');
+
       setState(() {
-        currentExerciseIndex += 1;
-        selectedAnswer = -1;
+        coins += 1;
+      });
+
+      Provider.of<CoinModel>(context, listen: false).winCoin1();
+
+      Future.delayed(Duration(seconds: 3), () {
+        Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => Coin1Game2Page(),
+        ));
       });
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('¡Has completado todos los ejercicios!'),
-        duration: Duration(seconds: 2),
-      ));
-    }
-  }
+      CustomSnackbarContent.show(context, '¡No te preocupes! Inténtalo de nuevo.', false);
+      _playSound('acento.mp3');
 
-void _checkAnswer() {
-  if (selectedAnswer == correctAnswers[currentExerciseIndex]) {
-    CustomSnackbarContent.show(context, "¡Perfecto! Continúa así.", true);
-    _playSound('correcto.mp3');
+      setState(() {
+        hearts -= 1;
+      });
 
-    setState(() {
-      completedExercises += 1;
-      if (completedExercises % 3 == 0) {
-        coins += 1;
-      }
-    });
-
-    if (completedExercises == correctAnswers.length) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Game2Eje3Page(initialHearts: hearts)),
-      );
-    } else {
-      _goToNextExercise();
-    }
-  } 
-  else {
-    CustomSnackbarContent.show(context, "¡Eso estuvo cerca! Prueba una vez más.", false);
-    _playSound('acento.mp3');
-    
-    setState(() {
-      hearts -= 1;
-    });
-
-    if (hearts <= 0) {
-    // Llama a esta función donde necesites mostrar el cuadro de diálogo
-
+      if (hearts <= 0) {
         Future.delayed(Duration(seconds: 2), () {
           showDialog(
             context: context,
@@ -170,7 +121,6 @@ void _checkAnswer() {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    //SizedBox(height: 12), // Esto agregará un espacio adicional entre los dos textos
                     Text(
                       '¿Te gustaría intentarlo de nuevo?',
                       style: TextStyle(
@@ -197,7 +147,8 @@ void _checkAnswer() {
                           onPressed: () {
                             Navigator.of(context).pop();
                             Navigator.of(context).pushReplacement(MaterialPageRoute(
-                                builder: (context) => GameLevelAdvanced())); 
+                              builder: (context) => Game2Page(),
+                            ));
                           },
                         ),
                         TextButton(
@@ -206,12 +157,12 @@ void _checkAnswer() {
                             style: TextStyle(
                               fontFamily: 'WorkSans',
                               fontSize: 18.7,
-                              fontWeight: FontWeight.bold,
+                              
                               color: Color(0xFFFDFDFD),
                             ),
                           ),
                           onPressed: () {
-                            Navigator.of(context).pop(); 
+                            Navigator.of(context).pop();
                           },
                         ),
                       ],
@@ -222,167 +173,189 @@ void _checkAnswer() {
             ),
           );
         });
-
+      }
     }
   }
-}
 
-_playSound(String soundFile) async {
-  final player = AudioCache(prefix: 'sounds/');
-  player.play(soundFile);
-}
+  void _playSound(String soundFile) async {
+    final player = AudioCache(prefix: 'sounds/');
+    player.play(soundFile);
+  }
 
-   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: Color(0xFF030328),
-    appBar: AppBar( toolbarHeight: 80,
-      leading: IconButton(
-        icon: Image.asset('assets/images/icon_atras.png'),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
-      title: Text(
-        'Pintando sonido',
-        style: TextStyle(
-          color: Color(0xFF44A1D6),
-          fontFamily: 'WorkSans',
-          fontWeight: FontWeight.bold,
-          fontSize: 23.4,
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Color(0xFF060630),
+      appBar: AppBar(
+        toolbarHeight: 80,
+        leading: IconButton(
+          icon: Image.asset('assets/images/icon_atras.png'),
+          onPressed: () => Navigator.of(context).pop(),
         ),
+        title: Text(
+          'Nivel Avanzado PS',
+          style: TextStyle( 
+            color: Color(0xFF44A1D6),
+            fontFamily: 'WorkSans',
+            fontWeight: FontWeight.bold,
+            fontSize: 23.4,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        backgroundColor: Color(0xFF030328),
       ),
-      centerTitle: true,
-      backgroundColor: Color(0xFF030328),
+      body: SingleChildScrollView(
+        child: Container(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CoinCounter(coins),
+                    Container(
+                      height: 8.0,
+                      width: 168.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.0),
+                        border: Border.all(
+                          color: Color(0xFF00D8BB),
+                          width: 1.0,
+                        ),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: LinearProgressIndicator(
+                          value: (coins == 1) ? 1.0 : 2 / 3,
+                          backgroundColor: Color(0xFF0A0A53),
+                          valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF00D8BB)),
+                        ),
+                      ),
+                    ),
+                    HeartsIndicator(hearts),
+                  ],
+                ),
+                SizedBox(height: 20.0),
+                Text(
+                  'Selecciona la imagen que se asocia con la escala',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFFFDFDFD),
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 21.5,
+                  ),
+                ),
+                SizedBox(height: 24.0),
+              Center(
+  child: Container(
+    width: 48.0, // Ancho deseado
+    height: 48.0, // Alto deseado
+    decoration: BoxDecoration(
+      shape: BoxShape.circle, // Hace que el contenedor sea circular
+      color: Color(0xFF00D8BB),
     ),
-    body: Column(
-      children: [
-        Expanded(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CoinCounter(coins),
-                      Row(
-                        children: List.generate(
-                          3,
-                          (index) => Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 3.0),
-                            child: Icon(
-                              index < completedExercises ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-                              size: 12.0,
-                              color: Color(0xFF44A1D6),
+    child: IconButton(
+      onPressed: () => _playPause(exerciseAudios[0]),
+      icon: Icon(Icons.play_arrow, color: Colors.white),
+    ),
+  ),
+),
+                SizedBox(height: 12.0),
+                Text(
+                  'Escala Cromática',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Color(0xFFFDFDFD),
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.0,
+                  ),
+                ),
+
+                SizedBox(height: 24.0),
+                Column(
+                  children: exerciseImages.map((imagePath) {
+                    int index = exerciseImages.indexOf(imagePath);
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedAnswer = index;
+                        });
+                      },
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width - 48.0, 
+                          maxHeight: (MediaQuery.of(context).size.width - 48.0) * (9/16), 
+                        ),
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 24.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: (selectedAnswer == index)
+                                  ? Colors.blue
+                                  : Colors.transparent,
+                              width: 3.0,
+                            ),
+                            image: DecorationImage(
+                              image: AssetImage(exerciseImages[index]),
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
                       ),
-                      HeartsIndicator(hearts),
-                    ],
-                  ),
-                  SizedBox(height: 20.0),
-                  Text(
-                    'Selecciona la melodia que se asocia con la imagen',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color(0xFFFDFDFD),
-                      fontFamily: 'WorkSans',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 21.5,
-                    ),
-                  ),
-                  Image.asset(exerciseImages[currentExerciseIndex]),
-                  SizedBox(height: 20.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () => _playPause(exerciseAudios1[currentExerciseIndex], 1),
-                            child: Icon(isPlaying1 ? Icons.pause : Icons.play_arrow, color: Colors.white),
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00D8BB)),
-                            ),
-                          ),
-                          Radio(
-                            value: 0,
-                            groupValue: selectedAnswer,
-                            activeColor: Color(0xFF44A1D6),
-                            onChanged: (value) {
-                              setState(() {
-                                selectedAnswer = value as int;
-                              });
-                            },
-                          ),
-                          Text(labels[currentExerciseIndex][0], style: TextStyle(color: Colors.white))
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () => _playPause(exerciseAudios2[currentExerciseIndex], 2),
-                            child: Icon(isPlaying2 ? Icons.pause : Icons.play_arrow, color: Colors.white),
-                            style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00D8BB)),
-                            ),
-                          ),
-                          Radio(
-                            value: 1,
-                            groupValue: selectedAnswer,
-                            activeColor: Color(0xFF44A1D6),
-                            onChanged: (value) {
-                              setState(() {
-                                selectedAnswer = value as int;
-                              });
-                            },
-                          ),
-                          Text(labels[currentExerciseIndex][1], style: TextStyle(color: Colors.white))
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(height: 20.0),
+
+
+               Container(
+  height: 60.0,
+  width: double.infinity,
+  child: ElevatedButton(
+    onPressed: () {
+      Navigator.of(context).pushReplacement(
+        PageRouteBuilder(
+          transitionDuration: Duration.zero, // Desactiva la animación
+          pageBuilder: (context, animation1, animation2) => Level2Screen(),
         ),
-        Padding(
-  padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-  child: Container(
-    height: 60.0,
-    width: double.infinity,
-    child: ElevatedButton(
-      onPressed: _checkAnswer,
-      child: Text(
-        'Verificar',
-        style: TextStyle(
-          fontFamily: 'WorkSans',
-          fontWeight: FontWeight.bold,
-          fontSize: 18.7,
-          color: Color(0xFFFDFDFD),
-        ),
+      );
+    },
+    child: Text(
+      'Verificar',
+      style: TextStyle(
+        fontFamily: 'WorkSans',
+        fontWeight: FontWeight.bold,
+        fontSize: 18.7,
+        color: Color(0xFFFDFDFD),
       ),
-      style: ElevatedButton.styleFrom(
-        primary: Color(0xFF00D8BB),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+    ),
+    style: ElevatedButton.styleFrom(
+      primary: Color(0xFF00D8BB),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
       ),
     ),
   ),
-),
-],
-),
-       bottomNavigationBar: CustomFooter(
+)
+
+                
+              ],
+            ),
+          ),
+        ),
+      ),
+             bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
           // Coloca aquí la lógica para despedir la notificación en esta página específica
           // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
         },
       ),
-);
-}
-}
+    );
+  }
+  // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+        }

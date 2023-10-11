@@ -103,6 +103,16 @@ flutter:
     - assets/images/escala_mayor.png
     - assets/images/escala_menor.png
     - assets/images/stars.png
+    - assets/images/ciudad_ls.png
+    - assets/images/mouse.png
+    - assets/images/pasos_ls.png
+    - assets/images/puerta_ls.png
+    - assets/images/voz_ls.png
+    - assets/images/cumplef.png
+    - assets/images/cumplet.png
+    - assets/images/ojos_na.png
+    - assets/images/ojos_na_2.png
+    - assets/images/desierto.png
     - assets/sounds/cumpleaños.mp3
     - assets/sounds/cumpleaños02.mp3
     - assets/sounds/escmayor.mp3

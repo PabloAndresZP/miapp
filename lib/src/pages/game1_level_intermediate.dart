@@ -11,10 +11,10 @@ class Game1LevelIntermediate extends StatefulWidget {
 
 class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
   int coins = 0;
-  int hearts = 3;
+  int hearts = 2;
   int completedExercises = 2;
+  int totalExercises = 3; // Cambia el número total de ejercicios aquí
   late AudioPlayer audioPlayer;
- 
 
   @override
   void initState() {
@@ -26,7 +26,8 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF030328),
-      appBar: AppBar( toolbarHeight: 80,
+      appBar: AppBar(
+        toolbarHeight: 80,
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png'),
           onPressed: () => Navigator.of(context).pop(),
@@ -56,16 +57,22 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         CoinCounter(coins),
-                        Row(
-                          children: List.generate(
-                            3,
-                            (index) => Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 3.0),
-                              child: Icon(
-                                index < completedExercises ? Icons.radio_button_checked : Icons.radio_button_unchecked,
-                                size: 12.0,
-                                color: Color(0xFF44A1D6),
-                              ),
+                        Container(
+                          height: 8.0,
+                          width: 168.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            border: Border.all(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0),
+                            child: LinearProgressIndicator(
+                              value: completedExercises / totalExercises,
+                              backgroundColor: Color(0xFF0A0A53),
+                              valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF00D8BB)),
                             ),
                           ),
                         ),
@@ -74,10 +81,9 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
                     ),
                     SizedBox(height: 20.0),
                     Center(
-                    child: Center(
                       child: Text(
                         'Sincroniza la siguiente animación con el audio',
-                        textAlign: TextAlign.center,  // Añade esta línea
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Color(0xFFFDFDFD),
                           fontFamily: 'WorkSans',
@@ -86,23 +92,24 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
                         ),
                       ),
                     ),
-                  ),
                     SizedBox(height: 20.0),
                     Image.asset('assets/images/nivel_2_rp.png'),
                     SizedBox(height: 20.0),
                     Image.asset('assets/images/componente_rp.png'),
                     SizedBox(height: 20.0),
-                    ElevatedButton.icon(
-                      onPressed: () async {
-    await audioPlayer.play('assets/sounds/ritmo nivel intermedio.mp3', isLocal: true);
-},
-                      icon: Icon(Icons.play_arrow, color: Color(0xFFFDFDFD)),
-                      label: Text(''),
-                      style: ElevatedButton.styleFrom(
-                        primary: Color(0xFF00D8BB),
-                        minimumSize: Size(double.infinity, 48),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                    Center(
+                      child: Container(
+                        width: 48.0, // Ancho deseado
+                        height: 48.0, // Alto deseado
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle, // Hace que el contenedor sea circular
+                          color: Color(0xFF00D8BB),
+                        ),
+                        child: IconButton(
+                          onPressed: () async {
+                            await audioPlayer.play('assets/sounds/ritmo nivel intermedio.mp3', isLocal: true);
+                          },
+                          icon: Icon(Icons.play_arrow, color: Colors.white),
                         ),
                       ),
                     ),
@@ -135,7 +142,7 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
           ),
         ],
       ),
-             bottomNavigationBar: CustomFooter(
+      bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
           // Coloca aquí la lógica para despedir la notificación en esta página específica
