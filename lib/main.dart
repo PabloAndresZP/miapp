@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'RAV'),
+      home: const HomePage(title: 'R.A.V.'),
     );
   }
 }
