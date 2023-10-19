@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'R.A.V.'),
+      home: const HomePage(title: 'RAV'),
     );
   }
 }
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF030328),
         centerTitle: true,
-        title: Image.asset('logo_3.png', height: 48),
+        title: Image.asset('assets/images/logo_3.png', height: 48),
         toolbarHeight: 80,
       ),
       body: Container(

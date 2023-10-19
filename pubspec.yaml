@@ -121,8 +121,9 @@ flutter:
     - assets/images/niveles_ls_02.png
     - assets/images/niveles_ls_03.png
     - assets/images/niveles_ls_04.png
+    - assets/images/logo_3.png
     - assets/sounds/cumpleaños.mp3
-    - assets/sounds/cumpleaños02.mp3
+    - assets/videos/cumpleaños02.mp3
     - assets/sounds/escmayor.mp3
     - assets/sounds/escmenor.mp3
     - assets/sounds/esccromatica.mp3
