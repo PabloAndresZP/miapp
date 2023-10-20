@@ -31,7 +31,7 @@ class _GameLevelExpertState extends State<GameLevelExpert> {
   ];
 
   List<String> exerciseAudios = [
-    'assets/videos/cumpleaños02.mp3',
+    'assets/sounds/cumpleaños02.mp3',
   ];
 
   @override

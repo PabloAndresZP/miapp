@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const HomePage(title: 'RAV'),
+      home: const HomePage(title: 'R.A.V.'),
     );
   }
 }
@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF030328),
         centerTitle: true,
-        title: Image.asset('assets/images/icon_menu.png', height: 48),
+        title: Image.asset('logo_3.png', height: 48),
         toolbarHeight: 80,
       ),
       body: Container(
@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-              button('assets/images/ritmo.png', 'Ritmo Pictórico', () {
+                button('assets/images/ritmo.png', 'Ritmo Pictórico', () {
                  Navigator.push(
                   context,
                   PageRouteBuilder(
