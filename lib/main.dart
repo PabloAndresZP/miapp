@@ -39,33 +39,31 @@ class HomePage extends StatelessWidget {
 
   final String title;
 
-  
-
   @override
   Widget build(BuildContext context) {
-    final button = (String imagePath, String label, VoidCallback onPressed, {double imgHeight = 48}) => GestureDetector(
-  onTap: onPressed,
-  child: Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Image.asset(imagePath, height: imgHeight), // imgHeight se usa aquí
-      SizedBox(height: 8),
-      Text(label,
-          style: TextStyle(
-            color: Color(0xFF7CF8FF),
-            fontFamily: 'WorkSans',
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          )),
-    ],
-  ),
-);
+    final button = (String imagePath, String label, VoidCallback onPressed, {double imgHeight = 100}) => GestureDetector(
+      onTap: onPressed,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(imagePath, height: imgHeight),
+          SizedBox(height: 8),
+          Text(label,
+              style: TextStyle(
+                color: Color(0xFF7CF8FF),
+                fontFamily: 'WorkSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              )),
+        ],
+      ),
+    );
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF030328),
         centerTitle: true,
-        title: Image.asset('logo_3.png', height: 48),
+        title: Image.asset('logo_3.png', height: 72),
         toolbarHeight: 80,
       ),
       body: Container(
@@ -93,16 +91,16 @@ class HomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 button('assets/images/ritmo.png', 'Ritmo Pictórico', () {
-                 Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    transitionDuration: Duration.zero, // Desactiva la animación
-                    pageBuilder: (context, animation1, animation2) => InstructionsPage(),
-                  ),
-                );
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => InstructionsPage(),
+                    ),
+                  );
                 }),
-                button('assets/images/pintando.png', 'Pintando Sonido', () {
 
+                button('assets/images/pintando.png', 'Pintando Sonido', () {
                   Navigator.push(
                     context,
                     PageRouteBuilder(
@@ -110,29 +108,25 @@ class HomePage extends StatelessWidget {
                       pageBuilder: (context, animation1, animation2) => Level2Screen(),
                     ),
                   );
-
-                  
                 }),
               ],
             ),
             Center(
               child: button('assets/images/lienzo_sonoro.png', 'Lienzo Sonoro', () {
-
-                    Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      transitionDuration: Duration.zero, // Desactiva la animación
-                      pageBuilder: (context, animation1, animation2) => Game3Page(),
-                    ),
-                  );
-                
-              }, imgHeight: 72), // Ajustado el tamaño de imagen para el botón "Lienzo Sonoro"
+                Navigator.push(
+                  context,
+                  PageRouteBuilder(
+                    transitionDuration: Duration.zero, // Desactiva la animación
+                    pageBuilder: (context, animation1, animation2) => Game3Page(),
+                  ),
+                );
+              }),
             ),
-            const SizedBox(height: 48),
+            const SizedBox(height: 100),
           ],
         ),
       ),
-              bottomNavigationBar: CustomFooter(
+      bottomNavigationBar: CustomFooter(
         currentPageIndex: 2,
         onNotificationDismiss: () {
           // Coloca aquí la lógica para despedir la notificación en esta página específica
