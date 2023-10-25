@@ -66,22 +66,30 @@ class Level2Screen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 72, width: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
+SizedBox(height: 48),
+                   Padding(
+  padding: EdgeInsets.symmetric(horizontal: 60), // Ajusta el espacio horizontal deseado
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
                       buildTextButton('Inicial', context, LessonTwoScreen(), 'assets/images/pincel_1.png'),
-                      buildTextButton('Intermedio', context, GameLevelIntermediate(), 'assets/images/pincel_2.png'),
+ SizedBox(width: 30), // Ajusta el espacio horizontal entre el primer botón y el segundo botón        
+                      buildTextButton('Medio', context, GameLevelIntermediate(), 'assets/images/pincel_2.png'),
                     ],
-                  ),
-                  SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
+  ),
+),
+                  SizedBox(height: 24),
+                  Padding(
+  padding: EdgeInsets.symmetric(horizontal: 24), // Ajusta el espacio horizontal deseado
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
                       buildTextButton('Avanzado', context, GameLevelAdvanced(initialHearts: 2), 'assets/images/pincel_3.png'),
                       buildTextButton('Experto', context, GameLevelExpert(initialHearts: 1), 'assets/images/pincel_4.png'),
-                    ],
-                  ),
+                                    ],
+  ),
+)
+         
                 ],
               ),
             ),

@@ -37,54 +37,57 @@ class LessonTwoScreen extends StatelessWidget {
             ),
           ),
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'Progresa a través de cada lección para dominar completamente las habilidades del nivel.',
-                  style: TextStyle(
-                    color: Color(0xFF7CF8FF),
-                    fontFamily: 'WorkSans',
-                    fontSize: 18.7,
-                    fontWeight: FontWeight.bold,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20), // Ajusta el espacio horizontal del texto
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Progresa a través de cada lección para dominar completamente las habilidades del nivel.',
+                    style: TextStyle(
+                      color: Color(0xFF7CF8FF),
+                      fontFamily: 'WorkSans',
+                      fontSize: 18.7,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 24),
-                Text(
-                  '¡Adelante, comienza tu aprendizaje!',
-                  style: TextStyle(
-                    color: Color(0xFF7CF8FF),
-                    fontFamily: 'WorkSans',
-                    fontSize: 15,
-                    fontWeight: FontWeight.normal,
+                  SizedBox(height: 24),
+                  Text(
+                    '¡Adelante, comienza tu aprendizaje!',
+                    style: TextStyle(
+                      color: Color(0xFF7CF8FF),
+                      fontFamily: 'WorkSans',
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildTextButton('Lección', context, Instructions2Page(), 'assets/images/lec1_ps.png'),
-                    buildTextButton('Lección', context, null, 'assets/images/lec2_ps.png', active: false),
-                  ],
-                ),
-                SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildTextButton('Lección', context, null, 'assets/images/lec3_ps.png', active: false),
-                  ],
-                ),
-                SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    buildTextButton('Lección', context, null, 'assets/images/lec4_ps.png', active: false),
-                    buildTextButton('Lección', context, null, 'assets/images/lec5_ps.png', active: false),
-                  ],
-                ),
-              ],
+                  SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildTextButton('1', context, Instructions2Page(), 'assets/images/lec1_ps.png'),
+                      buildTextButton('2', context, null, 'assets/images/lec2_ps.png', active: false),
+                    ],
+                  ),
+                  SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildTextButton('3', context, null, 'assets/images/lec3_ps.png', active: false),
+                    ],
+                  ),
+                  SizedBox(height: 24),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      buildTextButton('4', context, null, 'assets/images/lec4_ps.png', active: false),
+                      buildTextButton('5', context, null, 'assets/images/lec5_ps.png', active: false),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -113,8 +116,8 @@ class LessonTwoScreen extends StatelessWidget {
           },
           child: Column(
             children: [
-              Image.asset(imageAsset, height: 60, width: 60), // Agregamos la imagen
-              SizedBox(height: 12), // Separación vertical
+              Image.asset(imageAsset, height: 60, width: 60),
+              SizedBox(height: 12),
               Text(
                 label,
                 style: TextStyle(

@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
               style: TextStyle(
                 color: Color(0xFF7CF8FF),
                 fontFamily: 'WorkSans',
-                fontWeight: FontWeight.bold,
+                fontWeight: FontWeight.normal,
                 fontSize: 15,
               )),
         ],
@@ -87,6 +87,23 @@ class HomePage extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
+            
+            Center(
+              child: button('assets/images/pintando.png', 'Pintando Sonido', () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => Level2Screen(),
+
+
+                  ),
+                );
+              }),
+            ),
+
+
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -100,28 +117,19 @@ class HomePage extends StatelessWidget {
                   );
                 }),
 
-                button('assets/images/pintando.png', 'Pintando Sonido', () {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      transitionDuration: Duration.zero, // Desactiva la animación
-                      pageBuilder: (context, animation1, animation2) => Level2Screen(),
-                    ),
-                  );
-                }),
-              ],
-            ),
-            Center(
-              child: button('assets/images/lienzo_sonoro.png', 'Lienzo Sonoro', () {
+
+                button('assets/images/lienzo_sonoro.png', 'Lienzo Sonoro', () {
                 Navigator.push(
                   context,
                   PageRouteBuilder(
                     transitionDuration: Duration.zero, // Desactiva la animación
                     pageBuilder: (context, animation1, animation2) => Game3Page(),
-                  ),
-                );
-              }),
+                    ),
+                  );
+                }),
+              ],
             ),
+
             const SizedBox(height: 100),
           ],
         ),

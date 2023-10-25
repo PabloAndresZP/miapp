@@ -65,22 +65,31 @@ class Level3Screen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 72),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
+                  SizedBox(height: 48),
+                  Padding(
+                    
+  padding: EdgeInsets.symmetric(horizontal: 60), // Ajusta el espacio horizontal deseado
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
                       buildTextButton('Inicial', context, Game3LevelInitial(), 'assets/images/niveles_ls_01.png'),
-                      buildTextButton('Intermedio', context, Game3LevelIntermediate(), 'assets/images/niveles_ls_02.png'),
+                      SizedBox(width: 30), // Ajusta el espacio horizontal entre el primer botón y el segundo botón
+                      buildTextButton('Medio', context, Game3LevelIntermediate(), 'assets/images/niveles_ls_02.png'),
                     ],
-                  ),
-                  SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
+  ),
+),
+                  SizedBox(height: 24),
+                  Padding(
+  padding: EdgeInsets.symmetric(horizontal: 24), // Ajusta el espacio horizontal deseado
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
                       buildTextButton('Avanzado', context, Game3LevelAdvanced(), 'assets/images/niveles_ls_03.png'),
                       buildTextButton('Experto', context, Game3LevelExpert(), 'assets/images/niveles_ls_04.png'),
                     ],
-                  ),
+  ),
+)
+         
                 ],
               ),
             ),

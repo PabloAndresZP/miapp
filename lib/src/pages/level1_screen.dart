@@ -65,21 +65,32 @@ class Level1Screen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildTextButton('Inicial', context, Game1LevelInitial(), 'assets/images/niveles_rp_01.png'),
-                      buildTextButton('Intermedio', context, Game1LevelIntermediate(), 'assets/images/niveles_rp_02.png'),
-                    ],
-                  ),
-                  SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildTextButton('Avanzado', context, Game1LevelAdvanced(), 'assets/images/niveles_rp_03.png'),
-                      buildTextButton('Experto', context, Game1LevelExpert(), 'assets/images/niveles_rp_04.png'),
-                    ],
-                  ),
+                Padding(
+  padding: EdgeInsets.symmetric(horizontal: 60), // Ajusta el espacio horizontal deseado
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      buildTextButton('Inicial', context, Game1LevelInitial(), 'assets/images/niveles_rp_01.png'),
+      SizedBox(width: 30), // Ajusta el espacio horizontal entre el primer botón y el segundo botón
+      buildTextButton('Medio', context, Game1LevelIntermediate(), 'assets/images/niveles_rp_02.png'),
+    ],
+  ),
+),
+SizedBox(height: 24),
+Padding(
+  padding: EdgeInsets.symmetric(horizontal: 24), // Ajusta el espacio horizontal deseado
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      buildTextButton('Avanzado', context, Game1LevelAdvanced(), 'assets/images/niveles_rp_03.png'),
+      // SizedBox(width: 10), // Ajusta el espacio horizontal
+      buildTextButton('Experto', context, Game1LevelExpert(), 'assets/images/niveles_rp_04.png'),
+    ],
+  ),
+)
+
+
+
                 ],
               ),
             ),
