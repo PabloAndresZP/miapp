@@ -19,19 +19,19 @@ class Level3Screen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Niveles LS',
+          '       Niveles LS',
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
             fontWeight: FontWeight.bold,
             fontSize: 23.4,
           ),
+          // Eliminar centerTitle: true, para alinear como en Level1Screen
         ),
-        centerTitle: true,
       ),
       body: Stack(
         children: [
-          Container(  // Textura de fondo
+          Container(
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/textura_5.png'),
@@ -46,7 +46,7 @@ class Level3Screen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Cada nivel representa un desafío en la fascinante\n\n',
+                    'Cada nivel representa un desafío en la fascinante.\n\n',
                     style: TextStyle(
                       color: Color(0xFF7CF8FF),
                       fontFamily: 'WorkSans',
@@ -56,7 +56,7 @@ class Level3Screen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    '¡Que comience tu aventura!',
+                    '¡Que comience tu aventura!\n\n',
                     style: TextStyle(
                       color: Color(0xFF7CF8FF),
                       fontFamily: 'WorkSans',
@@ -65,31 +65,20 @@ class Level3Screen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 48),
                   Padding(
-                    
-  padding: EdgeInsets.symmetric(horizontal: 60), // Ajusta el espacio horizontal deseado
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-                      buildTextButton('Inicial', context, Game3LevelInitial(), 'assets/images/niveles_ls_01.png'),
-                      SizedBox(width: 30), // Ajusta el espacio horizontal entre el primer botón y el segundo botón
-                      buildTextButton('Medio', context, Game3LevelIntermediate(), 'assets/images/niveles_ls_02.png'),
-                    ],
-  ),
-),
-                  SizedBox(height: 24),
-                  Padding(
-  padding: EdgeInsets.symmetric(horizontal: 24), // Ajusta el espacio horizontal deseado
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-                      buildTextButton('Avanzado', context, Game3LevelAdvanced(), 'assets/images/niveles_ls_03.png'),
-                      buildTextButton('Experto', context, Game3LevelExpert(), 'assets/images/niveles_ls_04.png'),
-                    ],
-  ),
-)
-         
+                    padding: EdgeInsets.symmetric(vertical: 24), // Espacio vertical entre los textos y los botones
+                    child: Wrap(
+                      spacing: 24, // Espacio horizontal entre los botones
+                      runSpacing: 24, // Espacio vertical entre las filas de botones
+                      alignment: WrapAlignment.center, // Alineación central
+                      children: [
+                        buildTextButton('Inicial', context, Game3LevelInitial(), 'assets/images/niveles_ls_01.png'),
+                        buildTextButton('Medio', context, Game3LevelIntermediate(), 'assets/images/niveles_ls_02.png'),
+                        buildTextButton('Avanzado', context, Game3LevelAdvanced(), 'assets/images/niveles_ls_03.png'),
+                        buildTextButton('Experto', context, Game3LevelExpert(), 'assets/images/niveles_ls_04.png'),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -99,38 +88,41 @@ class Level3Screen extends StatelessWidget {
       bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
-          // Coloca aquí la lógica para despedir la notificación en esta página específica
-          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+          // Lógica para despedir la notificación en esta página específica
         },
       ),
     );
   }
 
   Widget buildTextButton(String label, BuildContext context, Widget? page, String imageAsset) {
-    return GestureDetector(
-      onTap: () {
-        if (page != null) {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => page),
-          );
-        }
-      },
-      child: Column(
-        children: [
-          Image.asset(imageAsset, height: 60, width: 60),
-          SizedBox(height: 12),
-          Text(
-            label,
-            style: TextStyle(
-              color: Color(0xFF7CF8FF),
-              fontFamily: 'WorkSans',
-              fontSize: 15,
-              fontWeight: FontWeight.normal,
-            ),
+    return Column(
+      children: [
+        GestureDetector(
+          onTap: () {
+            if (page != null) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => page),
+              );
+            }
+          },
+          child: Column(
+            children: [
+              Image.asset(imageAsset, height: 100, width: 100),
+              SizedBox(height: 12),
+              Text(
+                label,
+                style: TextStyle(
+                  color: Color(0xFF7CF8FF),
+                  fontFamily: 'WorkSans',
+                  fontSize: 15,
+                  fontWeight: FontWeight.normal,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

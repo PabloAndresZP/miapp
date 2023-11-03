@@ -144,6 +144,33 @@ flutter:
     - assets/videos/nivel_avanzado_02.mp4
     - assets/videos/nivel_experto_01.mp4
     - assets/videos/nivel_experto_02.mp4
+
+    - assets/images/Comp 1_00000.png
+    - assets/images/Comp 1_00001.png
+    - assets/images/Comp 1_00002.png
+    - assets/images/Comp 1_00003.png
+    - assets/images/Comp 1_00004.png
+    - assets/images/Comp 1_00005.png
+    - assets/images/Comp 1_00006.png
+    - assets/images/Comp 1_00007.png
+    - assets/images/Comp 1_00008.png
+    - assets/images/Comp 1_00009.png
+    - assets/images/Comp 1_00010.png
+    - assets/images/Comp 1_00011.png
+    - assets/images/Comp 1_00012.png
+    - assets/images/Comp 1_00013.png
+    - assets/images/Comp 1_00014.png
+    - assets/images/Comp 1_00015.png
+    - assets/images/Comp 1_00016.png
+    - assets/images/Comp 1_00017.png
+    - assets/images/Comp 1_00018.png
+    - assets/images/Comp 1_00019.png
+    - assets/images/Comp 1_00020.png
+    - assets/images/Comp 1_00021.png
+    - assets/images/Comp 1_00022.png
+    - assets/images/Comp 1_00023.png
+   
+
   fonts:
     - family: WorkSans
       fonts:

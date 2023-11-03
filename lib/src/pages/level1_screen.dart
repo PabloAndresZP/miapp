@@ -46,7 +46,7 @@ class Level1Screen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Cada nivel representa un desafío en el fascinante mundo del ritmo pictórico.\n\n',
+                    'Cada nivel representa un desafío en el fascinante.\n\n',
                     style: TextStyle(
                       color: Color(0xFF7CF8FF),
                       fontFamily: 'WorkSans',
@@ -65,32 +65,20 @@ class Level1Screen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                Padding(
-  padding: EdgeInsets.symmetric(horizontal: 60), // Ajusta el espacio horizontal deseado
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      buildTextButton('Inicial', context, Game1LevelInitial(), 'assets/images/niveles_rp_01.png'),
-      SizedBox(width: 30), // Ajusta el espacio horizontal entre el primer botón y el segundo botón
-      buildTextButton('Medio', context, Game1LevelIntermediate(), 'assets/images/niveles_rp_02.png'),
-    ],
-  ),
-),
-SizedBox(height: 24),
-Padding(
-  padding: EdgeInsets.symmetric(horizontal: 24), // Ajusta el espacio horizontal deseado
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      buildTextButton('Avanzado', context, Game1LevelAdvanced(), 'assets/images/niveles_rp_03.png'),
-      // SizedBox(width: 10), // Ajusta el espacio horizontal
-      buildTextButton('Experto', context, Game1LevelExpert(), 'assets/images/niveles_rp_04.png'),
-    ],
-  ),
-)
-
-
-
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 24), // Espacio vertical entre los textos y los botones
+                    child: Wrap(
+                      spacing: 24, // Espacio horizontal entre los botones
+                      runSpacing: 24, // Espacio vertical entre las filas de botones
+                      alignment: WrapAlignment.center, // Alineación central
+                      children: [
+                        buildTextButton('Inicial', context, Game1LevelInitial(), 'assets/images/niveles_rp_01.png'),
+                        buildTextButton('Medio', context, Game1LevelIntermediate(), 'assets/images/niveles_rp_02.png'),
+                        buildTextButton('Avanzado', context, Game1LevelAdvanced(), 'assets/images/niveles_rp_03.png'),
+                        buildTextButton('Experto', context, Game1LevelExpert(), 'assets/images/niveles_rp_04.png'),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -100,7 +88,7 @@ Padding(
       bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
-          // Coloca aquí la lógica para despedir la notificación en esta página específica
+          // Lógica para despedir la notificación en esta página específica
           // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
         },
       ),
@@ -121,7 +109,7 @@ Padding(
           },
           child: Column(
             children: [
-              Image.asset(imageAsset, height: 60, width: 60),
+              Image.asset(imageAsset, height: 100, width: 100),
               SizedBox(height: 12),
               Text(
                 label,

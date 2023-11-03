@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
-import 'package:mi_app_imgsound/src/widgets/video_player_widget.dart';
 import 'package:mi_app_imgsound/src/pages/level1_screen.dart';
 
 class InstructionsPage extends StatefulWidget {
@@ -11,19 +10,13 @@ class InstructionsPage extends StatefulWidget {
 class _InstructionsPageState extends State<InstructionsPage> {
   final PageController _pageController = PageController();
   int currentPage = 0;
+  
 
   final List<String> instructions = [
-    '\n\n\n\n\n\n\n\n\nAprende a Style/sincronizar Style/imagen y Style/sonido.',
-    'Los acentos en la imagen en movimiento ocurren cuando los objetos Style/colisionan, Style/aparecen o alcanzan un Style/punto Style/culminante Style/en Style/la Style/narrativa Style/visual.',
-    'Por otro lado, los silencios en la imagen en movimiento ocurren cuando los objetos Style/desaparecen, Style/salen Style/de Style/escena o se Style/ocultan Style/de Style/alguna Style/manera.',
-    'Tu objetivo es sincronizar la Style/imagen con el Style/sonido. \n\nUtiliza el controlador Style/Graph Style/Editor para lograr una perfecta armonía entre ambos. \n\n¡Presta atención a los detalles y busca la Style/perfecta Style/sincronización para avanzar!',
-  ];
-
-  final List<String> videoPaths = [
-    '', // Deja el primer videoPath en blanco para que no muestre el video
-    'assets/videos/instrucion_002.mp4',
-    'assets/videos/instrucion_003.mp4',
-    'assets/videos/instrucion_004.mp4',
+    'Aprende a sincronizar imagen y sonido.',
+    'Los acentos en la imagen en movimiento ocurren cuando los objetos colisionan, aparecen o alcanzan un punto culminante en la narrativa visual.',
+    'Por otro lado, los silencios en la imagen en movimiento ocurren cuando los objetos desaparecen, salen de escena o se ocultan de alguna manera.',
+    'Tu objetivo es sincronizar la imagen con el sonido. Utiliza el controlador Graph Editor para lograr una perfecta armonía entre ambos. ¡Presta atención a los detalles y busca la perfecta sincronización para avanzar!',
   ];
 
   @override
@@ -68,12 +61,27 @@ class _InstructionsPageState extends State<InstructionsPage> {
             },
             itemCount: instructions.length,
             itemBuilder: (context, index) {
-              return Center(
-                child: InstructionPage(
+              if (instructions[index] == 'Aprende a sincronizar imagen y sonido.') {
+                return Padding(
+                  padding: EdgeInsets.only(top: 216.0),
+                  //child: Center(
+                    child: Text(
+                      instructions[index],
+                      style: TextStyle(
+                        color: Color(0xFF7CF8FF),
+                        fontFamily: 'WorkSans',
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18.7,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                 // ),
+                );
+              } else {
+                return InstructionPage(
                   text: instructions[index],
-                  videoPath: videoPaths[index],
-                ),
-              );
+                );
+              }
             },
           ),
           Align(
@@ -97,7 +105,6 @@ class _InstructionsPageState extends State<InstructionsPage> {
               ),
             ),
           ),
-          
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
@@ -106,10 +113,7 @@ class _InstructionsPageState extends State<InstructionsPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    PageRouteBuilder(
-                      transitionDuration: Duration.zero, // Desactiva la animación
-                      pageBuilder: (context, animation1, animation2) => Level1Screen(), // Navega a Game3Page
-                    ),
+                    MaterialPageRoute(builder: (context) => Level1Screen()),
                   );
                 },
                 style: ButtonStyle(
@@ -126,7 +130,7 @@ class _InstructionsPageState extends State<InstructionsPage> {
                 child: Text(
                   'Jugar',
                   style: TextStyle(
-                    color: Color(0xFFFDFDFD),  // Color blanco para el texto "Jugar"
+                    color: Color(0xFFFDFDFD),
                     fontFamily: 'WorkSans',
                     fontWeight: FontWeight.bold,
                     fontSize: 15,
@@ -139,80 +143,149 @@ class _InstructionsPageState extends State<InstructionsPage> {
       ),
       bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
-        onNotificationDismiss: () {
-          // Coloca aquí la lógica para despedir la notificación en esta página específica
-          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
-        },
+        onNotificationDismiss: () {},
       ),
     );
   }
 }
 
-class InstructionPage extends StatelessWidget {
+class InstructionPage extends StatefulWidget {
+  
   final String text;
-  final String videoPath;
+  final String? imagePath;
+  final bool isCenteredHorizontal;
+  final bool isCenteredVertical;
+  final double marginTop;
+
 
   const InstructionPage({
+    Key? key,
+    this.imagePath,
+    this.isCenteredHorizontal = false,
+    this.isCenteredVertical = false,
+    this.marginTop = 0.0,
     required this.text,
-    required this.videoPath,
-  });
+  }) : super(key: key);
+
+@override
+Widget build(BuildContext context) {
+  final List<String> textParts = text.split('\n');
+
+  return Container(
+    padding: EdgeInsets.only(left: 16.0, right: 16.0, top: marginTop),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: isCenteredHorizontal ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+      children: [
+        if (imagePath != null) ...[
+          SizedBox(height: 12),
+          Image.asset(imagePath!, height: null, width: isCenteredHorizontal ? null : 150),
+          SizedBox(height: 12),
+        ],
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: textParts.map((part) {
+            final List<InlineSpan> inlineSpans = [];
+            final List<String> words = part.trim().split(' ');
+
+            for (final word in words) {
+              if (word.startsWith('Style/')) {
+                inlineSpans.add(
+                  TextSpan(
+                    text: '${word.substring(6)} ', // Omite "Style/"
+                    style: TextStyle(
+                      fontSize: 18.7,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF7CF8FF),
+                    ),
+                  ),
+                );
+              } else {
+                inlineSpans.add(
+                  TextSpan(
+                    text: '$word ',
+                    style: TextStyle(
+                      fontSize: 18.7,
+                      fontWeight: FontWeight.normal, // Estilo normal para palabras sin "Style/"
+                      color: Color(0xFF7CF8FF),
+                    ),
+                  ),
+                );
+              }
+            }
+
+            return RichText(
+              textAlign: TextAlign.center, // Centra el texto
+              text: TextSpan(
+                children: inlineSpans,
+              ),
+            );
+          }).toList(),
+        ),
+      ],
+    ),
+  );
+}
+
+  
+
+  @override
+  _InstructionPageState createState() => _InstructionPageState();
+}
+
+class _InstructionPageState extends State<InstructionPage> with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<int> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..repeat();
+
+    _animation = IntTween(begin: 0, end: 23).animate(_controller)
+      ..addListener(() {
+        setState(() {});
+      });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final List<String> textParts = text.split('\n');
-
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          if (videoPath.isNotEmpty)
-            VideoPlayerWidget(
-              videoPath: videoPath,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        AnimatedBuilder(
+          animation: _animation,
+          builder: (context, child) {
+            String frame = _animation.value.toString().padLeft(5, '0');
+            return Image.asset(
+              'assets/images/Comp 1_$frame.png',
+              gaplessPlayback: true,
+            );
+          },
+        ),
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            widget.text,
+            style: TextStyle(
+              color: Color(0xFF7CF8FF),
+              fontFamily: 'WorkSans',
+              fontWeight: FontWeight.normal,
+              fontSize: 16,
             ),
-          const SizedBox(height: 16.0),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: textParts.map((part) {
-              final List<InlineSpan> inlineSpans = [];
-              final List<String> words = part.trim().split(' ');
-
-              for (final word in words) {
-                if (word.startsWith('Style/')) {
-                  inlineSpans.add(
-                    TextSpan(
-                      text: '${word.substring(6)} ', // Ocultar "Style/"
-                      style: TextStyle(
-                        fontSize: 18.7,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF7CF8FF),
-                      ),
-                    ),
-                  );
-                } else {
-                  inlineSpans.add(
-                    TextSpan(
-                      text: '$word ',
-                      style: TextStyle(
-                        fontSize: 18.7,
-                        fontWeight: FontWeight.normal,
-                        color: Color(0xFF7CF8FF),
-                      ),
-                    ),
-                  );
-                }
-              }
-
-              return RichText(
-                textAlign: TextAlign.center, // Centrar el texto
-                text: TextSpan(
-                  children: inlineSpans,
-                ),
-              );
-            }).toList(),
+            textAlign: TextAlign.center,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

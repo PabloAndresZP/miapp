@@ -107,23 +107,24 @@ class HomePage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                button('assets/images/ritmo.png', 'Ritmo Pictórico', () {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      transitionDuration: Duration.zero, // Desactiva la animación
-                      pageBuilder: (context, animation1, animation2) => InstructionsPage(),
-                    ),
-                  );
-                }),
-
-
                 button('assets/images/lienzo_sonoro.png', 'Lienzo Sonoro', () {
                 Navigator.push(
                   context,
                   PageRouteBuilder(
                     transitionDuration: Duration.zero, // Desactiva la animación
                     pageBuilder: (context, animation1, animation2) => Game3Page(),
+                    ),
+                  );
+                }),
+
+                
+
+                 button('assets/images/ritmo.png', 'Ritmo Pictórico', () {
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => InstructionsPage(),
                     ),
                   );
                 }),

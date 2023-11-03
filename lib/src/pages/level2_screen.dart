@@ -19,15 +19,15 @@ class Level2Screen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Niveles',
+          '       Niveles', // Añadido espacios para alinear el título a la izquierda como en Level1Screen
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
             fontWeight: FontWeight.bold,
             fontSize: 23.4,
           ),
+          // Eliminar centerTitle: true, para alinear como en Level1Screen
         ),
-        centerTitle: true,
       ),
       body: Stack(
         children: [
@@ -46,7 +46,7 @@ class Level2Screen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Cada nivel representa un desafío en la fascinante',
+                    'Cada nivel representa un desafío en el fascinante.\n\n',
                     style: TextStyle(
                       color: Color(0xFF7CF8FF),
                       fontFamily: 'WorkSans',
@@ -55,9 +55,8 @@ class Level2Screen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 24, width: 48),
                   Text(
-                    '¡Que comience tu aventura!',
+                    '¡Que comience tu aventura!\n\n',
                     style: TextStyle(
                       color: Color(0xFF7CF8FF),
                       fontFamily: 'WorkSans',
@@ -66,30 +65,20 @@ class Level2Screen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-SizedBox(height: 48),
-                   Padding(
-  padding: EdgeInsets.symmetric(horizontal: 60), // Ajusta el espacio horizontal deseado
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-                      buildTextButton('Inicial', context, LessonTwoScreen(), 'assets/images/pincel_1.png'),
- SizedBox(width: 30), // Ajusta el espacio horizontal entre el primer botón y el segundo botón        
-                      buildTextButton('Medio', context, GameLevelIntermediate(), 'assets/images/pincel_2.png'),
-                    ],
-  ),
-),
-                  SizedBox(height: 24),
                   Padding(
-  padding: EdgeInsets.symmetric(horizontal: 24), // Ajusta el espacio horizontal deseado
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-                      buildTextButton('Avanzado', context, GameLevelAdvanced(initialHearts: 2), 'assets/images/pincel_3.png'),
-                      buildTextButton('Experto', context, GameLevelExpert(initialHearts: 1), 'assets/images/pincel_4.png'),
-                                    ],
-  ),
-)
-         
+                    padding: EdgeInsets.symmetric(vertical: 24), // Espacio vertical entre los textos y los botones
+                    child: Wrap(
+                      spacing: 24, // Espacio horizontal entre los botones
+                      runSpacing: 24, // Espacio vertical entre las filas de botones
+                      alignment: WrapAlignment.center, // Alineación central
+                      children: [
+                        buildTextButton('Inicial', context, LessonTwoScreen(), 'assets/images/pincel_1.png'),
+                        buildTextButton('Medio', context, GameLevelIntermediate(), 'assets/images/pincel_2.png'),
+                        buildTextButton('Avanzado', context, GameLevelAdvanced(initialHearts: 2), 'assets/images/pincel_3.png'),
+                        buildTextButton('Experto', context, GameLevelExpert(initialHearts: 1), 'assets/images/pincel_4.png'),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -99,28 +88,25 @@ SizedBox(height: 48),
       bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
-          // Coloca aquí la lógica para despedir la notificación en esta página específica
-          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+          // Lógica para despedir la notificación en esta página específica
         },
       ),
     );
   }
 
-  Widget buildTextButton(String label, BuildContext context, Widget? page, String imageAsset) {
+  Widget buildTextButton(String label, BuildContext context, Widget page, String imageAsset) {
     return Column(
       children: [
         GestureDetector(
           onTap: () {
-            if (page != null) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => page),
-              );
-            }
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => page),
+            );
           },
           child: Column(
             children: [
-              Image.asset(imageAsset, height: 60, width: 60),
+              Image.asset(imageAsset, height: 100, width: 100),
               SizedBox(height: 12),
               Text(
                 label,
