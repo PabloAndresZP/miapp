@@ -12,11 +12,21 @@ class _InstructionsPageState extends State<InstructionsPage> {
   int currentPage = 0;
   
 
+ 
+
+
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   final List<String> instructions = [
-    'Aprende a sincronizar imagen y sonido.',
+    'Aprende a \nsincronizar imagen y sonido.',
     'Los acentos en la imagen en movimiento ocurren cuando los objetos colisionan, aparecen o alcanzan un punto culminante en la narrativa visual.',
     'Por otro lado, los silencios en la imagen en movimiento ocurren cuando los objetos desaparecen, salen de escena o se ocultan de alguna manera.',
-    'Tu objetivo es sincronizar la imagen con el sonido. Utiliza el controlador Graph Editor para lograr una perfecta armonía entre ambos. ¡Presta atención a los detalles y busca la perfecta sincronización para avanzar!',
+    'Utiliza el controlador Graph Editor para lograr una perfecta armonía entre ambos. \n\n¡Presta atención a los detalles y busca la perfecta sincronización para avanzar!',
   ];
 
   @override
@@ -61,25 +71,43 @@ class _InstructionsPageState extends State<InstructionsPage> {
             },
             itemCount: instructions.length,
             itemBuilder: (context, index) {
-              if (instructions[index] == 'Aprende a sincronizar imagen y sonido.') {
-                return Padding(
-                  padding: EdgeInsets.only(top: 216.0),
-                  //child: Center(
-                    child: Text(
-                      instructions[index],
-                      style: TextStyle(
-                        color: Color(0xFF7CF8FF),
-                        fontFamily: 'WorkSans',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.7,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                 // ),
-                );
+              if (instructions[index] == 'Aprende a \nsincronizar imagen y sonido.') {
+  return Padding(
+    padding: EdgeInsets.only(top: 216.0),
+    child: RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: 'Aprende a\n', // El '\n' mueve el resto del texto a la siguiente línea
+            style: TextStyle(
+              // Usa el estilo que prefieras para el texto normal
+              color: Color(0xFF7CF8FF),
+              fontFamily: 'WorkSans',
+              fontWeight: FontWeight.normal,
+              fontSize: 18.7,
+            ),
+          ),
+          TextSpan(
+            text: 'sincronizar imagen y sonido.',
+            style: TextStyle(
+              // Usa un estilo diferente para el texto en negrita
+              color: Color(0xFF7CF8FF),
+              fontFamily: 'WorkSans',
+              fontWeight: FontWeight.bold,
+              fontSize: 18.7,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+
+
               } else {
                 return InstructionPage(
                   text: instructions[index],
+                  currentPage: index, // Añadir esto para pasar el índice actual
                 );
               }
             },
@@ -153,9 +181,12 @@ class InstructionPage extends StatefulWidget {
   
   final String text;
   final String? imagePath;
+  
   final bool isCenteredHorizontal;
   final bool isCenteredVertical;
   final double marginTop;
+  final int currentPage; // Agrega esto
+  
 
 
   const InstructionPage({
@@ -165,67 +196,10 @@ class InstructionPage extends StatefulWidget {
     this.isCenteredVertical = false,
     this.marginTop = 0.0,
     required this.text,
+    required this.currentPage, // Agrega esto
   }) : super(key: key);
 
-@override
-Widget build(BuildContext context) {
-  final List<String> textParts = text.split('\n');
 
-  return Container(
-    padding: EdgeInsets.only(left: 16.0, right: 16.0, top: marginTop),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: isCenteredHorizontal ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-      children: [
-        if (imagePath != null) ...[
-          SizedBox(height: 12),
-          Image.asset(imagePath!, height: null, width: isCenteredHorizontal ? null : 150),
-          SizedBox(height: 12),
-        ],
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: textParts.map((part) {
-            final List<InlineSpan> inlineSpans = [];
-            final List<String> words = part.trim().split(' ');
-
-            for (final word in words) {
-              if (word.startsWith('Style/')) {
-                inlineSpans.add(
-                  TextSpan(
-                    text: '${word.substring(6)} ', // Omite "Style/"
-                    style: TextStyle(
-                      fontSize: 18.7,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF7CF8FF),
-                    ),
-                  ),
-                );
-              } else {
-                inlineSpans.add(
-                  TextSpan(
-                    text: '$word ',
-                    style: TextStyle(
-                      fontSize: 18.7,
-                      fontWeight: FontWeight.normal, // Estilo normal para palabras sin "Style/"
-                      color: Color(0xFF7CF8FF),
-                    ),
-                  ),
-                );
-              }
-            }
-
-            return RichText(
-              textAlign: TextAlign.center, // Centra el texto
-              text: TextSpan(
-                children: inlineSpans,
-              ),
-            );
-          }).toList(),
-        ),
-      ],
-    ),
-  );
-}
 
   
 
@@ -234,58 +208,152 @@ Widget build(BuildContext context) {
 }
 
 class _InstructionPageState extends State<InstructionPage> with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
+  late AnimationController _animationController;
   late Animation<int> _animation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
+    _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 2),
-    )..repeat();
+    );
 
-    _animation = IntTween(begin: 0, end: 23).animate(_controller)
+    _animation = IntTween(begin: 0, end: 23).animate(_animationController)
       ..addListener(() {
         setState(() {});
       });
+
+    _animationController.repeat(reverse: false);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+  String getFrameImage(int compNumber, int frameNumber) {
+    String frame = frameNumber.toString().padLeft(5, '0');
+    return 'assets/images/Comp ${compNumber}_$frame.png';
+  }
+
+Widget buildStyledInstructionText(String instruction) {
+  List<InlineSpan> buildTextSpans(String text) {
+    final boldWords = [
+      'colisionan',
+      'aparecen',
+      'alcanzan',
+      'un',
+      'punto',
+      'culminante',
+      'narrativa',
+      'visual',
+      
+      'silencios',
+      
+      'acentos',
+      'imagen',
+      'objetos',
+      'desaparecen',
+      'movimiento',
+      'salen',
+      'de',
+      'escena',
+
+      'ocultan',
+      'de',
+      'alguna',
+      'manera',
+
+      'Graph',
+      'Editor',
+
+      'perfecta',
+      'sincronización',
+    ];
+
+    List<InlineSpan> spans = [];
+    text.split(' ').forEach((word) {
+      final trimmedWord = word.replaceAll(RegExp(r'[.,]'), ''); // Remove punctuation for matching
+      if (boldWords.contains(trimmedWord)) {
+        spans.add(TextSpan(text: '$word ', style: TextStyle(fontWeight: FontWeight.bold)));
+      } else {
+        spans.add(TextSpan(text: '$word '));
+      }
+    });
+
+    return spans;
+  }
+
+  return RichText(
+    textAlign: TextAlign.center,
+    text: TextSpan(
+      style: TextStyle(
+        color: Color(0xFF7CF8FF),
+        fontFamily: 'WorkSans',
+        fontWeight: FontWeight.normal,
+        fontSize: 18.7,
+      ),
+      children: buildTextSpans(instruction),
+    ),
+  );
+}
+
+
+
+@override
+Widget build(BuildContext context) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.stretch,
+    children: [
+      // Se verifica el valor de currentPage y se muestra un AnimatedBuilder adecuado
+      if (widget.currentPage == 1) 
         AnimatedBuilder(
           animation: _animation,
           builder: (context, child) {
-            String frame = _animation.value.toString().padLeft(5, '0');
             return Image.asset(
-              'assets/images/Comp 1_$frame.png',
+              getFrameImage(1, _animation.value), // Primer sprite
               gaplessPlayback: true,
             );
           },
         ),
-        Padding(
+      
+      if (widget.currentPage == 2) 
+        AnimatedBuilder(
+          animation: _animation,
+          builder: (context, child) {
+            return Image.asset(
+              getFrameImage(2, _animation.value),
+              gaplessPlayback: true,
+            );
+          },
+        ),
+
+      if (widget.currentPage == 3) 
+        AnimatedBuilder(
+          animation: _animation,
+          builder: (context, child) {
+            return Image.asset(
+              getFrameImage(3, _animation.value),
+              gaplessPlayback: true,
+            );
+          },
+        ),
+
+        
+
+
+        
+      // Texto al final del Column
+      Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Text(
-            widget.text,
-            style: TextStyle(
-              color: Color(0xFF7CF8FF),
-              fontFamily: 'WorkSans',
-              fontWeight: FontWeight.normal,
-              fontSize: 16,
-            ),
-            textAlign: TextAlign.center,
-          ),
+          child: buildStyledInstructionText(widget.text), // Usando la función dentro de la clase
         ),
       ],
     );
   }
 }
+
+
+      

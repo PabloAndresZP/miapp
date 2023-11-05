@@ -36,57 +36,60 @@ class LessonTwoScreen extends StatelessWidget {
               ),
             ),
           ),
-          Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20), // Ajusta el espacio horizontal del texto
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Progresa a través de cada lección para dominar completamente las habilidades del nivel.',
-                    style: TextStyle(
-                      color: Color(0xFF7CF8FF),
-                      fontFamily: 'WorkSans',
-                      fontSize: 18.7,
-                      fontWeight: FontWeight.bold,
+          SingleChildScrollView( // Aquí se añade el SingleChildScrollView
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Progresa a través de cada lección para dominar completamente las habilidades del nivel.',
+                      style: TextStyle(
+                        color: Color(0xFF7CF8FF),
+                        fontFamily: 'WorkSans',
+                        fontSize: 18.7,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 24),
-                  Text(
-                    '¡Adelante, comienza tu aprendizaje!',
-                    style: TextStyle(
-                      color: Color(0xFF7CF8FF),
-                      fontFamily: 'WorkSans',
-                      fontSize: 15,
-                      fontWeight: FontWeight.normal,
+                    SizedBox(height: 24),
+                    Text(
+                      '¡Adelante, comienza tu aprendizaje!',
+                      style: TextStyle(
+                        color: Color(0xFF7CF8FF),
+                        fontFamily: 'WorkSans',
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildTextButton('1', context, Instructions2Page(), 'assets/images/lec1_ps.png'),
-                      buildTextButton('2', context, null, 'assets/images/lec2_ps.png', active: false),
-                    ],
-                  ),
-                  SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildTextButton('3', context, null, 'assets/images/lec3_ps.png', active: false),
-                    ],
-                  ),
-                  SizedBox(height: 24),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      buildTextButton('4', context, null, 'assets/images/lec4_ps.png', active: false),
-                      buildTextButton('5', context, null, 'assets/images/lec5_ps.png', active: false),
-                    ],
-                  ),
-                ],
+                    SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buildTextButton('I', context, Instructions2Page(), 'assets/images/lec1_ps.png'),
+                        buildTextButton('II', context, null, 'assets/images/lec2_ps.png', active: false),
+                      ],
+                    ),
+                    SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buildTextButton('III', context, null, 'assets/images/lec3_ps.png', active: false),
+                      ],
+                    ),
+                    SizedBox(height: 24),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        buildTextButton('IV', context, null, 'assets/images/lec4_ps.png', active: false),
+                        buildTextButton('V', context, null, 'assets/images/lec5_ps.png', active: false),
+                      ],
+                    ),
+                    // Puedes añadir más widgets si necesitas más contenido aquí
+                  ],
+                ),
               ),
             ),
           ),
@@ -95,8 +98,7 @@ class LessonTwoScreen extends StatelessWidget {
       bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
-          // Coloca aquí la lógica para despedir la notificación en esta página específica
-          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+          // Lógica para despedir la notificación
         },
       ),
     );
@@ -107,7 +109,7 @@ class LessonTwoScreen extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            if (page != null) {
+            if (page != null && active) {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => page),
@@ -116,7 +118,7 @@ class LessonTwoScreen extends StatelessWidget {
           },
           child: Column(
             children: [
-              Image.asset(imageAsset, height: 60, width: 60),
+              Image.asset(imageAsset, height: 100, width: 100),
               SizedBox(height: 12),
               Text(
                 label,
