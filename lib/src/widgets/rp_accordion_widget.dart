@@ -28,7 +28,7 @@ class _AccordionWidgetState extends State<AccordionWidget> {
             });
           },
           contentPadding: EdgeInsets.all(8), // Elimina el espacio predeterminado alrededor del ListTile
-          leading: Image.asset('assets/images/rp_01.png', height: 36, width: 36),
+          leading: Image.asset('assets/images/ritmo.png', height: 36, width: 36),
           title: Row(
             children: [
               Text(

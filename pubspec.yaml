@@ -13,6 +13,7 @@ dependencies:
   provider: ^5.0.0 # Aquí está la dependencia añadida
   video_player: ^2.2.22  # Agrega esta línea
   auto_route: ^7.8.4 # Asegúrate de utilizar la última versión de auto_route
+  just_audio: ^0.9.15 # Asegúrate de utilizar la última versión compatible
  
 
 dev_dependencies:
@@ -135,6 +136,13 @@ flutter:
     - assets/sounds/ritmo nivel experto.mp3
     - assets/sounds/melodia modo frigio.mp3
     - assets/sounds/melodia modo lido.mp3
+    - assets/sounds/instrucciones2.mp3
+    - assets/sounds/instrucciones22.mp3
+    - assets/sounds/instrucciones222.mp3
+    - assets/sounds/instrucciones2_01.mp3
+    - assets/sounds/instrucciones2_02.mp3
+    - assets/sounds/instrucciones3_01.mp3
+
     - assets/videos/instrucion_002.mp4
     - assets/videos/instrucion_003.mp4
     - assets/videos/instrucion_004.mp4

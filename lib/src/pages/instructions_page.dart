@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:mi_app_imgsound/src/pages/level1_screen.dart';
+import 'package:audioplayers/audioplayers.dart';
+
+
 
 class InstructionsPage extends StatefulWidget {
   @override
@@ -11,9 +14,6 @@ class _InstructionsPageState extends State<InstructionsPage> {
   final PageController _pageController = PageController();
   int currentPage = 0;
   
-
- 
-
 
 
   @override
@@ -210,6 +210,7 @@ class InstructionPage extends StatefulWidget {
 class _InstructionPageState extends State<InstructionPage> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<int> _animation;
+  final AudioPlayer audioPlayer = AudioPlayer();
 
   @override
   void initState() {
@@ -225,11 +226,27 @@ class _InstructionPageState extends State<InstructionPage> with SingleTickerProv
       });
 
     _animationController.repeat(reverse: false);
+
+     // Se ejecuta el método para configurar y reproducir el sonido basado en la página actual.
+     _initAudio();
+  }
+
+  void _initAudio() {
+    // Reproduce el sonido en bucle para el primer y segundo sprite
+    if (widget.currentPage == 1 || widget.currentPage == 2) {
+      audioPlayer.setReleaseMode(ReleaseMode.LOOP);
+      String soundPath = widget.currentPage == 1 
+        ? 'assets/sounds/instrucciones2_02.mp3'
+        : 'assets/sounds/instrucciones3_01.mp3';
+      audioPlayer.play(soundPath, isLocal: true);
+    }
   }
 
   @override
   void dispose() {
     _animationController.dispose();
+    audioPlayer.stop();  // Asegúrate de detener el audio cuando la página se deshaga
+    audioPlayer.dispose(); // Libera los recursos del audioPlayer
     super.dispose();
   }
 
@@ -249,9 +266,7 @@ Widget buildStyledInstructionText(String instruction) {
       'culminante',
       'narrativa',
       'visual',
-      
-      'silencios',
-      
+      'silencios',    
       'acentos',
       'imagen',
       'objetos',
@@ -260,15 +275,12 @@ Widget buildStyledInstructionText(String instruction) {
       'salen',
       'de',
       'escena',
-
       'ocultan',
       'de',
       'alguna',
       'manera',
-
       'Graph',
       'Editor',
-
       'perfecta',
       'sincronización',
     ];

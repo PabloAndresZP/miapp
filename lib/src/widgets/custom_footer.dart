@@ -74,7 +74,7 @@ class _CustomFooterState extends State<CustomFooter> {
                 },
               ),
               ListTile(
-                leading: Image.asset('assets/images/rp_01.png', height: 24, width: 24),
+                leading: Image.asset('assets/images/ritmo.png', height: 24, width: 24),
                 title: Text(
                   'Ritmo Pictórico',
                   style: TextStyle(
@@ -94,7 +94,7 @@ class _CustomFooterState extends State<CustomFooter> {
                 },
               ),
               ListTile(
-                leading: Image.asset('assets/images/ps_01.png', height: 24, width: 24),
+                leading: Image.asset('assets/images/pintando.png', height: 24, width: 24),
                 title: Text(
                   'Pintando Sonido',
                   style: TextStyle(
@@ -115,7 +115,7 @@ class _CustomFooterState extends State<CustomFooter> {
                 },
               ),
               ListTile(
-                leading: Image.asset('assets/images/ls_01.png', height: 24, width: 24),
+                leading: Image.asset('assets/images/lienzo_sonoro.png', height: 24, width: 24),
                 title: Text(
                   'Lienzo Sonoro',
                   style: TextStyle(

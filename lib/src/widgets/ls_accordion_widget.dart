@@ -28,7 +28,7 @@ class _LsAccordionWidgetState extends State<LsAccordionWidget> {
             });
           },
           contentPadding: EdgeInsets.all(8), // Elimina el espacio predeterminado alrededor del ListTile
-          leading: Image.asset('assets/images/ls_01.png', height: 36, width: 36), // Cambia el icono a ls_01.png
+          leading: Image.asset('assets/images/lienzo_sonoro.png', height: 36, width: 36), // Cambia el icono a ls_01.png
           title: Row(
             children: [
               Text(

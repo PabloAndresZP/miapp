@@ -31,7 +31,7 @@ class _PsAccordionWidgetState extends State<PsAccordionWidget> {
             });
           },
           contentPadding: EdgeInsets.all(8),
-          leading: Image.asset('assets/images/ps_01.png', height: 36, width: 36),
+          leading: Image.asset('assets/images/pintando.png', height: 36, width: 36),
           title: Row(
             children: [
               Text(
