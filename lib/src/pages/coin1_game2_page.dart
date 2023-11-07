@@ -50,13 +50,13 @@ class Coin1Game2Page extends StatelessWidget {
                       fontSize: 18.7,
                     ),
                   ),
-                  SizedBox(height: 12),
+                  SizedBox(height: 24),
                   RichText(
                     text: TextSpan(
                       style: TextStyle(
                         color: Color(0xFF7CF8FF),
                         fontFamily: 'WorkSans',
-                        fontSize: 12,
+                        fontSize: 15,
                       ),
                       children: [
                         TextSpan(
@@ -66,13 +66,13 @@ class Coin1Game2Page extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 12),
+                  SizedBox(height: 24),
                   RichText(
                     text: TextSpan(
                       style: TextStyle(
                         color: Color(0xFF7CF8FF),
                         fontFamily: 'WorkSans',
-                        fontSize: 12,
+                        fontSize: 15,
                       ),
                       children: [
                         TextSpan(
@@ -85,15 +85,15 @@ class Coin1Game2Page extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 12),
+                  SizedBox(height: 24),
                   Image.asset('assets/images/escala_mayor.png'), // Imagen de la escala mayor
-                  SizedBox(height: 12),
+                  SizedBox(height: 24),
                   RichText(
                     text: TextSpan(
                       style: TextStyle(
                         color: Color(0xFF7CF8FF),
                         fontFamily: 'WorkSans',
-                        fontSize: 12,
+                        fontSize: 15,
                       ),
                       children: [
                         TextSpan(
@@ -107,13 +107,13 @@ class Coin1Game2Page extends StatelessWidget {
                     ),
                   ),
                   
-                  SizedBox(height: 12),
+                  SizedBox(height: 24),
                   RichText(
                     text: TextSpan(
                       style: TextStyle(
                         color: Color(0xFF7CF8FF),
                         fontFamily: 'WorkSans',
-                        fontSize: 12,
+                        fontSize: 15,
                       ),
                       children: [
                         TextSpan(
@@ -131,16 +131,14 @@ class Coin1Game2Page extends StatelessWidget {
                       ],
                     ),
                   ),
-
-
                   
-                  SizedBox(height: 12),
+                  SizedBox(height: 24),
                   RichText(
                     text: TextSpan(
                       style: TextStyle(
                         color: Color(0xFF7CF8FF),
                         fontFamily: 'WorkSans',
-                        fontSize: 12,
+                        fontSize: 15,
                       ),
                       children: [
                         TextSpan(
@@ -161,17 +159,17 @@ class Coin1Game2Page extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 12),
+                  SizedBox(height: 24),
                   Image.asset('assets/images/escala_menor.png'), // Imagen de la escala menor
 
 
-                 SizedBox(height: 12),
+                 SizedBox(height: 24),
 RichText(
   text: TextSpan(
     style: TextStyle(
       color: Color(0xFF7CF8FF),
       fontFamily: 'WorkSans',
-      fontSize: 12,
+      fontSize: 15,
     ),
     children: [
       TextSpan(
@@ -190,13 +188,13 @@ RichText(
   ),
 ),
 
-                  SizedBox(height: 12),
+                  SizedBox(height: 24),
                   RichText(
                     text: TextSpan(
                       style: TextStyle(
                         color: Color(0xFF7CF8FF),
                         fontFamily: 'WorkSans',
-                        fontSize: 12,
+                        fontSize: 15,
                       ),
                       children: [
                         TextSpan(
@@ -205,7 +203,7 @@ RichText(
                       ],
                     ),
                   ),
-                  SizedBox(height: 24),
+                  SizedBox(height: 48),
                   Container(
                     height: 60.0,
                     width: double.infinity,

@@ -17,21 +17,23 @@ class _AccordionWidgetState extends State<AccordionWidget> {
   bool _isExpanded = false;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ListTile(
-          onTap: () {
-            setState(() {
-              _isExpanded = !_isExpanded;
-            });
-          },
-          contentPadding: EdgeInsets.all(8), // Elimina el espacio predeterminado alrededor del ListTile
-          leading: Image.asset('assets/images/ritmo.png', height: 36, width: 36),
-          title: Row(
-            children: [
-              Text(
+Widget build(BuildContext context) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      ListTile(
+        onTap: () {
+          setState(() {
+            _isExpanded = !_isExpanded;
+          });
+        },
+        contentPadding: EdgeInsets.all(12),
+        leading: Image.asset('assets/images/ritmo.png', height: 36, width: 36),
+        title: Stack(
+          children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
                 widget.title,
                 style: TextStyle(
                   color: Color(0xFF7CF8FF),
@@ -40,26 +42,34 @@ class _AccordionWidgetState extends State<AccordionWidget> {
                   fontSize: 18.7,
                 ),
               ),
-              SizedBox(width: 12), // Añade un espacio de 12 px entre la palabra "Ritmo Pictórico" y la flecha
-              AnimatedSwitcher(
-                duration: Duration(milliseconds: 200),
-                child: _isExpanded
-                    ? Icon(
-                        Icons.keyboard_arrow_up,
-                        key: Key('up_icon'),
-                        color: Color(0xFF05B8A0),
-                        size: 24, // Ajusta el tamaño de la flecha
-                      )
-                    : Icon(
-                        Icons.keyboard_arrow_down,
-                        key: Key('down_icon'),
-                        color: Color(0xFFFDFDFD),
-                        size: 24, // Ajusta el tamaño de la flecha
-                      ),
-              ),
-            ],
-          ),
+            ),
+            Positioned(
+              right: 0, // Esto posicionará el icono de la flecha hacia la derecha
+              top: 0,
+              bottom: 0,
+              child: AnimatedSwitcher(
+  duration: Duration(milliseconds: 400),
+  child: _isExpanded
+      ? Image.asset(
+          'assets/images/icon_arriba.png', // Ruta a la imagen para el estado expandido
+          key: Key('up_image'),
+          color: Color(0xFF05B8A0),
+          height: 24, // Define el tamaño de la imagen
+          width: 24,
+        )
+      : Image.asset(
+          'assets/images/icon_abajo.png', // Ruta a la imagen para el estado no expandido
+          key: Key('down_image'),
+          color: Color(0xFFFDFDFD),
+          height: 24, // Define el tamaño de la imagen
+          width: 24,
         ),
+),
+
+            ),
+          ],
+        ),
+      ),
         if (_isExpanded)
          Column(
   children: widget.items.map((item) {

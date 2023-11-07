@@ -73,26 +73,7 @@ class _CustomFooterState extends State<CustomFooter> {
                   );
                 },
               ),
-              ListTile(
-                leading: Image.asset('assets/images/ritmo.png', height: 24, width: 24),
-                title: Text(
-                  'Ritmo Pictórico',
-                  style: TextStyle(
-                    fontFamily: 'WorkSans',
-                    fontSize: 15,
-                    color: Color(0xFF7CF8FF),
-                  ),
-                ),
-                onTap: () {
-
-                Navigator.of(context).pushReplacement(
-                    PageRouteBuilder(
-                      transitionDuration: Duration.zero, // Desactiva la animación
-                      pageBuilder: (context, animation1, animation2) => InstructionsPage(),
-                    ),
-                  );
-                },
-              ),
+             
               ListTile(
                 leading: Image.asset('assets/images/pintando.png', height: 24, width: 24),
                 title: Text(
@@ -134,6 +115,27 @@ class _CustomFooterState extends State<CustomFooter> {
                   );
                 },
               ),
+             ListTile(
+                leading: Image.asset('assets/images/ritmo.png', height: 24, width: 24),
+                title: Text(
+                  'Ritmo Pictórico',
+                  style: TextStyle(
+                    fontFamily: 'WorkSans',
+                    fontSize: 15,
+                    color: Color(0xFF7CF8FF),
+                  ),
+                ),
+                onTap: () {
+
+                Navigator.of(context).pushReplacement(
+                    PageRouteBuilder(
+                      transitionDuration: Duration.zero, // Desactiva la animación
+                      pageBuilder: (context, animation1, animation2) => InstructionsPage(),
+                    ),
+                  );
+                },
+              ),
+
             ],
           ),
         );

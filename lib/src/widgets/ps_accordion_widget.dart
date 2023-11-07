@@ -20,49 +20,55 @@ class _PsAccordionWidgetState extends State<PsAccordionWidget> {
   bool _isExpanded = false;
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ListTile(
-          onTap: () {
-            setState(() {
-              _isExpanded = !_isExpanded;
-            });
-          },
-          contentPadding: EdgeInsets.all(8),
-          leading: Image.asset('assets/images/pintando.png', height: 36, width: 36),
-          title: Row(
-            children: [
-              Text(
-                widget.title,
-                style: TextStyle(
-                  color: Color(0xFF7CF8FF),
-                  fontFamily: 'WorkSans',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18.7,
-                ),
+Widget build(BuildContext context) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      ListTile(
+        onTap: () {
+          setState(() {
+            _isExpanded = !_isExpanded;
+          });
+        },
+        contentPadding: EdgeInsets.all(12),
+        leading: Image.asset('assets/images/pintando.png', height: 36, width: 36),
+        title: Stack(
+          alignment: Alignment.centerLeft, // Alineación del texto al centro izquierdo
+          children: [
+            Text(
+              widget.title,
+              style: TextStyle(
+                color: Color(0xFF7CF8FF),
+                fontFamily: 'WorkSans',
+                fontWeight: FontWeight.bold,
+                fontSize: 18.7,
               ),
-              SizedBox(width: 12),
-              AnimatedSwitcher(
-                duration: Duration(milliseconds: 200),
-                child: _isExpanded
-                    ? Icon(
-                        Icons.keyboard_arrow_up,
-                        key: Key('up_icon'),
-                        color: Color(0xFF05B8A0),
-                        size: 24,
-                      )
-                    : Icon(
-                        Icons.keyboard_arrow_down,
-                        key: Key('down_icon'),
-                        color: Color(0xFFFDFDFD),
-                        size: 24,
-                      ),
-              ),
-            ],
-          ),
+            ),
+            Positioned(
+              right: 0, // Alineación del icono a la derecha
+              child: AnimatedSwitcher(
+  duration: Duration(milliseconds: 400),
+  child: _isExpanded
+      ? Image.asset(
+          'assets/images/icon_arriba.png', // Ruta a la imagen para el estado expandido
+          key: Key('up_image'),
+          color: Color(0xFF05B8A0),
+          height: 24, // Define el tamaño de la imagen
+          width: 24,
+        )
+      : Image.asset(
+          'assets/images/icon_abajo.png', // Ruta a la imagen para el estado no expandido
+          key: Key('down_image'),
+          color: Color(0xFFFDFDFD),
+          height: 24, // Define el tamaño de la imagen
+          width: 24,
         ),
+),
+
+            ),
+          ],
+        ),
+      ),
         if (_isExpanded)
           Column(
             children: widget.items.map((item) {
@@ -94,11 +100,11 @@ class _PsAccordionWidgetState extends State<PsAccordionWidget> {
                     child: Row(
                       children: [
                         Image.asset('assets/images/moneda_ps_active.png', height: 24, width: 24),
-                        SizedBox(width: 8), // Espacio entre la moneda y el texto
+                        SizedBox(width: 12), // Espacio entre la moneda y el texto
                         Text(
                           'Escalas Mayores y Menores',
                           style: TextStyle(
-                            color: Color(0xFF00D8BB),
+                            color: Color(0xFFFDFDFD),
                             fontFamily: 'WorkSans',
                             fontSize: 12,
                             decoration: TextDecoration.underline,

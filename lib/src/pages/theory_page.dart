@@ -39,7 +39,7 @@ class TheoryPage extends StatelessWidget {
             color: Color(0xFF060630), // Fondo de color
           ),
           Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(36.0),
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,43 +54,40 @@ class TheoryPage extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 24),
-                  Text(
-                    '¡Esperamos que disfrutes y aprendas mucho en tu viaje hacia el conocimiento de la relación entre imagen y sonido!',
-                    style: TextStyle(
-                      color: Color(0xFF7CF8FF),
-                      fontFamily: 'WorkSans',
-                      fontWeight: FontWeight.normal,
-                      fontSize: 15,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  AccordionWidget(
-                    title: 'Ritmo Pictórico',
-                    items: [
-                      'InicialStyle',
-                      'Acentos y silencios en la imagen y la música.',
-                      'Los \'silencios\' dentro de una secuencia visual.',
-                      'Yuxtaposición de acentos y silencios para crear un ritmo visual.',
-                      'Acentos y silencios en el ritmo.',
-                      'Los ritmos.',
-                      'IntermedioStyle',
-                      'La variación de ritmo.',
-                      'La sincronización de velocidad entre la animación y el ritmo.',
-                      'El uso de múltiples instrumentos rítmicos en la sincronización con la animación.',
-                      'AvanzadoStyle',
-                      'Los ritmos amalgamados.',
-                      'La polirritmia.',
-                      'La combinación de múltiples instrumentos rítmicos.',
-                      'ExpertoStyle',
-                      'La polirritmia y la coordinación con movimientos visuales.',
-                      'La sincronización avanzada de animación y ritmo.',
-                      // Agrega más elementos aquí según sea necesario
-                    ],
-                  ),
+                 SizedBox(height: 36),
+Padding(
+  padding: EdgeInsets.only(bottom: 24), // Aplica padding inferior de 12px
+  child: RichText(
+    textAlign: TextAlign.center,
+    text: TextSpan(
+      style: TextStyle(
+        // Estilo por defecto para el texto
+        color: Color(0xFF7CF8FF),
+        fontFamily: 'WorkSans',
+        fontWeight: FontWeight.normal,
+        fontSize: 15,
+      ),
+      children: <TextSpan>[
+        TextSpan(text: '¡Disfruta y aprende mucho en tu viaje hacia el conocimiento de la relación \nentre '),
+        TextSpan(
+          text: 'imagen',
+          style: TextStyle(fontWeight: FontWeight.bold), // Negrita para la palabra "imagen"
+        ),
+        TextSpan(text: ' y '),
+        TextSpan(
+          text: 'sonido',
+          style: TextStyle(fontWeight: FontWeight.bold), // Negrita para la palabra "sonido"
+        ),
+        TextSpan(text: '!'),
+      ],
+    ),
+  ),
+),
+
+                  
                   
                   PsAccordionWidget(
-                    title: 'Pintando Sonido',
+                    title: '  Pintando Sonido',
                     items: [
                       'InicialStyle',
                       'Escalas Mayores y Menores',
@@ -119,7 +116,7 @@ class TheoryPage extends StatelessWidget {
                   ),
 
                   LsAccordionWidget(
-                    title: 'Lienzo Sonoro',
+                    title: '  Lienzo Sonoro',
                     items: [
                       'InicialStyle',
                       'Fundamentos del sonido.',
@@ -141,6 +138,31 @@ class TheoryPage extends StatelessWidget {
                       'Mezcla Final.',
                     ],
                   ),
+
+                AccordionWidget(
+                    title: '  Ritmo Pictórico',
+                    items: [
+                      'InicialStyle',
+                      'Acentos y silencios en la imagen y la música.',
+                      'Los \'silencios\' dentro de una secuencia visual.',
+                      'Yuxtaposición de acentos y silencios para crear un ritmo visual.',
+                      'Acentos y silencios en el ritmo.',
+                      'Los ritmos.',
+                      'IntermedioStyle',
+                      'La variación de ritmo.',
+                      'La sincronización de velocidad entre la animación y el ritmo.',
+                      'El uso de múltiples instrumentos rítmicos en la sincronización con la animación.',
+                      'AvanzadoStyle',
+                      'Los ritmos amalgamados.',
+                      'La polirritmia.',
+                      'La combinación de múltiples instrumentos rítmicos.',
+                      'ExpertoStyle',
+                      'La polirritmia y la coordinación con movimientos visuales.',
+                      'La sincronización avanzada de animación y ritmo.',
+                      // Agrega más elementos aquí según sea necesario
+                    ],
+                  ),
+
                 ],
               ),
             ),
