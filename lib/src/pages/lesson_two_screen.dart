@@ -36,10 +36,12 @@ class LessonTwoScreen extends StatelessWidget {
               ),
             ),
           ),
+          
           SingleChildScrollView( // Aquí se añade el SingleChildScrollView
             child: Center(
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.only(top: 36, left: 20, right: 20), // Se añadió padding superior de 48px
+                
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -53,7 +55,7 @@ class LessonTwoScreen extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 24),
+                    SizedBox(height: 36),
                     Text(
                       '¡Adelante, comienza tu aprendizaje!',
                       style: TextStyle(
@@ -64,7 +66,7 @@ class LessonTwoScreen extends StatelessWidget {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 24),
+                    SizedBox(height: 60),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [

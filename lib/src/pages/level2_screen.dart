@@ -19,7 +19,7 @@ class Level2Screen extends StatelessWidget {
           },
         ),
         title: Text(
-          '       Niveles', // Añadido espacios para alinear el título a la izquierda como en Level1Screen
+          '           Niveles', // Añadido espacios para alinear el título a la izquierda como en Level1Screen
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
