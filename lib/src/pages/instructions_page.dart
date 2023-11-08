@@ -5,6 +5,7 @@ import 'package:audioplayers/audioplayers.dart';
 
 
 
+
 class InstructionsPage extends StatefulWidget {
   @override
   _InstructionsPageState createState() => _InstructionsPageState();
@@ -231,16 +232,19 @@ class _InstructionPageState extends State<InstructionPage> with SingleTickerProv
      _initAudio();
   }
 
-  void _initAudio() {
-    // Reproduce el sonido en bucle para el primer y segundo sprite
-    if (widget.currentPage == 1 || widget.currentPage == 2) {
-      audioPlayer.setReleaseMode(ReleaseMode.LOOP);
-      String soundPath = widget.currentPage == 1 
-        ? 'assets/sounds/instrucciones2_02.mp3'
-        : 'assets/sounds/instrucciones3_01.mp3';
-      audioPlayer.play(soundPath, isLocal: true);
-    }
+ void _initAudio() {
+  // Reproduce el sonido en bucle para el primer y segundo sprite
+  if (widget.currentPage == 1 || widget.currentPage == 2) {
+    audioPlayer.setReleaseMode(ReleaseMode.loop);
+
+    Source soundSource = widget.currentPage == 1 
+      ? AssetSource('sounds/instrucciones2_02.mp3')
+      : AssetSource('sounds/instrucciones3_01.mp3');
+
+    // En las versiones recientes de audioplayers usamos setSource y luego resume
+    audioPlayer.setSource(soundSource).then((_) => audioPlayer.resume());
   }
+}
 
   @override
   void dispose() {

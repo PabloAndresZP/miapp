@@ -120,8 +120,17 @@ class _Game1LevelIntermediateState extends State<Game1LevelIntermediate> {
                         ),
                         child: IconButton(
                           onPressed: () async {
-                            await audioPlayer.play('assets/sounds/ritmo nivel intermedio.mp3', isLocal: true);
-                          },
+  try {
+    // Configura el origen del audio para reproducir desde los assets
+    await audioPlayer.setSource(AssetSource('sounds/ritmo nivel intermedio.mp3'));
+    // Inicia la reproducción
+    await audioPlayer.resume();
+  } catch (e) {
+    // Manejo de errores si algo falla
+    print('Error al reproducir el audio: $e');
+  }
+},
+
                           icon: Icon(Icons.play_arrow, color: Colors.white),
                         ),
                       ),

@@ -48,11 +48,17 @@ class _GameLevelExpertState extends State<GameLevelExpert> {
   }
 
   void _playPause(String audioUrl) async {
-    int result = await _audioPlayer.play(audioUrl);
-    if (result != 1) {
-      print("Error al reproducir el audio");
-    }
+  try {
+    // Establecer la fuente con un UrlSource para reproducir desde una URL
+    await _audioPlayer.setSource(UrlSource(audioUrl));
+
+    // Iniciar o reanudar la reproducción del audio
+    await _audioPlayer.resume();
+  } catch (e) {
+    print("Error al reproducir el audio: $e");
   }
+}
+
 
   void _checkAnswer() {
     if (selectedAnswer == correctAnswer) {
@@ -178,9 +184,18 @@ class _GameLevelExpertState extends State<GameLevelExpert> {
   }
 
   void _playSound(String soundFile) async {
-    final player = AudioCache(prefix: 'sounds/');
-    player.play(soundFile);
+  final player = AudioPlayer();
+  try {
+    // Establecer la fuente con un AssetSource para reproducir desde los assets
+    await player.setSource(AssetSource('sounds/$soundFile'));
+
+    // Iniciar la reproducción del audio
+    await player.resume();
+  } catch (e) {
+    print("Error al reproducir el audio: $e");
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

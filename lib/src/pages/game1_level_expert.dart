@@ -117,9 +117,18 @@ class _Game1LevelExpertState extends State<Game1LevelExpert> {
                           color: Color(0xFF00D8BB),
                         ),
                         child: IconButton(
-                          onPressed: () async {
-                            await audioPlayer.play('assets/sounds/ritmo nivel experto.mp3', isLocal: true);
-                          },
+                         onPressed: () async {
+  try {
+    // Configurar la fuente del audio para reproducir un archivo de los assets
+    await audioPlayer.setSource(AssetSource('sounds/ritmo nivel experto.mp3'));
+    // Iniciar la reproducción del audio
+    await audioPlayer.resume();
+  } catch (e) {
+    // Manejar errores si algo sale mal
+    print('Error al reproducir el audio: $e');
+  }
+},
+
                           icon: Icon(Icons.play_arrow, color: Colors.white),
                         ),
                       ),

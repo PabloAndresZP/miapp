@@ -118,8 +118,17 @@ class _Game1LevelAdvancedState extends State<Game1LevelAdvanced> {
                         ),
                         child: IconButton(
                           onPressed: () async {
-                            await audioPlayer.play('assets/sounds/ritmo nivel avanzado.mp3', isLocal: true);
-                          },
+  try {
+    // Configura la fuente del audio para reproducir un archivo de los assets
+    await audioPlayer.setSource(AssetSource('sounds/ritmo nivel avanzado.mp3'));
+    // Inicia la reproducción del audio
+    await audioPlayer.resume();
+  } catch (e) {
+    // Maneja errores si algo sale mal
+    print('Error al reproducir el audio: $e');
+  }
+},
+
                           icon: Icon(Icons.play_arrow, color: Colors.white),
                         ),
                       ),

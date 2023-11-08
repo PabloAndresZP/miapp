@@ -48,11 +48,17 @@ class _GameLevelAdvancedState extends State<GameLevelAdvanced> {
   }
 
   void _playPause(String audioUrl) async {
-    int result = await _audioPlayer.play(audioUrl);
-    if (result != 1) {
-      print("Error al reproducir el audio");
-    }
+  final player = AudioPlayer();
+  try {
+    // Se inicia la reproducción utilizando un UrlSource con la URL proporcionada.
+    await player.setSource(UrlSource(audioUrl));
+    await player.resume();
+  } catch (e) {
+    // Si hay un error, se captura la excepción y se imprime.
+    print("Error al reproducir el audio: $e");
   }
+}
+
 
   void _checkAnswer() {
     if (selectedAnswer == correctAnswer) {
@@ -178,9 +184,18 @@ class _GameLevelAdvancedState extends State<GameLevelAdvanced> {
   }
 
   void _playSound(String soundFile) async {
-    final player = AudioCache(prefix: 'sounds/');
-    player.play(soundFile);
+  final player = AudioPlayer();
+  try {
+    // Se establece la fuente del sonido como un recurso del paquete (asset)
+    await player.setSource(AssetSource('sounds/$soundFile'));
+    // Se reproduce el sonido
+    await player.resume();
+  } catch (e) {
+    // Manejo de errores en caso de que la reproducción falle
+    print("Error al reproducir el audio: $e");
   }
+}
+
 
   @override
   Widget build(BuildContext context) {

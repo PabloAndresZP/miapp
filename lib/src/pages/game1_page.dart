@@ -21,14 +21,20 @@ class _Game1PageState extends State<Game1Page> {
   List<String> correctAnswers = ['Acento', 'Silencio', 'Acento', 'Silencio'];
 
   Future<void> playSound(String sound) async {
-    final String path = 'assets/sounds/$sound.mp3';
-    final int result = await audioPlayer.play(path, isLocal: true);
-
-    if (result != 1) {
-      // handle error
-      print('Error playing sound: $result');
-    }
+  final player = AudioPlayer(); // Crea una instancia de AudioPlayer
+  final String path = 'assets/sounds/$sound.mp3';
+  
+  try {
+    // Configura el origen del audio para reproducir desde los assets
+    await player.setSource(AssetSource(path));
+    // Reproduce el audio
+    await player.resume(); // `play` ha sido reemplazado por `resume` para iniciar la reproducción
+  } catch (e) {
+    // Maneja el error si algo sale mal
+    print('Error playing sound: $e');
   }
+}
+
 
   void checkAnswers() {
     if (exerciseGrid == correctAnswers) {

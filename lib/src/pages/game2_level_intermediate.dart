@@ -65,14 +65,18 @@ class _GameLevelIntermediateState extends State<GameLevelIntermediate> {
     bool currentPlaying = (playerNumber == 1) ? isPlaying1 : isPlaying2;
 
     if (currentPlaying) {
-      await currentPlayer.pause();
-    } else {
-      await otherPlayer.stop(); // Detener el otro audio.
-      int result = await currentPlayer.play(audioUrl);
-      if (result != 1) {
-        print("Error al reproducir el audio");
-      }
-    }
+  await currentPlayer.pause();
+} else {
+  await otherPlayer.stop(); // Detener el otro audio.
+  // Se asume que `audioUrl` es una URL. Si es un archivo local o un asset, necesitarás ajustar esto.
+  try {
+    await currentPlayer.setSource(UrlSource(audioUrl)); // Set the source for currentPlayer
+    await currentPlayer.resume(); // No hay necesidad de revisar el resultado, esto arrojará si hay un error
+  } catch (e) {
+    print("Error al reproducir el audio: $e");
+  }
+}
+
 
     setState(() {
       if (playerNumber == 1) {
@@ -294,9 +298,11 @@ class _GameLevelIntermediateState extends State<GameLevelIntermediate> {
   }
 
   _playSound(String soundFile) async {
-    final player = AudioCache(prefix: 'sounds/');
-    player.play(soundFile);
-  }
+  final player = AudioPlayer();
+  final file = AssetSource('sounds/$soundFile');
+  await player.play(file);
+}
+
 
   @override
   Widget build(BuildContext context) {

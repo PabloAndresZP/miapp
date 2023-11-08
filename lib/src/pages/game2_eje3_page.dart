@@ -67,11 +67,17 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
   }
 
   void _playPause(String audioUrl) async {
-    int result = await _audioPlayer.play(audioUrl);
-    if (result != 1) {
-      print("Error al reproducir el audio");
-    }
+  final player = AudioPlayer(); // Asegúrate de crear una instancia de AudioPlayer.
+  try {
+    // Establece la fuente del audio a la URL y luego comienza la reproducción.
+    await player.setSource(UrlSource(audioUrl));
+    await player.resume(); // La función resume inicia la reproducción del audio.
+  } catch (e) {
+    // Si hay un error, se captura la excepción y se imprime.
+    print("Error al reproducir el audio: $e");
   }
+}
+
 
   void _checkAnswer() {
   if (selectedAnswer == correctAnswer) {
@@ -197,9 +203,17 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
 }
 
 void _playSound(String soundFile) async {
-  final player = AudioCache(prefix: 'sounds/');
-  player.play(soundFile);
+  final player = AudioPlayer(); // Crea una nueva instancia de AudioPlayer
+  try {
+    // Prepara la fuente del audio usando AssetSource y establece la fuente en el player
+    await player.setSource(AssetSource('sounds/$soundFile'));
+    await player.resume(); // La función resume inicia la reproducción del audio
+  } catch (e) {
+    // Si hay un error, se captura la excepción y se imprime.
+    print("Error al reproducir el audio: $e");
+  }
 }
+
 
   @override
   Widget build(BuildContext context) {

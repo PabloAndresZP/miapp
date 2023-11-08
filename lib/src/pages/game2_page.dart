@@ -63,14 +63,18 @@ class _Game2PageState extends State<Game2Page> {
     bool currentPlaying = (playerNumber == 1) ? isPlaying1 : isPlaying2;
 
     if (currentPlaying) {
-      await currentPlayer.pause();
-    } else {
-      await otherPlayer.stop(); // Detener el otro audio.
-      int result = await currentPlayer.play(audioUrl);
-      if (result != 1) {
-        print("Error al reproducir el audio");
-      }
-    }
+  await currentPlayer.pause();
+} else {
+  await otherPlayer.stop(); // Detener el otro audio.
+  
+  try {
+    // Utiliza el Source adecuado para tu URL. Si es una URL remota, utiliza UrlSource.
+    await currentPlayer.setSource(UrlSource(audioUrl));
+    await currentPlayer.resume(); // `play` es reemplazado por `resume` después de `setSource`.
+  } catch (e) {
+    print("Error al reproducir el audio: $e");
+  }
+}
 
     setState(() {
       if (playerNumber == 1) {
@@ -292,9 +296,11 @@ class _Game2PageState extends State<Game2Page> {
   }
 
   _playSound(String soundFile) async {
-    final player = AudioCache(prefix: 'sounds/');
-    player.play(soundFile);
-  }
+  final player = AudioPlayer();
+  final file = AssetSource('sounds/$soundFile');
+  await player.play(file);
+}
+
 
   @override
   Widget build(BuildContext context) {
