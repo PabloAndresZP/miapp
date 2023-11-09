@@ -47,14 +47,14 @@ class _GameLevelExpertState extends State<GameLevelExpert> {
     super.dispose();
   }
 
-  void _playPause(String audioUrl) async {
+  void _playPause(String assetPath) async {
+  final player = AudioPlayer();
   try {
-    // Establecer la fuente con un UrlSource para reproducir desde una URL
-    await _audioPlayer.setSource(UrlSource(audioUrl));
-
-    // Iniciar o reanudar la reproducción del audio
-    await _audioPlayer.resume();
+    // Se inicia la reproducción utilizando AssetSource con la ruta del asset proporcionada.
+    await player.setSource(AssetSource('sounds/cumpleaños02.mp3'));
+   await player.resume(); // Inicia la reproducción del audio
   } catch (e) {
+    // Si hay un error, se captura la excepción y se imprime.
     print("Error al reproducir el audio: $e");
   }
 }

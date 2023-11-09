@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mi_app_imgsound/main.dart';
 
 import '../pages/instructions_page.dart';
 import '../pages/level2_screen.dart';
 import '../pages/theory_page.dart';
 import '../pages/profile_page.dart';
 import '../pages/game3_page.dart';
+
 
 class CustomFooter extends StatefulWidget {
   final int currentPageIndex;
@@ -212,9 +214,18 @@ class _CustomFooterState extends State<CustomFooter> {
             ),
           );
             break;
-          case 2:
-            Navigator.of(context).popUntil((route) => route.isFirst);
-            break;
+      case 2:
+  Navigator.of(context).popUntil((route) => route.isFirst);
+  if (!Navigator.of(context).canPop()) {
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        pageBuilder: (context, animation1, animation2) => const HomePage(title: 'R.A.V.'),
+        transitionDuration: Duration.zero,
+      ),
+    );
+  }
+  break;
+
           case 3:
             _showMenu(context);
             break;

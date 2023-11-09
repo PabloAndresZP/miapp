@@ -29,7 +29,7 @@ class Level2Screen extends StatelessWidget {
           // Eliminar centerTitle: true, para alinear como en Level1Screen
         ),
       ),
-      body: Stack(
+            body: Stack(
         children: [
           Container(
             decoration: BoxDecoration(
@@ -39,6 +39,8 @@ class Level2Screen extends StatelessWidget {
               ),
             ),
           ),
+          
+
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             child: Center(

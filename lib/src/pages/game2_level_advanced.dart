@@ -47,17 +47,18 @@ class _GameLevelAdvancedState extends State<GameLevelAdvanced> {
     super.dispose();
   }
 
-  void _playPause(String audioUrl) async {
+ void _playPause(String assetPath) async {
   final player = AudioPlayer();
   try {
-    // Se inicia la reproducción utilizando un UrlSource con la URL proporcionada.
-    await player.setSource(UrlSource(audioUrl));
-    await player.resume();
+    // Se inicia la reproducción utilizando AssetSource con la ruta del asset proporcionada.
+    await player.setSource(AssetSource('sounds/esccromatica.mp3'));
+   await player.resume(); // Inicia la reproducción del audio
   } catch (e) {
     // Si hay un error, se captura la excepción y se imprime.
     print("Error al reproducir el audio: $e");
   }
 }
+
 
 
   void _checkAnswer() {

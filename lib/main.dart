@@ -63,7 +63,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFF030328),
         centerTitle: true,
-        title: Image.asset('logo_3.png', height: 72),
+        title: Image.asset('assets/images/logo_3.png', height: 72),
         toolbarHeight: 80,
       ),
       body: Container(

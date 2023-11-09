@@ -66,17 +66,17 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
     super.dispose();
   }
 
-  void _playPause(String audioUrl) async {
-  final player = AudioPlayer(); // Asegúrate de crear una instancia de AudioPlayer.
+ void _playPause(String exerciseAudio) async {
+  final player = AudioPlayer(); // Crea una instancia de AudioPlayer
   try {
-    // Establece la fuente del audio a la URL y luego comienza la reproducción.
-    await player.setSource(UrlSource(audioUrl));
-    await player.resume(); // La función resume inicia la reproducción del audio.
+    await player.setSource(AssetSource('sounds/escmayor.mp3')); // Usa AssetSource para archivos locales
+    await player.resume(); // Inicia la reproducción del audio
   } catch (e) {
-    // Si hay un error, se captura la excepción y se imprime.
+    // Si hay un error, imprímelo
     print("Error al reproducir el audio: $e");
   }
 }
+
 
 
   void _checkAnswer() {

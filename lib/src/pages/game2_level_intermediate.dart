@@ -59,23 +59,53 @@ class _GameLevelIntermediateState extends State<GameLevelIntermediate> {
     super.dispose();
   }
 
-  void _playPause(String audioUrl, int playerNumber) async {
-    AudioPlayer currentPlayer = (playerNumber == 1) ? _audioPlayer1 : _audioPlayer2;
-    AudioPlayer otherPlayer = (playerNumber == 1) ? _audioPlayer2 : _audioPlayer1;
-    bool currentPlaying = (playerNumber == 1) ? isPlaying1 : isPlaying2;
+  void _playPause(int playerNumber) async {
+  AudioPlayer currentPlayer = (playerNumber == 1) ? _audioPlayer1 : _audioPlayer2;
+  bool currentPlaying = (playerNumber == 1) ? isPlaying1 : isPlaying2;
 
-    if (currentPlaying) {
-  await currentPlayer.pause();
-} else {
-  await otherPlayer.stop(); // Detener el otro audio.
-  // Se asume que `audioUrl` es una URL. Si es un archivo local o un asset, necesitarás ajustar esto.
-  try {
-    await currentPlayer.setSource(UrlSource(audioUrl)); // Set the source for currentPlayer
-    await currentPlayer.resume(); // No hay necesidad de revisar el resultado, esto arrojará si hay un error
-  } catch (e) {
-    print("Error al reproducir el audio: $e");
+  if (currentPlaying) {
+    await currentPlayer.pause();
+    setState(() {
+      if (playerNumber == 1) {
+        isPlaying1 = false;
+      } else {
+        isPlaying2 = false;
+      }
+    });
+  } else {
+    // Detener cualquier otro reproductor que pueda estar reproduciendo
+    if (_audioPlayer1 != currentPlayer) {
+      await _audioPlayer1.stop();
+      setState(() => isPlaying1 = false);
+    }
+    if (_audioPlayer2 != currentPlayer) {
+      await _audioPlayer2.stop();
+      setState(() => isPlaying2 = false);
+    }
+
+    String assetToPlay = (playerNumber == 1)
+        ? 'sounds/escmenormelodica.mp3'
+        : 'sounds/escmenorarmonica.mp3';
+
+    try {
+      await currentPlayer.setSource(AssetSource(assetToPlay));
+      await currentPlayer.resume();
+      setState(() {
+        if (playerNumber == 1) {
+          isPlaying1 = true;
+        } else {
+          isPlaying2 = true;
+        }
+      });
+    } catch (e) {
+      print("Error al reproducir el audio: $e");
+    }
   }
-}
+
+
+
+
+
 
 
     setState(() {
@@ -315,7 +345,7 @@ class _GameLevelIntermediateState extends State<GameLevelIntermediate> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'Nivel Intemedio PS',
+          'Nivel medio PS',
           style: TextStyle(
             color: Color(0xFF44A1D6),
             fontFamily: 'WorkSans',
@@ -375,62 +405,71 @@ class _GameLevelIntermediateState extends State<GameLevelIntermediate> {
                     Image.asset(exerciseImages[currentExerciseIndex]),
                     SizedBox(height: 20.0),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            InkWell(
-                              onTap: () => _playPause(exerciseAudios1[currentExerciseIndex], 1),
-                              child: ClipOval(
-                                child: Container(
-                                  width: 48,
-                                  height: 48,
-                                  color: Color(0xFF00D8BB),
-                                  child: Icon(isPlaying1 ? Icons.pause : Icons.play_arrow, color: Colors.white, size: 30),
-                                ),
-                              ),
-                            ),
-                            Radio(
-                              value: 0,
-                              groupValue: selectedAnswer,
-                              activeColor: Color(0xFF44A1D6),
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedAnswer = value as int;
-                                });
-                              },
-                            ),
-                            Text(labels[currentExerciseIndex][0], style: TextStyle(color: Colors.white))
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            InkWell(
-                              onTap: () => _playPause(exerciseAudios2[currentExerciseIndex], 2),
-                              child: ClipOval(
-                                child: Container(
-                                  width: 48,
-                                  height: 48,
-                                  color: Color(0xFF00D8BB),
-                                  child: Icon(isPlaying2 ? Icons.pause : Icons.play_arrow, color: Colors.white, size: 30),
-                                ),
-                              ),
-                            ),
-                            Radio(
-                              value: 1,
-                              groupValue: selectedAnswer,
-                              activeColor: Color(0xFF44A1D6),
-                              onChanged: (value) {
-                                setState(() {
-                                  selectedAnswer = value as int;
-                                });
-                              },
-                            ),
-                            Text(labels[currentExerciseIndex][1], style: TextStyle(color: Colors.white))
-                          ],
-                        ),
-                      ],
-                    ),
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    Column(
+      children: [
+          InkWell(
+  onTap: () {
+    _playPause(1); // Actualiza para pasar solo el número del jugador
+    setState(() {}); // Esta llamada a setState asegura que el widget se redibuja
+  },
+          splashColor: Colors.transparent, // Desactiva la animación de onda
+          child: ClipOval(
+            child: Container(
+              width: 48,
+              height: 48,
+              color: Color(0xFF00D8BB),
+              child: Icon(isPlaying1 ? Icons.pause : Icons.play_arrow, color: Colors.white, size: 30),
+            ),
+          ),
+        ),
+        Radio(
+          value: 0,
+          groupValue: selectedAnswer,
+          activeColor: Color(0xFF44A1D6),
+          onChanged: (int? value) {
+            setState(() {
+              selectedAnswer = value!;
+            });
+          },
+        ),
+        Text(labels[currentExerciseIndex][0], style: TextStyle(color: Colors.white))
+      ],
+    ),
+    Column(
+      children: [
+         InkWell(
+  onTap: () {
+    _playPause(2); // Actualiza para pasar solo el número del jugador
+    setState(() {}); // Esta llamada a setState asegura que el widget se redibuja
+  },
+          splashColor: Colors.transparent, // Desactiva la animación de onda
+          child: ClipOval(
+            child: Container(
+              width: 48,
+              height: 48,
+              color: Color(0xFF00D8BB),
+              child: Icon(isPlaying2 ? Icons.pause : Icons.play_arrow, color: Colors.white, size: 30),
+            ),
+          ),
+        ),
+        Radio(
+          value: 1,
+          groupValue: selectedAnswer,
+          activeColor: Color(0xFF44A1D6),
+          onChanged: (int? value) {
+            setState(() {
+              selectedAnswer = value!;
+            });
+          },
+        ),
+        Text(labels[currentExerciseIndex][1], style: TextStyle(color: Colors.white))
+      ],
+    ),
+  ],
+),
+
                   ],
                 ),
               ),

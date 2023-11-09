@@ -24,7 +24,7 @@ class _Game3LevelIntermediateState extends State<Game3LevelIntermediate> {
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
-          'Nivel Intermedio LS',
+          'Nivel medio LS',
           style: TextStyle(
             color: Color(0xFF44A1D6),
             fontFamily: 'WorkSans',
