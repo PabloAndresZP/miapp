@@ -54,11 +54,28 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
   ];
 
   @override
-  void initState() {
-    super.initState();
-    _audioPlayer = AudioPlayer();
-    hearts = widget.initialHearts;
-  }
+void initState() {
+  super.initState();
+  _audioPlayer = AudioPlayer();
+  hearts = widget.initialHearts;
+
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    Future.delayed(Duration(seconds: 2), () {
+      CustomSnackbarContent.show(
+        context,
+        "", // Reemplaza con el mensaje que desees mostrar
+        true, // true si es un mensaje de éxito, false si no lo es
+        textColor: Colors.white, // Color del texto, opcional
+        imageAsset: 'assets/images/audio.png', // Ruta de la imagen a mostrar
+      );
+
+      Future.delayed(Duration(seconds: 3), () {
+        // Aquí puedes colocar cualquier acción que quieras realizar después de los 3 segundos
+      });
+    });
+  });
+}
+
 
   @override
   void dispose() {
@@ -78,10 +95,15 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
 }
 
 
-
   void _checkAnswer() {
   if (selectedAnswer == correctAnswer) {
-    CustomSnackbarContent.show(context, '¡Impresionante! Sigues avanzando.', true);
+    CustomSnackbarContent.show(
+      context, 
+      '¡Impresionante! Sigues avanzando.', 
+      true,
+      textColor: Color(0xFF00D8BB), // Color del texto
+      imageAsset: 'assets/images/stars.png', // Ruta de la imagen a mostrar
+    );
     _playSound('correcto.mp3');
 
     setState(() {
@@ -95,14 +117,23 @@ class _Game2Eje3PageState extends State<Game2Eje3Page> {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
           builder: (context) => Coin1Game2Page())); 
     });
+  }
 
-  } else {
-    CustomSnackbarContent.show(context, '¡No te preocupes! Inténtalo de nuevo.', false);
-    _playSound('acento.mp3');
+else {
+  CustomSnackbarContent.show(
+    context, 
+    '¡No te preocupes! Inténtalo de nuevo.', 
+    false,
+    textColor: Color(0xFFC92771), // Color del texto
+    imageAsset: 'assets/images/cerca.png', // Ruta de la imagen a mostrar
+  );
+  _playSound('acento.mp3');
 
-    setState(() {
-      hearts -= 1;
-    });
+  setState(() {
+    hearts -= 1;
+  });
+
+  // Cualquier otra lógica que necesites después de reducir los corazones
 
     if (hearts <= 0) {
       Future.delayed(Duration(seconds: 2), () {

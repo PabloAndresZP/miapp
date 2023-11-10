@@ -40,7 +40,7 @@ class LessonTwoScreen extends StatelessWidget {
           SingleChildScrollView( // Aquí se añade el SingleChildScrollView
             child: Center(
               child: Padding(
-                padding: EdgeInsets.only(top: 36, left: 20, right: 20), // Se añadió padding superior de 48px
+                padding: EdgeInsets.only(top: 24, left: 20, right: 20), // Se añadió padding superior de 48px
                 
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

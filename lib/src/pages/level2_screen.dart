@@ -68,10 +68,10 @@ class Level2Screen extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 24), // Espacio vertical entre los textos y los botones
+                    padding: EdgeInsets.symmetric(vertical: 12), // Espacio vertical entre los textos y los botones
                     child: Wrap(
                       spacing: 24, // Espacio horizontal entre los botones
-                      runSpacing: 24, // Espacio vertical entre las filas de botones
+                      runSpacing: 12, // Espacio vertical entre las filas de botones
                       alignment: WrapAlignment.center, // Alineación central
                       children: [
                         buildTextButton('Inicial', context, LessonTwoScreen(), 'assets/images/pincel_1.png'),

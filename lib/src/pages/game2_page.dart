@@ -11,6 +11,7 @@ class Game2Page extends StatefulWidget {
   _Game2PageState createState() => _Game2PageState();
 }
 
+
 class _Game2PageState extends State<Game2Page> {
   bool _showOverlay = false; // Declarar aquí la variable _showOverlay
   bool _showStars = false; // Declarar aquí la variable _showStars

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/pages/game2_page.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
+import 'package:mi_app_imgsound/src/widgets/custom_snackbar_content.dart';
 
 const List<String> instructions = [
   'Asocia Style/imágenes con Style/escalas Style/musicales.',
@@ -100,36 +101,49 @@ class _Instructions2PageState extends State<Instructions2Page> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 30.0),
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    PageRouteBuilder(
-                      transitionDuration: Duration.zero, // Desactiva la animación
-                      pageBuilder: (context, animation1, animation2) => Game2Page(),
-                    ),
-                  );
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00D8BB)),
-                  minimumSize: MaterialStateProperty.all<Size>(Size(313, 48)),
-                  shape: MaterialStateProperty.all<OutlinedBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  shadowColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.3)),
-                  elevation: MaterialStateProperty.all<double>(5.0),
-                ),
-                child: Text(
-                  'Jugar',
-                  style: TextStyle(
-                    color: Color(0xFFFDFDFD),  // Color blanco para el texto "Jugar"
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
+  onPressed: () {
+    CustomSnackbarContent.show(
+      context,
+      "", // Reemplaza con el mensaje que desees mostrar
+      true, // true si es un mensaje de éxito, false si no lo es
+      textColor: Colors.white, // Color del texto, opcional
+      imageAsset: 'assets/images/video.png', // Ruta de la imagen a mostrar
+    );
+
+    // Espera 3 segundos (o el tiempo que el Snackbar esté visible) antes de navegar
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.push(
+        context,
+        PageRouteBuilder(
+          transitionDuration: Duration.zero, // Desactiva la animación
+          pageBuilder: (context, animation1, animation2) => Game2Page(),
+        ),
+      );
+    });
+  },
+  style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00D8BB)),
+    minimumSize: MaterialStateProperty.all<Size>(Size(313, 48)),
+    shape: MaterialStateProperty.all<OutlinedBorder>(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+    ),
+    shadowColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.3)),
+    elevation: MaterialStateProperty.all<double>(5.0),
+  ),
+  child: Text(
+    'Jugar',
+    style: TextStyle(
+      color: Color(0xFFFDFDFD),
+      fontFamily: 'WorkSans',
+      fontWeight: FontWeight.bold,
+      fontSize: 15,
+    ),
+  ),
+),
+
+
             ),
           ),
         ],

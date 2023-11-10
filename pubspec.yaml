@@ -57,6 +57,8 @@ flutter:
     - assets/images/instruccion_3_lienzo_sonoro.png
   
     - assets/images/componente_rp.png
+    - assets/images/video.png
+    - assets/images/audio.png
   
     - assets/images/Nuevo_perfil_grande.png
     - assets/images/Nuevo_perfil_grande2.png
