@@ -32,25 +32,38 @@ class _RegisterPageState extends State<RegisterPage> {
         fontSize: 18.7,
         color: Color(0xFF7CF8FF),
       ),
-      enabledBorder: UnderlineInputBorder(
+      enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Color(0x0A0A53),
+          color: Color(0xFF00D8BB),
+          width: 2.0,
         ),
+        borderRadius: BorderRadius.circular(8.0),
       ),
-      focusedBorder: UnderlineInputBorder(
+      focusedBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Color(0x0A0A53),
+          color: Color(0xFF00D8BB),
+          width: 2.0,
         ),
+        borderRadius: BorderRadius.circular(8.0),
       ),
-      focusedErrorBorder: UnderlineInputBorder(
+      errorBorder: OutlineInputBorder(
         borderSide: BorderSide(
           color: Colors.red,
+          width: 2.0,
         ),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: Colors.red,
+          width: 2.0,
+        ),
+        borderRadius: BorderRadius.circular(8.0),
       ),
       errorStyle: TextStyle(
         color: Colors.red,
       ),
-      contentPadding: EdgeInsets.symmetric(vertical: 16.0),
+      contentPadding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 10.0),
     );
   }
 
@@ -67,6 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
     );
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +191,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         _registerUser();
                       }
                     },
-                    child: Text('REGISTRARSE', style: TextStyle(
+                    child: Text('Registrarse', style: TextStyle(
                       fontFamily: 'WorkSans',
                       fontWeight: FontWeight.bold,
                       fontSize: 15,

@@ -16,7 +16,7 @@ class LessonTwoScreen extends StatelessWidget {
           },
         ),
         title: Text(
-          'Lecciones',
+          'Lecciones PS',
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',

@@ -19,7 +19,7 @@ class Level2Screen extends StatelessWidget {
           },
         ),
         title: Text(
-          '           Niveles', // Añadido espacios para alinear el título a la izquierda como en Level1Screen
+          '       Niveles PS', // Añadido espacios para alinear el título a la izquierda como en Level1Screen
           style: TextStyle(
             color: Color(0xFF044A1D6),
             fontFamily: 'WorkSans',
@@ -48,7 +48,7 @@ class Level2Screen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Cada nivel representa un desafío en el fascinante.\n\n',
+                    'Cada nivel representa un desafío único en el fascinante mundo de las escalas.\n\n',
                     style: TextStyle(
                       color: Color(0xFF7CF8FF),
                       fontFamily: 'WorkSans',

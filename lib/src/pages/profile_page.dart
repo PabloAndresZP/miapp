@@ -71,31 +71,30 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 30),
-                Container(
-                  width: MediaQuery.of(context).size.width - 32,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Implementar la lógica para iniciar sesión aquí
-                    },
-                    child: Text('Iniciar Sesión', style: TextStyle(
-                      color: Color(0xFFFDFDFD),
-                      fontFamily: 'WorkSans',
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                    )),
-                    style: ElevatedButton.styleFrom(
-                      primary: Color(0xFF00D8BB),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      minimumSize: Size(
-                        MediaQuery.of(context).size.width - 32,
-                        60,
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10),
+               // Container(
+               //   width: MediaQuery.of(context).size.width - 32,
+               ///   child: ElevatedButton(
+                 //    onPressed: () {
+                 //      // Implementar la lógica para iniciar sesión aquí
+                //     },
+                 //    child: Text('Iniciar Sesión', style: TextStyle(
+                 //      color: Color(0xFFFDFDFD),
+                 //      fontFamily: 'WorkSans',
+                  //     fontWeight: FontWeight.bold,
+                  //     fontSize: 15,
+                  //   )),
+                   //  style: ElevatedButton.styleFrom(
+                    //   primary: Color(0xFF00D8BB),
+                    //   shape: RoundedRectangleBorder(
+                     //    borderRadius: BorderRadius.circular(12),
+                     //  ),
+                    //   minimumSize: Size(
+                     //    MediaQuery.of(context).size.width - 32,
+                   //    ),
+                  //   ),
+                //   ),
+               //  ),
+                 SizedBox(height: 10),
                 Container(
                   width: MediaQuery.of(context).size.width - 32,
                   child: ElevatedButton(

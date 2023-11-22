@@ -254,7 +254,7 @@ class _GameLevelExpertState extends State<GameLevelExpert> {
                 ),
                 SizedBox(height: 20.0),
                 Text(
-                  'Selecciona la imagen que se asocia al fracmento de la canción',
+                  'Selecciona la imagen que se asocia al fragmento de la canción.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color(0xFFFDFDFD),

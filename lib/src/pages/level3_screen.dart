@@ -46,7 +46,7 @@ class Level3Screen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    'Cada nivel representa un desafío en la fascinante.\n\n',
+                    'Cada nivel representa un desafío único en el fascinante mundo de la grabación.\n\n',
                     style: TextStyle(
                       color: Color(0xFF7CF8FF),
                       fontFamily: 'WorkSans',
