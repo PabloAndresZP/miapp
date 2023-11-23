@@ -143,6 +143,8 @@ flutter:
     - assets/videos/nivel_avanzado_02.mp4
     - assets/videos/nivel_experto_01.mp4
     - assets/videos/nivel_experto_02.mp4
+    - assets/videos/precarga_v.mp4
+    - assets/videos/precarga_a.mp4
 
     - assets/images/Comp 1_00000.png
     - assets/images/Comp 1_00001.png
@@ -218,6 +220,57 @@ flutter:
     - assets/images/Comp 3_00021.png
     - assets/images/Comp 3_00022.png
     - assets/images/Comp 3_00023.png
+
+    - assets/images/precarga_00000.png
+    - assets/images/precarga_00001.png
+    - assets/images/precarga_00002.png
+    - assets/images/precarga_00003.png
+    - assets/images/precarga_00004.png
+    - assets/images/precarga_00005.png
+    - assets/images/precarga_00006.png
+    - assets/images/precarga_00007.png
+    - assets/images/precarga_00008.png
+    - assets/images/precarga_00009.png
+    - assets/images/precarga_00010.png
+    - assets/images/precarga_00011.png
+    - assets/images/precarga_00012.png
+    - assets/images/precarga_00013.png
+    - assets/images/precarga_00014.png
+    - assets/images/precarga_00015.png
+    - assets/images/precarga_00016.png
+    - assets/images/precarga_00017.png
+    - assets/images/precarga_00018.png
+    - assets/images/precarga_00019.png
+    - assets/images/precarga_00020.png
+    - assets/images/precarga_00021.png
+    - assets/images/precarga_00022.png
+    - assets/images/precarga_00023.png
+
+    - assets/images/precarga2_00000.png
+    - assets/images/precarga2_00001.png
+    - assets/images/precarga2_00002.png
+    - assets/images/precarga2_00003.png
+    - assets/images/precarga2_00004.png
+    - assets/images/precarga2_00005.png
+    - assets/images/precarga2_00006.png
+    - assets/images/precarga2_00007.png
+    - assets/images/precarga2_00008.png
+    - assets/images/precarga2_00009.png
+    - assets/images/precarga2_00010.png
+    - assets/images/precarga2_00011.png
+    - assets/images/precarga2_00012.png
+    - assets/images/precarga2_00013.png
+    - assets/images/precarga2_00014.png
+    - assets/images/precarga2_00015.png
+    - assets/images/precarga2_00016.png
+    - assets/images/precarga2_00017.png
+    - assets/images/precarga2_00018.png
+    - assets/images/precarga2_00019.png
+    - assets/images/precarga2_00020.png
+    - assets/images/precarga2_00021.png
+    - assets/images/precarga2_00022.png
+    - assets/images/precarga2_00023.png
+    
 
    
 

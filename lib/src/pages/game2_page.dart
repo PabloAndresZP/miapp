@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:mi_app_imgsound/src/widgets/coin_counter.dart';
 import 'package:mi_app_imgsound/src/widgets/hearts_indicator.dart';
-import 'package:mi_app_imgsound/src/pages/game2_eje3_page.dart';
+import 'package:mi_app_imgsound/src/pages/video_intro_page.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_snackbar_content.dart';
 
@@ -199,15 +199,18 @@ void _playPause(int playerNumber) async {
         }
       });
 
-      if (completedExercises == correctAnswers.length) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => Game2Eje3Page(initialHearts: hearts)),
-        );
-      } else {
-        _goToNextExercise();
-      }
+     if (completedExercises == correctAnswers.length) {
+      // Navegar a VideoIntroPage en lugar de Game2Eje3Page
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => VideoIntroPage(initialHearts: hearts),
+        ),
+      );
     } else {
+      _goToNextExercise();
+    }
+  } else {
       CustomSnackbarContent.show( imageAsset: 'assets/images/cerca.png',
         context,
         "¡Eso estuvo cerca! Prueba una vez más.",

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mi_app_imgsound/src/pages/game2_page.dart';
+
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
-import 'package:mi_app_imgsound/src/widgets/custom_snackbar_content.dart';
+import 'package:mi_app_imgsound/src/pages/video2_intro_page.dart';
 
 const List<String> instructions = [
   'Asocia Style/imágenes con Style/escalas Style/musicales.',
@@ -28,13 +28,11 @@ class _Instructions2PageState extends State<Instructions2Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( 
+      appBar: AppBar(
         backgroundColor: Color(0xFF030328),
         leading: IconButton(
           icon: Image.asset('assets/images/icon_atras.png', height: 24, width: 24),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
+          onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           'Instrucciones',
@@ -46,116 +44,91 @@ class _Instructions2PageState extends State<Instructions2Page> {
           ),
         ),
         centerTitle: true,
-        toolbarHeight: 80, // Ajustar esta altura según sea necesario
+        toolbarHeight: 80,
       ),
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/textura_5.png'),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          PageView.builder(
-            onPageChanged: (page) {
-              setState(() {
-                currentPage = page;
-              });
-            },
-            itemBuilder: (context, index) {
-              return InstructionPage(
-                text: instructions[index],
-                imagePath: images[index],
-                isCenteredHorizontal: true, // Centrar solo horizontalmente
-                isCenteredVertical: index == 0, // Centrar verticalmente solo para el primer ítem
-                marginTop: index == 0 ? 216.0 : 0.0, // Margen superior de 60 px solo para el primer ítem
-              );
-            },
-            itemCount: instructions.length,
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 100.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  instructions.length,
-                  (i) => Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                    child: CircleAvatar(
-                      radius: 8,
-                      backgroundColor: i == currentPage
-                          ? Color(0xFF044A1D6)
-                          : Color(0xFF044A1D6).withOpacity(0.5),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 30.0),
-              child: ElevatedButton(
-  onPressed: () {
-    CustomSnackbarContent.show(
-      context,
-      "", // Reemplaza con el mensaje que desees mostrar
-      true, // true si es un mensaje de éxito, false si no lo es
-      textColor: Colors.white, // Color del texto, opcional
-      imageAsset: 'assets/images/video.png', // Ruta de la imagen a mostrar
-    );
-
-    // Espera 3 segundos (o el tiempo que el Snackbar esté visible) antes de navegar
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.push(
-        context,
-        PageRouteBuilder(
-          transitionDuration: Duration.zero, // Desactiva la animación
-          pageBuilder: (context, animation1, animation2) => Game2Page(),
-        ),
-      );
-    });
-  },
-  style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF00D8BB)),
-    minimumSize: MaterialStateProperty.all<Size>(Size(313, 48)),
-    shape: MaterialStateProperty.all<OutlinedBorder>(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-    ),
-    shadowColor: MaterialStateProperty.all<Color>(Colors.black.withOpacity(0.3)),
-    elevation: MaterialStateProperty.all<double>(5.0),
-  ),
-  child: Text(
-    'Jugar',
-    style: TextStyle(
-      color: Color(0xFFFDFDFD),
-      fontFamily: 'WorkSans',
-      fontWeight: FontWeight.bold,
-      fontSize: 15,
-    ),
-  ),
-),
-
-
-            ),
-          ),
+          _buildBackgroundContent(),
+          _buildButton(),
         ],
       ),
       bottomNavigationBar: CustomFooter(
         currentPageIndex: 5,
         onNotificationDismiss: () {
-          // Coloca aquí la lógica para despedir la notificación en esta página específica
-          // Puedes establecer el estado de hasWonCoin1 a falso o realizar cualquier otra acción necesaria.
+          // Lógica para despedir la notificación
         },
       ),
     );
+  }
+
+  Widget _buildBackgroundContent() {
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/textura_5.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: PageView.builder(
+        onPageChanged: (page) {
+          setState(() {
+            currentPage = page;
+          });
+        },
+        itemBuilder: (context, index) {
+          return InstructionPage(
+            text: instructions[index],
+            imagePath: images[index],
+            isCenteredHorizontal: true,
+            isCenteredVertical: index == 0,
+            marginTop: index == 0 ? 216.0 : 0.0,
+          );
+        },
+        itemCount: instructions.length,
+      ),
+    );
+  }
+
+  Widget _buildButton() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 30.0),
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              PageRouteBuilder(
+                transitionDuration: Duration.zero,
+                pageBuilder: (context, animation1, animation2) => Video2IntroPage(),
+              ),
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            primary: Color(0xFF00D8BB),
+            onPrimary: Color(0xFFFDFDFD),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            minimumSize: Size(313, 48),
+            elevation: 5.0,
+          ),
+          child: Text(
+            'Jugar',
+            style: TextStyle(
+              fontFamily: 'WorkSans',
+              fontWeight: FontWeight.bold,
+              fontSize: 15,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }
 
@@ -199,7 +172,7 @@ class InstructionPage extends StatelessWidget {
                 if (word.startsWith('Style/')) {
                   inlineSpans.add(
                     TextSpan(
-                      text: '${word.substring(6)} ', // Ocultar "Style/"
+                      text: '${word.substring(6)} ',
                       style: TextStyle(
                         fontSize: 18.7,
                         fontWeight: FontWeight.bold,
@@ -222,7 +195,7 @@ class InstructionPage extends StatelessWidget {
               }
 
               return RichText(
-                textAlign: TextAlign.center, // Centrar el texto
+                textAlign: TextAlign.center,
                 text: TextSpan(
                   children: inlineSpans,
                 ),

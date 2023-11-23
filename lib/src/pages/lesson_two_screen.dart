@@ -2,7 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/pages/instructions2_page.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 
-class LessonTwoScreen extends StatelessWidget {
+
+class LessonTwoScreen extends StatefulWidget {
+  @override
+  _LessonTwoScreenState createState() => _LessonTwoScreenState();
+}
+
+class _LessonTwoScreenState extends State<LessonTwoScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _precacheImages();
+  }
+
+  void _precacheImages() async {
+    for (var i = 0; i < 24; i++) {
+      await precacheImage(AssetImage('assets/images/precarga_000${i.toString().padLeft(2, '0')}.png'), context);
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
