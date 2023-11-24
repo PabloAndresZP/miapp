@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:mi_app_imgsound/src/widgets/instruction_snackbar.dart'; // Asegúrate de importar esto
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:mi_app_imgsound/src/pages/video2_intro_page.dart';
 
@@ -26,6 +26,17 @@ class _Instructions2PageState extends State<Instructions2Page> {
   int currentPage = 0;
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      InstructionSnackbar.show(
+        context,
+        'assets/images/Nuevoicono atras_derecha.png',
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -46,9 +57,10 @@ class _Instructions2PageState extends State<Instructions2Page> {
         centerTitle: true,
         toolbarHeight: 80,
       ),
-      body: Stack(
+     body: Stack(
         children: [
           _buildBackgroundContent(),
+          _buildPageIndicator(), // Llamada al método que crea los indicadores
           _buildButton(),
         ],
       ),
@@ -88,6 +100,31 @@ class _Instructions2PageState extends State<Instructions2Page> {
       ),
     );
   }
+
+    Widget _buildPageIndicator() {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 100.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(
+            instructions.length,
+            (i) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: CircleAvatar(
+                radius: 8,
+                backgroundColor: i == currentPage
+                    ? Color(0xFF044A1D6)
+                    : Color(0xFF044A1D6).withOpacity(0.5),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
 
   Widget _buildButton() {
     return Align(

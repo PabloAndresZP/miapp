@@ -5,6 +5,9 @@ import 'src/pages/game3_page.dart';
 import 'package:provider/provider.dart';
 import 'package:mi_app_imgsound/models/coin_model.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
+import 'package:mi_app_imgsound/src/widgets/custom2_snackbar_content.dart';
+
+bool isSnackbarShown = false; // Variable global
 
 void main() {
   runApp(
@@ -34,10 +37,31 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    if (!isSnackbarShown) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Custom2SnackbarContent.show(
+          context,
+          "Para una experiencia óptima, se sugiere usar audífonos.",
+          imageAsset: 'assets/images/rav.png',
+          textColor: const Color(0xFF7CF8FF),
+        );
+        isSnackbarShown = true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

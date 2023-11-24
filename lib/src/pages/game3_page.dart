@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/pages/level3_screen.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
+import 'package:mi_app_imgsound/src/widgets/instruction_snackbar.dart';
 
 const List<String> instructions = [
   'Aprende sobre la Style/grabación / Style/registro Style/de Style/sonido.',
@@ -22,6 +23,17 @@ class Game3Page extends StatefulWidget {
 
 class _Game3PageState extends State<Game3Page> {
   int currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      InstructionSnackbar.show(
+        context,
+        'assets/images/Nuevoicono atras_derecha.png',
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

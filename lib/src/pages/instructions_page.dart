@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mi_app_imgsound/src/widgets/custom_footer.dart';
 import 'package:mi_app_imgsound/src/pages/level1_screen.dart';
 import 'package:audioplayers/audioplayers.dart';
-
+import 'package:mi_app_imgsound/src/widgets/instruction_snackbar.dart';
 
 
 
@@ -15,7 +15,16 @@ class _InstructionsPageState extends State<InstructionsPage> {
   final PageController _pageController = PageController();
   int currentPage = 0;
   
-
+@override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      InstructionSnackbar.show(
+        context,
+        'assets/images/Nuevoicono atras_derecha.png',
+      );
+    });
+  }
 
   @override
   void dispose() {
@@ -215,42 +224,46 @@ class _InstructionPageState extends State<InstructionPage> with SingleTickerProv
 
   @override
   void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
+  super.initState();
 
-    _animation = IntTween(begin: 0, end: 23).animate(_animationController)
-      ..addListener(() {
-        setState(() {});
-      });
+  _animationController = AnimationController(
+    vsync: this,
+    duration: const Duration(seconds: 2),
+  );
 
+  _animation = IntTween(begin: 0, end: 23).animate(_animationController)
+    ..addListener(() {
+      setState(() {});
+    });
+
+  // Inicia la animación directamente para la página 3
+  if (widget.currentPage == 3) {
     _animationController.repeat(reverse: false);
-
-     // Se ejecuta el método para configurar y reproducir el sonido basado en la página actual.
-     _initAudio();
+  } else if (widget.currentPage == 1 || widget.currentPage == 2) {
+    // Configura y precarga el audio para las páginas 1 y 2
+    _setupAudioPlayer();
   }
+}
 
- void _initAudio() {
-  // Reproduce el sonido en bucle para el primer y segundo sprite
+ void _setupAudioPlayer() {
   if (widget.currentPage == 1 || widget.currentPage == 2) {
-    audioPlayer.setReleaseMode(ReleaseMode.loop);
-
     Source soundSource = widget.currentPage == 1 
       ? AssetSource('sounds/instrucciones2_02.mp3')
       : AssetSource('sounds/instrucciones3_01.mp3');
 
-    // En las versiones recientes de audioplayers usamos setSource y luego resume
-    audioPlayer.setSource(soundSource).then((_) => audioPlayer.resume());
+    audioPlayer.setSource(soundSource).then((_) async {
+      await Future.delayed(Duration(milliseconds: 800)); // Buffer de 500 ms
+      _animationController.repeat(reverse: false);
+      audioPlayer.resume();
+    });
   }
 }
 
   @override
   void dispose() {
     _animationController.dispose();
-    audioPlayer.stop();  // Asegúrate de detener el audio cuando la página se deshaga
-    audioPlayer.dispose(); // Libera los recursos del audioPlayer
+    audioPlayer.stop();
+    audioPlayer.dispose();
     super.dispose();
   }
 
